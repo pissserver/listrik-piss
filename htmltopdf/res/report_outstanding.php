@@ -1,0 +1,81 @@
+<?php
+	include "../connection.php";
+	$total = 0;
+?>
+<page backtop="10mm" backbottom="10mm" backleft="7mm" backright="7mm">
+    <page_header>
+        <table style="width:97%; border:0px; margin-top:20px; margin-bottom:30px; margin-left:10px; margin-right:10px;">
+            <tr>
+                <td style="text-align:left; width:33%">PISS</td>
+                <td style="text-align:center; width:34%"></td>
+                <td style="text-align:right; width:33%">Dicetak : <?php echo date('d/m/Y'); ?></td>
+            </tr>
+        </table>
+		<br />
+    </page_header>
+    <page_footer>
+        <table style="width: 97%; border: 0px; margin-top:30px; margin-left:10px; margin-right:10px;">
+            <tr>
+                <td style="text-align: left;width: 50%"></td>
+                <td style="text-align: right;width: 50%">Halaman [[page_cu]]/[[page_nb]]</td>
+            </tr>
+        </table>
+    </page_footer>
+    <div style="font-size: 18px; font-weight: bold; text-align: center; margin-top:15px;">
+		Outstanding Tagihan Listrik PISS
+	</div>
+	<br/>
+	<table style="border: solid 1px black; font-size:8pt; border-collapse: collapse; margin-bottom: 5px; width:680px; margin-right:0px;" id="tableNonkomoditi">
+		<tr>
+			<th style="text-align: center;width: 5%;height: 3%; border: solid 1px black;">NO</th>
+			<th style="text-align: center;width: 10%; border: solid 1px black;">KODE TAGIHAN</th>
+			<th style="text-align: center;width: 25%; border: solid 1px black;">PENGGUNA LISTRIK</th>
+			<th style="text-align: center;width: 10%; border: solid 1px black;">LAPAK PASANG</th>
+			<th style="text-align: center;width: 10%; border: solid 1px black;">DAYA</th>
+			<th style="text-align: center;width: 12%;border: solid 1px black;">PERIODE</th>
+			<th style="text-align: center;width: 10%; border: solid 1px black;">TARIF</th>
+			<th style="text-align: center;width: 13%;border: solid 1px black;">TAGIHAN</th>
+		</tr>
+		 <?php
+			$query 	= mysql_query("	select 	pay_id, 
+											merchant_id, 
+											pay_total, 
+											pay_sts,
+											id_lapak_dipasang, 
+											periode_id
+									from 	e_pay
+									where 	pay_sts = 'Belum Lunas'
+									order 	by periode_id, merchant_id");
+			$no		= 1;
+			$total	= 0;
+			while($r = mysql_fetch_array($query)){
+				$tlid 		= sprintf("%07d", $r['pay_id']);
+				$lid		= executeScalar("select lapak_id from rent where merchant_id = '".$r['merchant_id']."' and (rent_sts2 != 'Pindah' && rent_sts2 != 'Batal') limit 1");
+				$lapak		= executeScalar("select lapak_name from lapak where lapak_id = '".$r['id_lapak_dipasang']."'");
+				$name		= executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
+				$tarif		= executeScalar("select e_cost_id from electricity where merchant_id = '".$r['merchant_id']."'");
+				$price		= executeScalar("select e_cost_price from e_cost where e_cost_id = '".$tarif."'");
+				$ampere		= executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$tarif."'");
+				$periode	= executeScalar("select periode_name from e_periode where periode_id = '".$r['periode_id']."'");
+		?>
+		<tr>
+			<td style="text-align: center;font-size: 8pt;height: 1%;border: solid 1px black;"><?php echo $no;  ?></td>
+			<td style="text-align: center;font-size:8pt;border: solid 1px black;">TL<?php echo $tlid; ?></td>
+			<td style="text-align: left;font-size:8pt;border: solid 1px black;"><?php echo $name; ?></td>
+			<td style="text-align: left;font-size:8pt;border: solid 1px black;"><?php echo $lapak; ?></td>
+			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $ampere; ?> Ampere</td>
+			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $periode; ?></td>
+			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_rupiah($price);  ?></td>
+			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_rupiah($r['pay_total']);  ?></td>
+		</tr>
+		<?php 
+				$no++; 
+				$total = $total+$r['pay_total'];
+			} 
+		?>
+		<tr>
+			<td style="text-align: right;font-size:8pt;border: solid 1px black;" colspan="7"><b>TOTAL </b></td>
+			<td style="text-align: right;font-size:8pt;border: solid 1px black;font-weight:bold;"><?php echo format_rupiah($total); ?></td>
+		</tr>
+	</table>
+</page>
