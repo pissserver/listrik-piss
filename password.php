@@ -1,50 +1,35 @@
 <?php
 	session_start();
 	include "connection.php";
-	
-	//Validasi role
-	if($_SESSION['role']==''){
-		header("Location:index.php");
-	}
-	$query 	= mysql_query("select * from admin where username = '".$_SESSION['user']."'");
-	while ($r = mysql_fetch_array($query)){
+	include "components/role_session.php";
 ?>
-<form class="form-horizontal" method="post" action="update_password.php" enctype="multipart/form-data">
-	<table class="table table-striped table-hover">
+<form action="update_password.php?user=<?php echo $_SESSION['username']; ?>" class="form-horizontal" method="post">
+	<table class="table table-hover">
 		<tbody>
 			<tr>
-				<td width="30%">
-					<b>Nama</b>
-				</td>
-				<td>
-					<?php echo $r['username']; ?>
+				<td style="border: none;">
+					<b>Username</b><br>
+					<input style="margin-top: 5px;" type="text" class="form-control" id="nopol" name="nopol" value="<?php echo $_SESSION['username']; ?>" readonly> 
 				</td width="70%">
 			</tr>
 			<tr>
-				<td>
-					<b>Password Lama</b>
-				</td>
-				<td>
-					<input type="password" class="col-lg-10" id="pass" name="pass" placeholder="Password Lama"/>
+				<td style="border: none;">
+					<b>Password Lama</b><br>
+					<input style="margin-top: 5px;" type="password" class="col-lg-10 form-control" id="pass" name="pass" placeholder="Password Lama"/>
 				</td>
 			</tr>
 			<tr>
-				<td>
-					<b>Password Baru</b>
-				</td>
-				<td>
-					<p><input type="password" class="col-lg-10" id="pass1" name="pass1" placeholder="Password Baru"/></p><br />
-					<p><input type="password" class="col-lg-10" id="pass2" name="pass2" placeholder="Ulangi Password Baru"/></p>
+				<td style="border: none;">
+					<b>Password Baru</b><br>
+					<p><input style="margin-top: 5px;" type="password" class="col-lg-10 form-control" id="pass1" name="pass1" placeholder="Password Baru"/></p><br />
+					<p><input style="margin-top: 5px;" type="password" class="col-lg-10 form-control" id="pass2" name="pass2" placeholder="Ulangi Password Baru"/></p>
 				</td>
 			</tr>
 			<tr>
-				<td>
-				</td>
-				<td>
-					<button type="submit" class="btn btn-outline btn-primary btn-md">Simpan</button>
+				<td style="border: none;">
+					<button type="submit" class="btn btn-block btn-primary">Simpan</button>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 </form>
-<?php } ?>

@@ -1,15 +1,6 @@
 
 <?php
-    // if($_SESSION['role']=='spv'){
-    //     if($_SESSION['username']!=''){
-    //         $name = executescalar("select name from admin where username='".$_SESSION['username']."'");
-    //     }else{
-    //         header("Location:../login.html");
-    //     }
-    // }else{
-    //     header("Location:../login.html");
-    // }
-    $name = executescalar("select name from admin where username='".$_SESSION['username']."'");
+    include "components/role_session.php";
 ?>
 
 <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; overflow: hidden;">
