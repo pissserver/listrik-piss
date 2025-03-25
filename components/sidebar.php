@@ -142,38 +142,40 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li><a class="active" href="dashboard.php"><i class="fa fa-bar-chart fa-fw"></i> Dashboard</a></li>
-						<li>
-							<a href="#"><i class="fa fa-flash fa-fw"></i> Biaya Listrik<span class="fa arrow"></span></a>
+                        <li><a class="<?= isActive(['dashboard.php']); ?>" href="dashboard.php"><i class="fa fa-bar-chart fa-fw"></i> Dashboard</a></li>
+
+						<li class="<?= isParentActive(['tarif.php', 'tarif2.php']); ?>">
+							<a href="#"><i class="fa fa-credit-card fa-fw"></i> Daftar Biaya<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="tarif.php"><i class="fa fa-flash fa-fw"></i> Biaya Listrik</a></li>
-								<li><a href="tarif2.php"><i class="fa fa-flash fa-fw"></i> Biaya Perlengkapan Listrik</a></li>
+								<li><a class="<?= isActive(['tarif.php']); ?>" href="tarif.php"><i class="fa fa-flash fa-fw"></i> Biaya Listrik</a></li>
+								<li><a class="<?= isActive(['tarif2.php']); ?>" href="tarif2.php"><i class="fa fa-suitcase fa-fw"></i> Biaya Perlengkapan Listrik</a></li>
 							</ul>
 						</li>
-						<li>
-                            <a href="#"><i class="fa fa-users fa-fw"></i> Pelanggan Listrik<span class="fa arrow"></span></a>
+
+						<li class="<?= isParentActive(['register.php', 'merchant.php']); ?>">
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Pengguna Listrik<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="register.php"><i class="fa fa-user-plus fa-fw"></i> Input Pengguna</a></li>
-								<li><a href="merchant.php"><i class="fa fa-users fa-fw"></i> Data Pelanggan Listrik</a></li>
+								<li><a class="<?= isActive(['register.php']); ?>" href="register.php"><i class="fa fa-user-plus fa-fw"></i> Tambah Pengguna</a></li>
+								<li><a class="<?= isActive(['merchant.php']); ?>" href="merchant.php"><i class="fa fa-users fa-fw"></i> Data Pengguna Listrik</a></li>
 							</ul>
 						</li>
-						<li>
+						<li class="<?= isParentActive(['periode.php', 'invoice.php', 'invoice_cancel.php']); ?>">
                             <a href="#"><i class="fa fa-clipboard fa-fw"></i> Tagihan Listrik<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="periode.php"><i class="fa fa-clock-o fa-fw"></i> Periode Tagihan</a></li>
-								<li><a href="invoice.php"><i class="fa fa-print fa-fw"></i> Cetak Tagihan</a></li>
-								<li><a href="invoice_cancel.php"><i class="fa fa-close fa-fw"></i> Pembatalan Tagihan</a></li>
+								<li><a class="<?= isActive(['periode.php']); ?>" href="periode.php"><i class="fa fa-clock-o fa-fw"></i> Periode Tagihan</a></li>
+								<li><a class="<?= isActive(['invoice.php']); ?>" href="invoice.php"><i class="fa fa-print fa-fw"></i> Cetak Tagihan</a></li>
+								<li><a class="<?= isActive(['invoice_cancel.php']); ?>" href="invoice_cancel.php"><i class="fa fa-close fa-fw"></i> Pembatalan Tagihan</a></li>
 							</ul>
 						</li>
-						<li>
-                            <a href="#"><i class="fa fa-money fa-fw"></i> Pembayaran Listrik<span class="fa arrow"></span></a>
+						<li class="<?= isParentActive(['pay.php', 'pay_cancel.php']); ?>">
+                            <a href="#"><i class="fa fa-money fa-fw"></i> Pembayaran<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="pay.php"><i class="fa fa-money fa-fw"></i> Pembayaran Tagihan</a></li>
-								<li><a href="pay_cancel.php"><i class="fa fa-close fa-fw"></i> Pembatalan Pembayaran</a></li>
+								<li><a class="<?= isActive(['pay.php']); ?>" href="pay.php"><i class="fa fa-money fa-fw"></i> Pembayaran Tagihan</a></li>
+								<li><a class="<?= isActive(['pay_cancel.php']); ?>" href="pay_cancel.php"><i class="fa fa-close fa-fw"></i> Pembatalan Pembayaran</a></li>
 							</ul>
 						</li>
-						<li><a href="note.php"><i class="fa fa-sticky-note-o fa-fw"></i> Catatan Untuk Pelanggan</a></li>
-						<li><a href="report.php"><i class="fa fa-book fa-fw"></i> Laporan</a></li>
+						<li><a class="<?= isActive(['note.php']); ?>" href="note.php"><i class="fa fa-file-text-o fa-fw"></i> Catatan Untuk Pelanggan</a></li>
+						<li><a class="<?= isActive(['report.php']); ?>" href="report.php"><i class="fa fa-clipboard fa-fw"></i> Laporan</a></li>
                     </ul>
                 </div>
             </div>
