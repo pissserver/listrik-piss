@@ -174,7 +174,7 @@
 								<li><a class="<?= isActive(['pay_cancel.php']); ?>" href="pay_cancel.php"><i class="fa fa-close fa-fw"></i> Pembatalan Pembayaran</a></li>
 							</ul>
 						</li>
-						<li><a class="<?= isActive(['note.php']); ?>" href="note.php"><i class="fa fa-file-text-o fa-fw"></i> Catatan Untuk Pelanggan</a></li>
+						<li><a class="<?= isActive(['note.php']); ?>" href="note.php"><i class="fa fa-file-text fa-fw"></i> Catatan Untuk Pelanggan</a></li>
 						<li><a class="<?= isActive(['report.php']); ?>" href="report.php"><i class="fa fa-clipboard fa-fw"></i> Laporan</a></li>
                     </ul>
                 </div>

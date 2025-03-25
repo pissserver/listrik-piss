@@ -59,21 +59,21 @@
 
 			<div id="page-wrapper">
 				<div class="row"><br><br><br><br>
-					<div class="col-md-4" style="padding:10px;">
+					<div class="col-md-12">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
-								<i class="fa fa-plus fa-fw"></i> <strong> Tambah Data Perlengkapan Listrik</strong>
+								<i class="fa fa-pencil fa-fw"></i> Tambah Data Perlengkapan Listrik
 							</div>
 							<div class="panel-body">
 								<form class="form-horizontal" action="tarif_action2.php?task=insert" id="formTarif" name="formTarif" method="POST">
 									<fieldset>
 										<div class="form-group" style="padding:10px; margin-top: -10px;">
-											<label>NAMA PERLENGKAPAN LISTRIK</label>
-											<input class="form-control" id="tools" name="tools" type="text" placeholder="Masukkan Nama Perlengkapan"/>
+											<label>Nama Perlengkapan Listrik</label>
+											<input class="form-control" id="tools" name="tools" type="text" placeholder="Masukkan Nama Perlengkapan" required/>
 										</div>
 										<div class="form-group" style="padding:10px; margin-top: -10px;">
-											<label>HARGA <sup>( Rp )</sup></label>
-											<input class="form-control" id="price" name="price" type="number" value="0" />
+											<label>Harga <sup>(Rp)</sup></label>
+											<input class="form-control" id="price" name="price" type="number" placeholder="0" required/>
 											<script>
 												$("input[name='price']").TouchSpin({
 												verticalbuttons: true,
@@ -83,17 +83,24 @@
 											</script>
 										</div>
 										<div class="form-group" style="padding:10px; margin-top: -10px; margin-bottom: -10px;">
-											<center><button type="submit" class="btn btn-outline btn-block btn-primary">Simpan</button></center>
+											<center><button type="submit" class="btn btn-block btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button></center>
 										</div>
 									</fieldset>
 								</form> 
 							</div>
 						</div>
 					</div>
-					<div class="col-md-8" style="margin-top:20px;">
-						<div id="Area1">
-							<div class="alert alert-info" onclick="clearNotif()">
-								<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+					<div class="col-md-12" style="margin-top:10px;">
+						<div class="panel panel-primary" style="overflow-x: auto">
+							<div class="panel-heading">
+								<i class="fa fa-suitcase fa-fw"></i> Data Perlengkapan Listrik
+							</div>
+							<div class="panel-body">
+								<div id="Area1">
+									<div class="alert alert-info" onclick="clearNotif()">
+										<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -101,22 +108,20 @@
 			</div>
 		</div>
 
-		<!-- Modal Ganti Password -->
-		<div class="modal fade" id="modalPassword" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+		<!-- Modal Edit -->
+		<div id="modalEditTarif2" class="modal fade">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src='../assets/image/Delete.png' width='25' height='25'/></button>
-						<h4 id="header_password">Ganti Password</h4>
-					</div>
-					<div class="modal-body">
-						<div id="data_password" style="margin-bottom: 0px;">
-							<div class="alert alert-info" onclick="clearNotif()"><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></div>
-						</div>
-						<input type="hidden" id="value_id" />
-					</div>
-					<div class="modal-footer">
-					</div>
+					<!-- Meload modal "tarif2_modal.php" file -->
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal Delete -->
+		<div id="modalDeleteTarif2" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- Meload modal "tarif2_delete_modal.php" file -->
 				</div>
 			</div>
 		</div>
@@ -145,5 +150,24 @@
 		<script src="js/plugins/metisMenu/metisMenu.min.js"></script>
 		<!-- Custom Theme JavaScript -->
 		<script src="js/sb-admin-2.js"></script>
+		<!-- Sweet Alert -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+		<?php
+			// Menampilkan SweetAlert jika session success ada dan bernilai true
+			if (isset($_SESSION['success'])) {
+				$title = $_SESSION['title'];
+				$message = $_SESSION['message'];
+				$icon = $_SESSION['success'] ? 'success' : 'error';
+				echo "<script>
+					Swal.fire({
+						title: '$title',
+						text: '$message',
+						icon: '$icon'
+					});
+				</script>";
+				unset($_SESSION['success']);
+				unset($_SESSION['message']);
+			}
+		?>
 	</body>
 </html>

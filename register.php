@@ -56,10 +56,10 @@
 
         <div id="page-wrapper">
             <div class="row"><br><br><br><br>
-                <div class="col-lg-3" style="padding:10px;">
+                <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-plus fa-fw"></i><strong> Tambah Pengguna Listrik PISS</strong>
+                            <i class="fa fa-pencil fa-fw"></i>Tambah Pengguna Listrik
                         </div>
                         <div class="panel-body">
                             <form action="register_action.php?task=insert"  id="formRegister" name = "formRegister" method="POST" class="form-horizontal">
@@ -121,20 +121,27 @@
 									<?php } ?>
 									</select>
 								</div>
-								<div class="form-group" style="padding:10px;">
-									<center><button type="submit" class="btn btn-outline btn-block btn-primary">Simpan</button></center>
+								<div class="form-group" style="padding:10px; margin-bottom: 0px;">
+									<center><button type="submit" class="btn btn-block btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button></center>
 								</div>
 							</form> 
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9" style="margin-top:-10px;">
-                    <div id="Area1">
-						<div class="alert alert-info" onclick="clearNotif()">
-							<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+                <div class="col-md-12" style="margin-top:10px;">
+					<div class="panel panel-primary" style="overflow-x: auto">
+						<div class="panel-heading">
+							<i class="fa fa-group fa-fw"></i> Data Pengguna Listrik
+						</div>
+						<div class="panel-body">
+							<div id="Area1">
+								<div class="alert alert-info" onclick="clearNotif()">
+									<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+								</div>
+							</div>
 						</div>
 					</div>
-                </div>
+				</div>
             </div>
         </div>
     </div>
@@ -149,26 +156,6 @@
 				</div>
 				<div class="modal-body">
 					<div id="data_nonkomoditi" style="margin-bottom: 0px;">
-						<div class="alert alert-info" onclick="clearNotif()"><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></div>
-					</div>
-					<input type="hidden" id="value_id" />
-				</div>
-				<div class="modal-footer">
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<!-- Modal Ganti Password -->
-	<div class="modal fade" id="modalPassword" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src='../assets/image/Delete.png' width='25' height='25'/></button>
-					<h4 id="header_password">Ganti Password</h4>
-				</div>
-				<div class="modal-body">
-					<div id="data_password" style="margin-bottom: 0px;">
 						<div class="alert alert-info" onclick="clearNotif()"><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></div>
 					</div>
 					<input type="hidden" id="value_id" />
