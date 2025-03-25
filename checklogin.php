@@ -31,9 +31,7 @@
 		if($ada==1){
 			$_SESSION['user'] 	= $r['checker_name'];
 			$_SESSION['role'] 	= $r['checker_role'];
-			$role = $r['checker_role'];
-			echo "<script>window.alert('$role');
-			window.location=('dashboard.php')</script>";
+			echo "<script>window.location=('dashboard.php')</script>";
 			exit();
 		}
 		echo "<script>window.alert('Anda Tidak Memiliki Hak Untuk Masuk!');
