@@ -51,7 +51,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="dashboard.php" style="color: #ffffff;"><i class="fa fa-building-o fa-fw silhouette"></i> <b class="silhouette">LISTRIK PISS</b></a>
+        <a class="navbar-brand" href="dashboard.php" style="color: #ffffff;"><i class="fa fa-bolt fa-fw silhouette"></i> <b class="silhouette">LISTRIK PISS</b></a>
     </div>
 			
 	<ul class="nav navbar-top-links navbar-right">
@@ -63,7 +63,7 @@
 			onmouseout="this.style.backgroundColor='transparent'">
 				<i class="fa fa-user fa-fw" style="color: #ffffff;"></i>
 				<span style="color: #ffffff;"><?php echo $greetingMessage; ?></span>
-				<b style="text-transform: capitalize; color: #ffffff;"><?php echo $name; ?>&nbsp;</b>
+				<b style="text-transform: capitalize; color: #ffffff;"><?php echo $role == 'Cashier' ? 'Kasir - '.$name : ($role == 'pp' ? 'PP - '.$name : 'SPV - ' . $name); ?>&nbsp;</b>
 				<i id="dropdownIcon" class="fa fa-angle-down" style="color: #ffffff;"></i>
 			</a>
 			<ul class="dropdown-menu dropdown-user" style="width: 200px; margin-right: 10px; margin-top: 10px; border: 3px solid #ffffff; background-color: #428bca; border-radius: 10px;">

@@ -5,6 +5,6 @@
 	unset($_SESSION['name']); 
 	unset($_SESSION['role']); 
 	session_regenerate_id();
-	header("Location: index.php");
+	header("Location: login.php");
 	exit();
 ?>

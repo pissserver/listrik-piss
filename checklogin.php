@@ -15,13 +15,14 @@
 	$r		= mysql_fetch_array($login);
 	
 	if($ketemu==1){
-		$_SESSION['user'] 	= $r['username'];
+		$_SESSION['username'] 	= $r['username'];
 		$_SESSION['role'] 	= $r['role'];
-		echo "<script>window.location=('dashboard.php')</script>";
+		include "components/welcome_animation.php";
+		echo "<script>setTimeout(function() { window.location.href = 'dashboard.php'; }, 3250);</script>";
 		exit();
 	}
 	else{
-		$login2	= mysql_query("select checker_name, checker_role from checker
+		$login2	= mysql_query("select checker_code, checker_role from checker
 			where checker_code 	= '".antiinjection($_POST["user"])."' and 
 				checker_pass 	= '".antiinjection($_POST["pass"])."' and
 				checker_role 	= 'Cashier' and
@@ -29,9 +30,10 @@
 		$ada	= mysql_num_rows($login2);
 		$r		= mysql_fetch_array($login2);
 		if($ada==1){
-			$_SESSION['user'] 	= $r['checker_name'];
+			$_SESSION['username'] 	= $r['checker_code'];
 			$_SESSION['role'] 	= $r['checker_role'];
-			echo "<script>window.location=('dashboard.php')</script>";
+			include "components/welcome_animation.php";
+			echo "<script>setTimeout(function() { window.location.href = 'dashboard.php'; }, 3250);</script>";
 			exit();
 		}
 		echo "<script>window.alert('Anda Tidak Memiliki Hak Untuk Masuk!');
