@@ -10,16 +10,16 @@
 	$('#historyoutstanding').dataTable({"aLengthMenu": [[10, 50, 100, -1], [10, 50, 100, "All"]]});
 	});
 </script>
-<h3>Daftar Tagihan Listrik</h3>
+<!-- <h3>Daftar Tagihan Listrik</h3> -->
 	<table id="historyoutstanding" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 		<thead>
 			<tr>
-				<th style="width:8%;text-align:center;">No</th>
-				<th style="width:15%;text-align:left;">Periode</th>
-				<th style="width:25;text-align:left;">Pengguna Listrik</th>
-				<th style="width:15%;text-align:center;">Biaya</th>
-				<th style="width:15%;text-align:center;">Status</th>
-				<th style="width:10%;text-align:center;">Aksi</th>
+				<th style="width:8%;text-align:center;">NO</th>
+				<th style="width:15%;text-align:left;">PERIODE</th>
+				<th style="width:25;text-align:left;">PENGGUNA LISTRIK</th>
+				<th style="width:15%;text-align:center;">BIAYA</th>
+				<th style="width:15%;text-align:center;">STATUS</th>
+				<th style="width:10%;text-align:center;">AKSI</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -33,14 +33,14 @@
 				$name	 = executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
 			?>
 			<tr>
-				<td style="text-align:right;"><?php echo $no; ?></td>
+				<td style="text-align:center;"><?php echo $no; ?></td>
 				<td style="text-align:center;"><?php echo $periode; ?></td>
 				<td style="text-align:left;"><?php echo $name; ?></td>
 				<td style="text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
-				<td style="text-align:left;"><?php echo $r['pay_sts']; ?></td>
+				<td style="text-align:center;"><?php echo $r['pay_sts']; ?></td>
 				<td>
 					<center><a href="htmltopdf/merchant_bill2.php?id=<?php echo $r[0]; ?>" target="_blank">
-						<button class="btn btn-outline btn-primary btn-block btn-xs">Cetak</button>
+						<button class="btn btn-primary btn-block btn-xs"><i class="fa fa-print"></i>&nbsp;&nbsp;Cetak</button>
 					</a></center>
 				</td>
 			</tr>

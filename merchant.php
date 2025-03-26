@@ -43,10 +43,17 @@
 
             <div id="page-wrapper">
                 <div class="row"><br><br><br><br>
-                    <div class="col-lg-12" style="margin-top:10px;">
-                        <div id="Area1">
-                            <div class="alert alert-info" onclick="clearNotif()">
-                                <center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+                    <div class="col-md-12" style="margin-top:10px;">
+                        <div class="panel panel-primary" style="overflow-x: auto">
+                            <div class="panel-heading">
+                                <i class="fa fa-group fa-fw"></i> Data Pengguna Listrik
+                            </div>
+                            <div class="panel-body">
+                                <div id="Area1">
+                                    <div class="alert alert-info" onclick="clearNotif()">
+                                        <center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

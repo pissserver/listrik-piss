@@ -18,7 +18,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="img/logo.png">
 	<link rel="shortcut icon" href="img/logo.png" />
-    <title>Input Pengguna | PISS</title>
+    <title> Pengguna Listrik | PISS</title>
 
 	<?php echo headScript(); ?>
 
@@ -59,14 +59,14 @@
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-pencil fa-fw"></i>Tambah Pengguna Listrik
+                            <i class="fa fa-pencil fa-fw"></i> Tambah Pengguna Listrik
                         </div>
                         <div class="panel-body">
                             <form action="register_action.php?task=insert"  id="formRegister" name = "formRegister" method="POST" class="form-horizontal">
-								<div class="form-group" style="padding:10px;">
+								<div class="form-group" style="padding: 0 10px;">
 									<label>Nama Pengguna Listrik</label>
-									<select class="form-control" name="mid" id="mid" autofocus="autofocus" required>
-										<option value="" selected disabled>-- Pilih Pedagang --</option>
+									<select class="form-control chzn-select" name="mid" id="mid" autofocus="autofocus" required>
+										<option value="" selected>-- Pilih Pedagang --</option>
 										<?php 
 											$sql = mysql_query("select 		merchant_id, 
 																			merchant_name, 
@@ -90,14 +90,14 @@
 										?>
 									</select>
 								</div>
-								<div class="form-group" style="padding:10px;">
+								<div class="form-group" style="padding: 0 10px;">
 									<label for="sel1">Lapak Listrik Dipasang :</label>
 									<select class="form-control" name="lapak" id="lapak">
 										<!-- Lapak akan diload menggunakan ajax, dan ditampilkan disini -->
 										<option value="" selected disabled>-- Pilih Pedagang Dahulu --</option>
 									</select>
 								</div>
-								<div class="form-group" style="padding:10px;">
+								<div class="form-group" style="padding: 0 10px;">
 									<label>Daya Yang Digunakan</label>
 									<select class="form-control" name="tarif" id="tarif" required>
 									<option value="" selected disabled>-- Pilih Ampere --</option>
@@ -109,7 +109,7 @@
 									<?php } ?>
 									</select>
 								</div>
-								<div class="form-group" style="padding:10px;">
+								<div class="form-group" style="padding: 0 10px;">
 									<label>Petugas Lapangan</label>
 									<select class="form-control" name="petugas" id="petugas" required>
 									<option value="" selected disabled>-- Pilih Petugas --</option>
@@ -162,6 +162,24 @@
 				</div>
 				<div class="modal-footer">
 				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Edit -->
+	<div id="modalEditRegister" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Meload modal "register_modal.php" file -->
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Delete -->
+	<div id="modalDeleteRegister" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Meload modal "register_delete_modal.php" file -->
 			</div>
 		</div>
 	</div>
@@ -219,5 +237,29 @@
     <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
+	<!-- Search Dropdown -->
+	<script src="js/plugins/chosen/chosen.jquery.js"></script>
+	<script type="text/javascript">
+    	$(".chzn-select").chosen({"search_contains": true,"width":"100%", "no_results_text":"Hasil tidak ditemukan !"});
+    </script>
+	<!-- Sweet Alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+		<?php
+			// Menampilkan SweetAlert jika session success ada dan bernilai true
+			if (isset($_SESSION['success'])) {
+				$title = $_SESSION['title'];
+				$message = $_SESSION['message'];
+				$icon = $_SESSION['success'] ? 'success' : 'error';
+				echo "<script>
+					Swal.fire({
+						title: '$title',
+						text: '$message',
+						icon: '$icon'
+					});
+				</script>";
+				unset($_SESSION['success']);
+				unset($_SESSION['message']);
+			}
+		?>
 </body>
 </html>

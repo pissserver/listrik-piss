@@ -17,7 +17,7 @@
 			<th style="text-align:center;">KODE</th>
 			<th style="text-align:center;">PEDAGANG</th>
 			<th style="text-align:center;">LAPAK</th>
-			<th style="text-align:center;">DATA</th>
+			<th style="text-align:center;">DAYA</th>
 			<th style="text-align:center;">TARIF</th>
 			<th style="text-align:center;">STATUS</th>
 			<th style="text-align:left">PETUGAS</th>
@@ -38,9 +38,9 @@
 		<tr>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $data['merchant_id']; ?></td>
-			<td style="vertical-align: middle; text-align:center;"><?php echo $name; ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo $name; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $lapakpasang; ?></td>
-			<td style="vertical-align: middle; text-align:right;"><?php echo $ampere; ?> Amp</td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $ampere; ?> Amp</td>
 			<td style="vertical-align: middle; text-align:right;"><?php echo format_rupiah($price); ?></td>
 			<td style="vertical-align: middle; text-align:center;">
 				<div style="vertical-align: middle; background-color: <?php echo $data['electricity_sts'] == 'Tidak Aktif' ? 'red' : 'green'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
@@ -53,11 +53,46 @@
 				</div>
 			</td>
 			<td style="vertical-align: middle; text-align:center;"><center>
-				<a style="text-decoration: none;" href="register_edit.php?id=<?php echo $data['electricity_id']; ?>">
-				<button class="btn btn-outline btn-primary btn-block btn-xs"><i class="fa fa-edit"></i>&nbsp;Edit</button>
-			</a>
+				<a style="text-decoration: none" class="btn btn-outline btn-block btn-primary btn-xs modalEditRegister" data-toggle="modal" data-target="#modalEditRegister" data-id="<?php echo $data['electricity_id']; ?>">
+					<i class="fa fa-edit"></i>&nbsp;&nbsp;Edit
+				</a>
+				<a style="text-decoration: none" class="btn btn-outline btn-block btn-danger btn-xs modalDeleteRegister" data-toggle="modal" data-target="#modalDeleteRegister" data-id="<?php echo $data['electricity_id']; ?>">
+					<i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus
+				</a>
 			</center></td>
 		</tr>
 		<?php $no++;} ?>
 	</tbody>
 </table>
+
+<script>
+	$(document).ready(function() {
+		$('body').on('click', '.modalEditRegister', function() {
+			var registerID = $(this).data('id'); 
+
+			$.ajax({
+				url: 'register_modal.php',
+				type: 'GET',
+				data: { id: registerID }, 
+				success: function(response) {
+					$('#modalEditRegister .modal-content').html(response);
+					$('#modalEditRegister').modal('show');
+				}
+			});
+		});
+	});
+
+	$('body').on('click', '.modalDeleteRegister', function() {
+			var registerID = $(this).data('id'); 
+
+			$.ajax({
+				url: 'register_delete_modal.php',
+				type: 'GET',
+				data: { id: registerID }, 
+				success: function(response) {
+					$('#modalDeleteRegister .modal-content').html(response);
+					$('#modalDeleteRegister').modal('show');
+				}
+			});
+		});
+</script>

@@ -1,10 +1,7 @@
 <?php
 	session_start();
 	include "connection.php";
-	//Validasi role
-	if($_SESSION['role']==''){
-		header("Location:index.php");
-	}
+
 	$task		= $_GET['task'];
 	//======================================= START INSERT DATA ===========================================
 	if ($task == 'insert'){
@@ -14,8 +11,12 @@
 									where 	merchant_id = '".$_POST['mid']."' AND 
 											id_lapak_dipasang = '".$_POST['lapak']."'");
 		if($ada>0){
-			echo "<script>window.alert('Pedagang Sudah Terdaftar');
-			window.history.back()</script>";
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Pedagang sudah terdaftar";
+			echo "<script>
+			window.location=('register.php')</script>";
 			exit();
 		}
 		if($_POST['mid']==null||$_POST['tarif']==null||$_POST['lapak']==null){
@@ -44,11 +45,20 @@
 			$update	= mysql_query("	update	merchant 
 									set 	merchant_electricity = 'Yes' 
 									where 	merchant_id = '".$_POST['mid']."'");
+			
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Menambah Pengguna Listrik";
 			echo "<script>window.location=('register.php')</script>";
 			exit();
 		}
 		else{
-			echo "<script>window.alert('Data Gagal Masuk');
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Menambah Pengguna Listrik";
+			echo "<script>
 			window.history.back()</script>";
 			exit();
 		}
@@ -66,11 +76,19 @@
 										electricity_sts 	= '".$_POST['status']."'
 								where 	electricity_id 		= '".$id."'");
 		if($update){
-			echo "<script>window.location=('register_edit.php?id=$id')</script>";
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Update Pengguna Listrik";
+			echo "<script>window.location=('register.php?id=$id')</script>";
 			exit;
 		}
 		else{
-			echo "<script>window.alert('Update Gagal');
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Update Pengguna Listrik";
+			echo "<script>
 			window.history.back()</script>";
 			exit;
 		}
@@ -169,15 +187,23 @@
 	}
 	
 	elseif ($task == 'delete'){
-		$delete = mysql_query("delete request where request_id = '".$id."'");
+		$id		= $_GET['id'];
+		$delete = mysql_query("delete from electricity where electricity_id = '".$id."'");
 		if($delete){
-			//Writes the photo to the server 
-			echo "<script>window.alert('Delete Success');
-			window.location=('request.php')</script>";
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Hapus pengguna listrik";
+			echo "<script>
+			window.location=('register.php')</script>";
 		}
 		else{
-			echo "<script>window.alert('Delete Failled');
-			window.location=('request.php')</script>";
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Hapus pengguna listrik";
+			echo "<script>
+			window.location=('register.php')</script>";
 		}
 	}
 ?>

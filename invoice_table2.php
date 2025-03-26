@@ -10,17 +10,18 @@
 		$('#merchantView').dataTable({"aLengthMenu": [[10, 50, 100, -1], [10, 50, 100, "All"]]});
 	});
 </script>
-<h3>Tagihan Listrik PIOS</h3>
+<!-- <h3>Tagihan Listrik PIOS</h3> -->
 <table id="merchantView" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th style="width:5%;text-align:center;">No</th>
-			<th style="width:30%;">Nama</th>
-			<th style="width:12%;text-align:center;">Periode</th>
-			<th style="width:10%;text-align:center;">Daya</th>
-			<th style="width:10%;text-align:center;">Biaya</th>
-			<th style="width:12%;text-align:center;">Status</th>
-			<th style="width:10%;text-align:center;">Aksi</th>
+			<th style="width:5%;text-align:center;">NO</th>
+			<th style="width:5%;text-align:center;">KODE</th>
+			<th style="width:30%;">NAMA PENGGUNA</th>
+			<th style="width:12%;text-align:center;">PERIODE</th>
+			<th style="width:10%;text-align:center;">DAYA</th>
+			<th style="width:10%;text-align:center;">BIAYA</th>
+			<th style="width:12%;text-align:center;">STATUS</th>
+			<th style="width:10%;text-align:center;">AKSI</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -36,10 +37,11 @@
 				$ampere = executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$cost_id."'");
 		?>
 		<tr>
-			<td style="text-align:right;"><?php echo $no; ?></td>
-			<td><?php echo $name; ?></td>
+			<td style="text-align:center;"><?php echo $no; ?></td>
+			<td style="text-align:center;"><?php echo $r['merchant_id']; ?></td>
+			<td style="text-align:left;"><?php echo $name; ?></td>
 			<td style="text-align:center;"><?php echo $periode; ?></td>
-			<td style="text-align:right;"><?php echo $ampere; ?> Ampere</td>
+			<td style="text-align:center;"><?php echo $ampere; ?> Ampere</td>
 			<td style="text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
 			<td style="text-align:center;"><?php echo $r['pay_sts']; ?></td>
 			<td>
@@ -48,8 +50,8 @@
 					
 				}
 				else{
-					echo '<center><a href="pay_action.php?task=absen&id='.$r['pay_id'].'">
-					<button class="btn btn-outline btn-primary btn-block btn-xs">Batalkan Tagihan</button>
+					echo '<center><a style="text-decoration: none;" href="pay_action.php?task=absen&id='.$r['pay_id'].'">
+					<button class="btn btn-outline btn-danger btn-block btn-xs"><i class="fa fa-remove"></i>&nbsp;&nbsp;Batalkan Tagihan</button>
 				</a></center>';
 				}
 			?>

@@ -152,11 +152,11 @@
 							</ul>
 						</li>
 
-						<li class="<?= isParentActive(['register.php', 'merchant.php']); ?>">
+						<li class="<?= isParentActive(['register.php', 'merchant.php', 'merchant_edit.php']); ?>">
                             <a href="#"><i class="fa fa-user fa-fw"></i> Pengguna Listrik<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a class="<?= isActive(['register.php']); ?>" href="register.php"><i class="fa fa-user-plus fa-fw"></i> Tambah Pengguna</a></li>
-								<li><a class="<?= isActive(['merchant.php']); ?>" href="merchant.php"><i class="fa fa-users fa-fw"></i> Data Pengguna Listrik</a></li>
+								<li><a class="<?= isActive(['merchant.php', 'merchant_edit.php']); ?>" href="merchant.php"><i class="fa fa-users fa-fw"></i> Data Pengguna Listrik</a></li>
 							</ul>
 						</li>
 						<li class="<?= isParentActive(['periode.php', 'invoice.php', 'invoice_cancel.php']); ?>">

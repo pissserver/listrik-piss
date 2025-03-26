@@ -5,7 +5,7 @@
 ?>
 
 <div class="modal-header bg-primary text-white" style="border-top-left-radius: 5px; border-top-right-radius: 5px;">
-	<h4 style="margin-left: 20px;"><i class="fa fa-remove fa-fw"></i>&nbsp;Hapus Data Perlengkapan Listrik</h4>
+	<h4 style="margin-left: 20px;"><i class="fa fa-trash fa-fw"></i>&nbsp;Hapus Data Perlengkapan Listrik</h4>
 	<button style="margin-top: -35px; margin-right: 20px;" type="button" class="close" data-dismiss="modal" aria-label="Close">
 		<span aria-hidden="true">&times;</span>
 	</button>

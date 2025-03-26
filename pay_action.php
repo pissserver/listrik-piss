@@ -49,13 +49,21 @@
 												`pay_sts` 	= 'Batal' 
 											where pay_id 	= '".$id."'");
 		if($insert){
-			echo "<script>window.alert('Pembatalan Pembayaran Berhasil');
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Membatalkan tagihan";
+			echo "<script>
 			window.location=('invoice_cancel.php')</script>";
 			exit();
 		}
 		else{
-			echo "<script>window.alert('Data Gagal Masuk');
-			window.history.back()</script>";
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Membatalkan tagihan";
+			echo "<script>
+			window.location=('invoice_cancel.php')</script>";
 			exit();
 		}
 	}

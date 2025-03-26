@@ -27,6 +27,8 @@
 	while($r=mysql_fetch_array($sql)){
 		$ampere 	= executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$r['e_cost_id']."'");
 		$price 		= executeScalar("select e_cost_price from e_cost where e_cost_id = '".$r['e_cost_id']."'");
+		$payStatus	= executeScalar("select pay_sts from e_pay where merchant_id = '".$r['merchant_id']."' and periode_id = '".$_POST['periode']."'");
+		$payDate	= executeScalar("select pay_date from e_pay where merchant_id = '".$r['merchant_id']."' and periode_id = '".$_POST['periode']."'");
 		$periode 	= executeScalar("select periode_name from e_periode where periode_id = '".$_POST['periode']."'");
 		$year	 	= executeScalar("select periode_year from e_periode where periode_id = '".$_POST['periode']."'");
 		$month	 	= executeScalar("select periode_month from e_periode where periode_id = '".$_POST['periode']."'");
@@ -75,38 +77,79 @@
 		<tr>
 			<td style="text-align: left; width: 50%"><?php echo 'TL'.$id; ?></td>
 			<td style="text-align: center; width: 5%"></td>
-			<td style="text-align: right; width: 45%"><?php echo date("d-m-Y", strtotime($date_now)); ?></td>
+			<td style="text-align: right; width: 45%"><?php echo date("d M Y", strtotime($date_now)); ?></td>
 			<!-- <td style="text-align: right; width: 45%">01-09-2024</td> -->
 		</tr>
 	</table>
 	<br />
     <div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:5px; margin-bottom:15px;">
-		Tagihan Listrik PISS
+		TAGIHAN LISTRIK PISS
 	</div>
-	<table style="margin-bottom: 5px;font-size:11pt;" id="tableCheckout">
-		<tr><td>Nama 				</td><td> : <?php echo $r['merchant_name']; ?> </td></tr>
-		<tr><td>Nama Alias			</td><td> : <?php echo $r['merchant_nick']; ?> </td></tr>
-		<tr><td>Lapak				</td><td> : <?php echo $lapak; ?> </td></tr>
-		<tr><td>Daya Yg Digunakan	</td><td> : <?php echo $ampere; ?> Ampere</td></tr>
-		<tr><td>Periode Tagihan		</td><td> : <?php echo $periode; ?></td></tr>
-		<tr><td>Jumlah Tagihan		</td><td> : <b><?php echo format_rupiah($price); ?></b></td></tr>
+	<table style="margin-bottom: 5px;font-size:11pt; width: 100%;" id="tableCheckout">
+		<tr>
+			<td style="width: 40%; padding-bottom: 10px;">Nama 				</td>
+			<td style="width: 3%; padding-bottom: 10px;"> : </td>
+			<td style="width: 57%; padding-bottom: 10px;"><?php echo $r['merchant_name']; ?> </td>
+		</tr>
+		<tr>
+			<td style="padding-bottom: 10px;">Nama Alias			</td>
+			<td style="padding-bottom: 10px;"> : </td>
+			<td style="padding-bottom: 10px;"><?php echo $r['merchant_nick'] != NULL ? $r['merchant_nick'] : '-'; ?> </td>
+		</tr>
+		<tr>
+			<td style="padding-bottom: 10px;">Lapak				</td>
+			<td style="padding-bottom: 10px;"> : </td>
+			<td style="padding-bottom: 10px;"><?php echo $lapak; ?> </td>
+		</tr>
+		<tr>
+			<td style="padding-bottom: 10px;">Daya Digunakan	</td>
+			<td style="padding-bottom: 10px;"> : </td>
+			<td style="padding-bottom: 10px;"><?php echo $ampere; ?> Ampere</td>
+		</tr>
+		<tr>
+			<td style="padding-bottom: 10px;">Periode Tagihan		</td>
+			<td style="padding-bottom: 10px;"> : </td>
+			<td style="padding-bottom: 10px;"><?php echo $periode; ?></td>
+		</tr>
+		<tr>
+			<td style="padding-bottom: 10px;">Status Tagihan		</td>
+			<td style="padding-bottom: 10px;"> : </td>
+			<td style="padding-bottom: 10px;"><?php echo $payStatus; ?></td>
+		</tr>
+		<tr>
+			<td style="padding-bottom: 10px;">Tanggal Bayar		</td>
+			<td style="padding-bottom: 10px;"> : </td>
+			<td style="padding-bottom: 10px;"><?php echo $payDate != NULL ? date('d M Y', strtotime($payDate)) : '-'; ?></td>
+		</tr>
+		<tr>
+			<td style="padding-bottom: 10px;">Jumlah Tagihan		</td>
+			<td style="padding-bottom: 10px;"> : </td>
+			<td style="padding-bottom: 10px;"><b><?php echo format_rupiah($price); ?></b></td>
+		</tr>
 	</table>
     <br/><br/>
-	<?php 
-		if($note!=''){
-			echo $note;
-		}
-	?>
+	<table style="width: 100%">
+		<tr>
+			<td><b>NB</b></td>
+			<td> : </td>
+			<td style="font-size: 12px; width: 90%;">
+				<?php 
+					if($note!=''){
+						echo $note;
+					}
+				?>
+			</td>
+		</tr>
+	</table>
     <br/>
 	
     <page_footer>
-		<table style="width: 95%; border: 0px black; margin-top:0px; margin-bottom:30px; margin-right:5px; font-size:8pt;">
+		<table style="width: 100%; border: 0px black; margin-top:10px; margin-bottom:30px; margin-right:5px; font-size:8pt;">
 			<tr>
-				<td style="text-align: center;width: 45%">(TTD & Nama Petugas)</td>
-				<td style="text-align: center;width: 65%">(TTD Pelanggan)</td>
+				<td style="text-align: center;width: 50%">(TTD & Nama Petugas)</td>
+				<td style="text-align: center;width: 50%">(TTD Pelanggan)</td>
 			</tr>
 		</table>
-	<br />
     </page_footer>
 </page>
 <?php } ?>

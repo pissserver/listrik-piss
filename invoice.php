@@ -42,8 +42,8 @@
 			<?php include "components/sidebar.php"; ?>
 
 			<div id="page-wrapper">
-				<div class="row"><br><br><br><br>
-					<div class="col-lg-3">
+				<div class="row"><br><br><br>
+					<div class="col-lg-12">
 						<br />
 						<div class="panel panel-primary">
 							<div class="panel-heading">
@@ -63,20 +63,27 @@
 											<?php } ?>
 										</select>
 									</div>
-									<div class="form-group" style="margin-left:5px; margin-right:5px;">
-										<button class="btn btn-outline btn-block btn-primary">Buat Tagihan</button>
+									<div class="form-group" style="margin-left:5px; margin-right:5px; margin-bottom: -5px;">
+										<button id="refresh" class="btn btn-block btn-primary"><i class="fa fa-print"></i>&nbsp;&nbsp;Buat Tagihan</button>
 									</div>
 								</form>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-9">
-						<div id="Area1">
-							<div class="alert alert-info" onclick="clearNotif()">
-								<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
-							</div>
-						</div>
-					</div>
+					<div class="col-md-12" style="margin-top:10px;">
+                        <div class="panel panel-primary" style="overflow-x: auto">
+                            <div class="panel-heading">
+                                <i class="fa fa-user fa-fw"></i> Daftar Tagihan Listrik Belum Lunas
+                            </div>
+                            <div class="panel-body">
+                                <div id="Area1">
+                                    <div class="alert alert-info" onclick="clearNotif()">
+                                        <center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div>
@@ -116,7 +123,14 @@
 			});
 			function clearNotif(){$("#notifArea").html("")};
 		</script>
-		
+		<script>
+			document.getElementById("refresh").onclick = function(event) {
+				setTimeout(function() {
+					location.reload();
+				}, 100);
+			};
+		</script>
+
 		<!-- jQuery -->
 		<script src="js/jquery.js"></script>
 		<!-- Bootstrap Core JavaScript -->
