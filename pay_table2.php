@@ -14,12 +14,15 @@
 <table id="payView" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th style="width:5%;text-align:center;">No</th>
-			<th style="width:25%;text-align:center;">Nama Pelanggan</th>
-			<th style="width:15%;text-align:center;">Periode Tagihan</th>
-			<th style="width:12%;text-align:center;">Tanggal Bayar</th>
-			<th style="width:10%;text-align:center;">Jumlah Bayar</th>
-			<th style="width:10%;text-align:center;">Aksi</th>
+			<th style="vertical-align: middle; width:5%;text-align:center;">NO</th>
+			<th style="vertical-align: middle; width:5%;text-align:center;">TAGIHAN</th>
+			<th style="vertical-align: middle; width:5%;text-align:center;">KODE</th>
+			<th style="vertical-align: middle; width:25%;text-align:center;">NAMA PENGGUNA</th>
+			<th style="vertical-align: middle; width:15%;text-align:center;">PERIODE TAGIHAN</th>
+			<th style="vertical-align: middle; width:10%;text-align:center;">JUMLAH BAYAR</th>
+			<th style="vertical-align: middle; width:12%;text-align:center;">STATUS</th>
+			<th style="vertical-align: middle; width:12%;text-align:center;">TANGGAL BAYAR</th>
+			<th style="vertical-align: middle; width:10%;text-align:center;">AKSI</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -33,18 +36,25 @@
 			$nick 	= executeScalar("select merchant_nick from merchant where merchant_id = '".$r['merchant_id']."'");
 		?>
 		<tr>
-			<td style="text-align:right;"><?php echo $no; ?></td>
-			<td style="text-align:left;"><?php echo $name.' / '.$nick; ?></td>
-			<td style="text-align:center;"><?php echo $periode; ?></td>
-			<td style="text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
-			<td style="text-align:center;"><?php echo $r['pay_date']; ?></td>
-			<td>
+			<td style="vertical-align: middle; text-align:right;"><?php echo $no; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo 'TL' . $r['pay_id']; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $r['merchant_id']; ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo $name.' / '.$nick; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $periode; ?></td>
+			<td style="vertical-align: middle; text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
+			<td style="vertical-align: middle; text-align:center;">
+				<div style="vertical-align: middle; background-color: <?php echo $r['pay_sts'] == 'Belum Lunas' ? 'red' : 'green'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
+					<i class="fa <?php echo $r['pay_sts'] == 'Belum Lunas' ? 'fa-remove' : 'fa-check'; ?>"></i>&nbsp;<?php echo $r['pay_sts']; ?>
+				</div>
+			</td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo date('d M Y', strtotime($r['pay_date'])); ?></td>
+			<td style="vertical-align: middle; text-align:center;">
 				<?php 
 					if($_SESSION['role']=='Cashier'){
 						
 					}
 					else{
-						echo '<a href="pay_action.php?task=batal&id='.$r['pay_id'].'"><button class="btn btn-xs btn-outline btn-primary btn-block">Batalkan Pembayaran</button></a>';
+						echo '<a style="text-decoration: none;" href="pay_action.php?task=batal&id='.$r['pay_id'].'"><button class="btn btn-xs btn-outline btn-danger btn-block"><i class="fa fa-remove"></i>&nbsp;Batalkan Pembayaran</button></a>';
 					}
 				?>
 			</td>

@@ -142,7 +142,7 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li><a class="<?= isActive(['dashboard.php']); ?>" href="dashboard.php"><i class="fa fa-bar-chart fa-fw"></i> Dashboard</a></li>
+                        <li><a class="<?= isActive(['dashboard.php']); ?>" href="dashboard.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
 
 						<li class="<?= isParentActive(['tarif.php', 'tarif2.php']); ?>">
 							<a href="#"><i class="fa fa-credit-card fa-fw"></i> Daftar Biaya<span class="fa arrow"></span></a>
@@ -152,11 +152,11 @@
 							</ul>
 						</li>
 
-						<li class="<?= isParentActive(['register.php', 'merchant.php']); ?>">
+						<li class="<?= isParentActive(['register.php', 'merchant.php', 'merchant_edit.php']); ?>">
                             <a href="#"><i class="fa fa-user fa-fw"></i> Pengguna Listrik<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a class="<?= isActive(['register.php']); ?>" href="register.php"><i class="fa fa-user-plus fa-fw"></i> Tambah Pengguna</a></li>
-								<li><a class="<?= isActive(['merchant.php']); ?>" href="merchant.php"><i class="fa fa-users fa-fw"></i> Data Pengguna Listrik</a></li>
+								<li><a class="<?= isActive(['merchant.php', 'merchant_edit.php']); ?>" href="merchant.php"><i class="fa fa-users fa-fw"></i> Data Pengguna Listrik</a></li>
 							</ul>
 						</li>
 						<li class="<?= isParentActive(['periode.php', 'invoice.php', 'invoice_cancel.php']); ?>">
@@ -174,7 +174,7 @@
 								<li><a class="<?= isActive(['pay_cancel.php']); ?>" href="pay_cancel.php"><i class="fa fa-close fa-fw"></i> Pembatalan Pembayaran</a></li>
 							</ul>
 						</li>
-						<li><a class="<?= isActive(['note.php']); ?>" href="note.php"><i class="fa fa-file-text-o fa-fw"></i> Catatan Untuk Pelanggan</a></li>
+						<li><a class="<?= isActive(['note.php']); ?>" href="note.php"><i class="fa fa-file-text fa-fw"></i> Catatan Untuk Pelanggan</a></li>
 						<li><a class="<?= isActive(['report.php']); ?>" href="report.php"><i class="fa fa-clipboard fa-fw"></i> Laporan</a></li>
                     </ul>
                 </div>

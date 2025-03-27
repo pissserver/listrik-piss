@@ -11,7 +11,7 @@
 	$('#rentView').dataTable({"aLengthMenu": [[10, 50, 100, -1], [10, 50, 100, "All"]]});
 	});
 </script>
-<h3 style="margin-top:-10px;text-align:center;"><center><strong>PERIODE TAGIHAN LISTRIK</strong></center></h3></br>
+<!-- <h3 style="margin-top:-10px;text-align:center;"><center><strong>PERIODE TAGIHAN LISTRIK</strong></center></h3></br> -->
 <table id="rentView" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	<thead>
 		<tr>
@@ -30,10 +30,10 @@
 		?>
 		<tr>
 			<td style="text-align:center;"><?php echo $no; ?></td>
-			<td><?php echo $data['periode_name']; ?></td>
+			<td style="text-align:center;"><?php echo $data['periode_name']; ?></td>
 			<td>
-				<a href="htmltopdf/monthly_bill.php?id=<?php echo $data['periode_id'];?>" target="_blank">
-					<button type="button" class="btn btn-block btn-outline btn-info btn-xs">Status Tagihan
+				<a style="text-decoration: none;" class="btn btn-block btn-outline btn-primary btn-xs" href="htmltopdf/monthly_bill.php?id=<?php echo $data['periode_id'];?>" target="_blank">
+					<i class="fa fa-file-text"></i>&nbsp;&nbsp;Status Tagihan
 				</a>
 			</td>
 		</tr>

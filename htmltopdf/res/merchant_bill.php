@@ -20,10 +20,10 @@
 		$price	= $price/2;
 	}*/
 	//untuk mencegah error periode = 0 || tahun = 0
-	if($periode==0||$pname==0){
-		echo "<script>window.history.back()</script>";
-		exit();
-	}
+	// if($periode==0||$pname==0){
+	// 	echo "<script>window.history.back()</script>";
+	// 	exit();
+	// }
 	
 	//Check jika id sudah ada
 	$ada = executeScalar("select count(pay_id) from e_pay where merchant_id = '".$id."' and periode_id = '".$periode."'");
@@ -44,7 +44,7 @@
     </page_header>
 	<table style="width:95%; border:0px; margin-top:0px; margin-left:5px; margin-right:5px; font-size:8pt;">
 		<tr>
-			<td style="text-align: left; width: 50%"><?php echo 'TL'.$tlid; ?></td>
+			<td style="text-align: left; width: 50%"><?php echo 'TL'.$id; ?></td>
 			<td style="text-align: center; width: 5%"></td>
 			<td style="text-align: right; width: 45%"><?php echo $date_now; ?></td>
 			<!-- <td style="text-align: right; width: 45%">2024-06-01</td> -->
@@ -52,7 +52,7 @@
 	</table>
 	<br />
     <div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:5px; margin-bottom:15px;">
-		Tagihan Listrik PIOS
+		Tagihan Listrik PISS
 	</div>
 	<table style="margin-bottom: 5px;font-size:11pt;" id="tableCheckout">
 		<tr><td>Nama 				</td><td> : <?php echo $name; ?> </td></tr>

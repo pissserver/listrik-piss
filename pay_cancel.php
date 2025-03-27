@@ -45,7 +45,7 @@
 			<br /><br><br><br>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<i class="fa fa-clock-o fa-fw"></i> Histori Pembayaran Listrik
+					<i class="fa fa-clock-o fa-fw"></i> Histori Pembayaran Tagihan
 				</div>
 				<div class="panel-body">
 					<div id="Area1"><div class="alert alert-info" onclick="clearNotif()"><center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center></div></div>
@@ -98,5 +98,24 @@
     <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
+	<!-- Sweet Alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+		<?php
+			// Menampilkan SweetAlert jika session success ada dan bernilai true
+			if (isset($_SESSION['success'])) {
+				$title = $_SESSION['title'];
+				$message = $_SESSION['message'];
+				$icon = $_SESSION['success'] ? 'success' : 'error';
+				echo "<script>
+					Swal.fire({
+						title: '$title',
+						text: '$message',
+						icon: '$icon'
+					});
+				</script>";
+				unset($_SESSION['success']);
+				unset($_SESSION['message']);
+			}
+		?>
 </body>
 </html>

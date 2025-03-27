@@ -47,18 +47,29 @@
 			VALUES ('', '".$name."', '".$month."', '".$year."')");
 			
 			if($insert){
-				//echo "<script>window.location=('register_edit.php?id=".$rid."')</script>";
+				// Alert Information
+				$_SESSION['success'] = true;
+				$_SESSION['title'] = 'Berhasil';
+				$_SESSION['message'] = "Menambahkan periode tagihan";
 				echo "<script>window.location=('periode.php')</script>";
 				exit();
 			}else{
-				echo "<script>window.alert('Data Gagal Masuk');
-				window.history.back()</script>";
+				// Alert Information
+				$_SESSION['success'] = false;
+				$_SESSION['title'] = 'Gagal';
+				$_SESSION['message'] = "Menambahkan pengguna listrik";
+				echo "<script>
+				window.location=('periode.php')</script>";
 				exit();
 			}
 		}
 		else{
-			echo "<script>window.alert('Periode Sudah Ada');
-			window.history.back()</script>";
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Periode sudah ada";
+			echo "<script>
+			window.location=('periode.php')</script>";
 			exit();
 		}
 	}

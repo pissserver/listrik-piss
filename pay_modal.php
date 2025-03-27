@@ -1,34 +1,27 @@
 <?php
 	session_start();
 	include "connection.php";
-	//Validasi role
-	if($_SESSION['role']==''){
-		header("Location:index.php");
-	}
+	include "components/role_session.php";
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Timeline CSS -->
-    <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-	<br /><br /><br />
-		<div class="row" style="margin-right:10px;margin-left:10px;margin-top:10px;margin-bottom:10px;">
-			<div class="col-md-8 col-md-offset-2">
-				<form action="pay_action.php?task=insert&id=<?php echo $_GET['id']; ?>"  id="form_pay" name="form_pay" method="POST" class="form-horizontal">
-					<label>Input Tanggal Bayar</label>
-					<input id="pay_date" name="pay_date" type="date" class="form-control form-xs" required />
-					<br />
-					<button type="submit" class="btn btn-outline btn-primary btn-block btn-xs">Bayar</button>
-				</form>
-			</div>
+<div class="modal-header bg-primary text-white" style="border-top-left-radius: 5px; border-top-right-radius: 5px;">
+	<h4 style="margin-left: 20px;"><i class="fa fa-money fa-fw"></i>&nbsp;Bayar Tagihan</h4>
+	<button style="margin-top: -35px; margin-right: 20px;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	<form action="pay_action.php?task=insert&id=<?php echo $_GET['id']; ?>"  id="form_pay" name="form_pay" method="POST" class="form-horizontal">
+		<div class="form-group" style="padding: 0 35px; margin-top: 0px;">
+			<label>Kode Tagihan</label>
+			<input id="kode" name="kode" type="text" value="<?php echo 'TL' . $_GET['id']; ?>" class="form-control form-xs" disabled />
 		</div>
-	<br /><br /><br />
-</body>
-</html>
+		<div class="form-group" style="padding: 0 35px; margin-top: 0px;">
+			<label>Input Tanggal Bayar</label>
+			<input id="pay_date" name="pay_date" type="date" class="form-control form-xs" required />
+		</div>
+		<div class="fomr-group" style="padding: 0 20px;">
+			<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-money"></i>&nbsp;&nbsp;Bayar</button>
+		</div>
+	</form>
+</div>
+

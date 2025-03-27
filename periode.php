@@ -42,14 +42,14 @@
 
             <div id="page-wrapper">
                 <div class="row"><br><br><br><br>
-                    <div class="col-lg-4" style="padding:10px;">
+                    <div class="col-lg-12">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <i class="fa fa-clock-o fa-fw"></i> Periode Tagihan Listrik
+                                <i class="fa fa-pencil fa-fw"></i> Tambah Periode Tagihan Listrik
                             </div>
                             <div class="panel-body">
                                 <form class="form-horizontal" id="form" name="form" method="POST" action="periode_action.php?task=insert">
-                                    <div class="form-group" style="padding:10px;">
+                                    <div class="form-group" style="padding: 0 10px; margin-bottom: 20px;">
                                         <label>Periode Tagihan Listrik</label>
                                         <select class="form-control" name="periode" id="periode" required>
                                             <?php 
@@ -57,22 +57,30 @@
                                                 $month2 = date("M Y",strtotime("+29 day"));
                                                 $vmonth = date('mY');
                                                 $vmonth2 = date("mY",strtotime("+29 day"));
-                                            ?>
+                                                ?>
+                                            <option value="">- Pilih Periode Tagihan -</option>
                                             <option value="<?php echo $vmonth;?>"><?php echo $month; ?></option>
                                             <option value="<?php echo $vmonth2;?>"><?php echo $month2;?></option>
                                         </select>
                                     </div>
-                                    <div class="form-group" style="padding:10px;">
-                                        <center><button type="submit" class="btn btn-outline btn-block btn-primary">Simpan</button></center>
+                                    <div class="form-group" style="padding: 0 10px; margin-bottom: 0px;">
+                                        <center><button type="submit" class="btn btn-block btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button></center>
                                     </div>
                                 </form> 
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8" style="margin-top:20px;">
-                        <div id="Area1">
-                            <div class="alert alert-info" onclick="clearNotif()">
-                                <center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+                    <div class="col-md-12" style="margin-top:10px;">
+                        <div class="panel panel-primary" style="overflow-x: auto">
+                            <div class="panel-heading">
+                                <i class="fa fa-clock-o fa-fw"></i> Data Periode Tagihan Listrik
+                            </div>
+                            <div class="panel-body">
+                                <div id="Area1">
+                                    <div class="alert alert-info" onclick="clearNotif()">
+                                        <center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -123,5 +131,24 @@
         <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
         <!-- Custom Theme JavaScript -->
         <script src="js/sb-admin-2.js"></script>
+        <!-- Sweet Alert -->
+	    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+		<?php
+			// Menampilkan SweetAlert jika session success ada dan bernilai true
+			if (isset($_SESSION['success'])) {
+				$title = $_SESSION['title'];
+				$message = $_SESSION['message'];
+				$icon = $_SESSION['success'] ? 'success' : 'error';
+				echo "<script>
+					Swal.fire({
+						title: '$title',
+						text: '$message',
+						icon: '$icon'
+					});
+				</script>";
+				unset($_SESSION['success']);
+				unset($_SESSION['message']);
+			}
+		?>
     </body>
 </html>

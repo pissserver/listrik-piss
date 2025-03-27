@@ -73,28 +73,41 @@
 
 	// Update
 	elseif ($task=='update'){
-		$id		= $_GET['id'];
+		$eid	= $_GET['id'];
+		$mid	= $_GET['kode'];
 		$sts	= $_POST['sts'];
 		$sts2	= '';
-		$update	= mysql_query("update electricity set electricity_sts = '".$sts."' where merchant_id = '".$id."'");
+		$update	= mysql_query("update electricity set electricity_sts = '".$sts."' where merchant_id = '".$mid."'");
 		if($update){
 			if($sts=='Aktif'){
 				$sts2	= 'Yes';
 			}else{
 				$sts2	= 'No';
 			}
-			$update2	= mysql_query("update merchant set merchant_electricity = '".$sts2."' where merchant_id = '".$id."'");
+			$update2	= mysql_query("update merchant set merchant_electricity = '".$sts2."' where merchant_id = '".$mid."'");
 			if($update2){
-				echo "<script>window.alert('Update Success');
-				window.location=('merchant.php')</script>";
+				// Alert Information
+				$_SESSION['success'] = true;
+				$_SESSION['title'] = 'Berhasil';
+				$_SESSION['message'] = "Update pengguna listrik";
+				echo "<script>
+				window.location=('merchant_edit.php?id=$eid&kode=$mid')</script>";
 				exit;
 			}else{
-				echo "<script>window.alert('Update Failled');
+				// Alert Information
+				$_SESSION['success'] = false;
+				$_SESSION['title'] = 'Gagal';
+				$_SESSION['message'] = "Update pengguna listrik";
+				echo "<script>
 				window.history.back()</script>";
 				exit;
 			}
 		}else{
-			echo "<script>window.alert('Update Failled');
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Update pengguna listrik";
+			echo "<script>
 			window.history.back()</script>";
 			exit;
 		}

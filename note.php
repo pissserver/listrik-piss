@@ -45,7 +45,7 @@
 
         <div id="page-wrapper">
 			<div class="row"><br><br><br>
-				<div class="col-lg-6">
+				<div class="col-lg-12">
 					<br />
 					<div class="panel panel-primary">
 						<div class="panel-heading">
@@ -57,16 +57,35 @@
 									<textarea id="note" name="note" class="form-control" cols="20" rows="5" ><?php echo $note;?></textarea>
 								</div>
 								<div class="form-group" style="margin-left:5px; margin-right:5px;">
-									<button  class="btn btn-outline btn-block btn-primary">Simpan Catatan</button>
+									<button  class="btn btn-block btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan Catatan</button>
 								</div>
 							</form>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-6">
-					<h3>Catatan Untuk Pelanggan Listrik Saat Ini</h3>
-					<textarea class="form-control" cols="20" rows="10" disabled><?php echo $note;?></textarea>
-				</div>
+				<div class="col-lg-12">
+                	<div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <i class="fa fa-file-text fa-fw"></i> Hasil Catatan
+                        </div>
+                    <div class="panel-body">
+						<textarea class="form-control" cols="20" rows="8" disabled><?php echo $note;?></textarea>
+						<div style="margin: 10px 0px;" class="alert alert-warning" role="alert">
+							<table>
+								<tr>
+									<td style="font-size:20px; padding-right: 10px;">
+										<i class="fa fa-info-circle"></i>
+									</td>
+									<td>
+										<p style="font-size: 14px; padding-top:10px;">
+											Catatan ini akan muncul pada nota tagihan pelanggan
+										</p>
+									</td>
+								</tr>
+							</table>
+						</div>
+                    </div>
+                </div>
 			</div>
         </div>
     </div>
@@ -115,5 +134,24 @@
     <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
+	<!-- Sweet Alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+		<?php
+			// Menampilkan SweetAlert jika session success ada dan bernilai true
+			if (isset($_SESSION['success'])) {
+				$title = $_SESSION['title'];
+				$message = $_SESSION['message'];
+				$icon = $_SESSION['success'] ? 'success' : 'error';
+				echo "<script>
+					Swal.fire({
+						title: '$title',
+						text: '$message',
+						icon: '$icon'
+					});
+				</script>";
+				unset($_SESSION['success']);
+				unset($_SESSION['message']);
+			}
+		?>
 </body>
 </html>
