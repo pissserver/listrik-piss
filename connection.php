@@ -1,12 +1,20 @@
 <?php
-	$server = "localhost";$username = "root";$password = "";$database = "db_piss";
+	$server = "localhost";
+	$username = "root";
+	$password = "";
+	$database = "db_piss";
 
 	// Koneksi dan memilih database di server
 	mysql_connect($server,$username,$password) or die("Koneksi gagal");
 	mysql_select_db($database) or die("Database tidak bisa dibuka");
 
 	function format_rupiah($angka){
-		$rupiah = 'Rp.'.number_format($angka,0,',','.');
+		$rupiah = 'Rp '.number_format($angka,0,',','.');
+		return $rupiah;
+	}
+
+	function format_number($angka){
+		$rupiah = number_format($angka,0,',',',');
 		return $rupiah;
 	}
 	
