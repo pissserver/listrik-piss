@@ -6,9 +6,9 @@
     <page_header>
         <table style="width:97%; border:0px; margin-top:20px; margin-bottom:30px; margin-left:10px; margin-right:10px;">
             <tr>
-                <td style="text-align:left; width:33%">PISS</td>
+                <td style="text-align:left; width:33%"></td>
                 <td style="text-align:center; width:34%"></td>
-                <td style="text-align:right; width:33%">Dicetak : <?php echo date('d/m/Y'); ?></td>
+                <td style="text-align:right; width:33%">Dicetak : <?php echo date('d M Y'); ?></td>
             </tr>
         </table>
 		<br />
@@ -22,9 +22,10 @@
         </table>
     </page_footer>
     <div style="font-size: 18px; font-weight: bold; text-align: center; margin-top:15px;">
-		Outstanding Tagihan Listrik PISS
+		LAPORAN OUTSTANDING LISTRIK <br>
+		PASAR INDUK SURABAYA (PISS)
 	</div>
-	<br/>
+	<br/><br>
 	<table style="border: solid 1px black; font-size:8pt; border-collapse: collapse; margin-bottom: 5px; width:680px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
 			<th style="text-align: center;width: 5%;height: 3%; border: solid 1px black;">NO</th>
@@ -66,7 +67,7 @@
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $ampere; ?> Ampere</td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $periode; ?></td>
 			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_rupiah($price);  ?></td>
-			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_rupiah($r['pay_total']);  ?></td>
+			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_number($r['pay_total']);  ?></td>
 		</tr>
 		<?php 
 				$no++; 
@@ -74,8 +75,8 @@
 			} 
 		?>
 		<tr>
-			<td style="text-align: right;font-size:8pt;border: solid 1px black;" colspan="7"><b>TOTAL </b></td>
-			<td style="text-align: right;font-size:8pt;border: solid 1px black;font-weight:bold;"><?php echo format_rupiah($total); ?></td>
+			<td style="text-align: center;font-size:8pt;border: solid 1px black;" colspan="7"><b>TOTAL </b></td>
+			<td style="text-align: right;font-size:8pt;border: solid 1px black;font-weight:bold;"><?php echo format_number($total); ?></td>
 		</tr>
 	</table>
 </page>

@@ -86,8 +86,8 @@
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $r['e_cost_ampere']; ?> Ampere</td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $r['periode_name']; ?></td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo date("d M Y", strtotime($r['pay_date'])); ?></td>
-			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo $r['e_cost_price'];  ?></td>
-			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo $r['pay_total'];  ?></td>
+			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_rupiah($r['e_cost_price']);  ?></td>
+			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_number($r['pay_total']);  ?></td>
 		</tr>
 		<?php
 				$no++; 
@@ -96,7 +96,7 @@
 		?>
 		<tr>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;" colspan="8"><b>TOTAL </b></td>
-			<td style="text-align: right;font-size:8pt;border: solid 1px black;font-weight:bold;"><?php echo $total; ?></td>
+			<td style="text-align: right;font-size:8pt;border: solid 1px black;font-weight:bold;"><?php echo format_number($total); ?></td>
 		</tr>
 	</table>
 </page>

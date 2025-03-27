@@ -12,6 +12,11 @@
 		$rupiah = 'Rp '.number_format($angka,0,',','.');
 		return $rupiah;
 	}
+
+	function format_number($angka){
+		$rupiah = number_format($angka,0,',',',');
+		return $rupiah;
+	}
 	
 	function executeScalar($sql,$def=0){
 		$rs = mysql_query($sql) or die(mysql_error().$sql);

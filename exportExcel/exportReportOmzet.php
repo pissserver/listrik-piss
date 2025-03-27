@@ -104,7 +104,8 @@
               ->setCellValue("I" . $row, $r['pay_total']);
             
         // Membuat format menjadi number
-        // $sheet->getStyle("I" . $row . ":I" . $row)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("H" . $row . ":H" . $row)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("I" . $row . ":I" . $row)->getNumberFormat()->setFormatCode('#,##0');
 
         // Perhitungan total
         // if ($data['weighing_sts'] != 'Batal' && $data['weighing_sts'] != 'Dipecah' && $data['weighing_sts'] != 'Digabung') {
@@ -141,14 +142,14 @@
     // $sheet->getStyle("A" . $row . ":J" . $row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
     // Membuat format menjadi number
-    // $sheet->getStyle("I" . $row . ":J" . $row)->getNumberFormat()->setFormatCode('#,##0');
+    $sheet->getStyle("I" . $row . ":I" . $row)->getNumberFormat()->setFormatCode('#,##0');
 
     // Menambahkan border pada seluruh tabel
     $sheet->getStyle("A5:I" . $row)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Laporan Pendapatan Listrik' . date('d M Y') . '.xls"');
+    header('Content-Disposition: attachment;filename="Laporan Pendapatan Listrik_' . date('d M Y') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel
