@@ -12,12 +12,20 @@
 												`pay_sts`	= 'Lunas'
 											where pay_id 	= '".$id."'");
 		if($insert){
-			echo "<script>window.alert('Pembayaran Berhasil');
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Melakukan Pembayaran tagihan";
+			echo "<script>
 			window.location=('pay.php')</script>";
 			exit();
 		}
 		else{
-			echo "<script>window.alert('Data Gagal Masuk');
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Melakukan pembayaran tagihan";
+			echo "<script>
 			window.history.back()</script>";
 			exit();
 		}
@@ -30,12 +38,20 @@
 												`pay_sts` 	= 'Belum Lunas' 
 											where pay_id 	= '".$id."'");
 		if($update){
-			echo "<script>window.alert('Pembatalan Pembayaran Berhasil');
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Melakukan pembatalan pembayaran";
+			echo "<script>
 			window.location=('pay_cancel.php')</script>";
 			exit();
 		}
 		else{
-			echo "<script>window.alert('Data Gagal Masuk');
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'gagal';
+			$_SESSION['message'] = "Melakukan pembatalan pembayaran";
+			echo "<script>
 			window.history.back()</script>";
 			exit();
 		}
@@ -62,6 +78,33 @@
 			$_SESSION['success'] = false;
 			$_SESSION['title'] = 'Gagal';
 			$_SESSION['message'] = "Membatalkan tagihan";
+			echo "<script>
+			window.location=('invoice_cancel.php')</script>";
+			exit();
+		}
+	}
+
+	//Aktifkan Pembayaran
+	if ($task=='active'){
+		$id		= $_GET['id'];
+		$insert = mysql_query("update e_pay set `pay_date` 	= null, 
+											`cancel_date` 	= '".$date_now."',
+												`pay_sts` 	= 'Belum Lunas' 
+											where pay_id 	= '".$id."'");
+		if($insert){
+			// Alert Information
+			$_SESSION['success'] = true;
+			$_SESSION['title'] = 'Berhasil';
+			$_SESSION['message'] = "Aktifkan tagihan";
+			echo "<script>
+			window.location=('invoice_cancel.php')</script>";
+			exit();
+		}
+		else{
+			// Alert Information
+			$_SESSION['success'] = false;
+			$_SESSION['title'] = 'Gagal';
+			$_SESSION['message'] = "Aktifkan tagihan";
 			echo "<script>
 			window.location=('invoice_cancel.php')</script>";
 			exit();

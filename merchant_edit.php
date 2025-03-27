@@ -65,6 +65,12 @@
 					</div>
 					<div class="panel-body">
 						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group" class="margin-left: 20px;">
+									<label>Kode</label>
+									<input class="form-control" value="<?php echo $r['merchant_id']; ?>" disabled></input>             
+								</div>
+							</div>
 							<div class="col-lg-6">
 								<div class="form-group">
 									<label>Nama</label>
@@ -191,6 +197,7 @@
 									<thead>
 										<tr>
 											<th style="width:5%;text-align:center;">NO</th>
+											<th style="width:5%;text-align:center;">TAGIHAN</th>
 											<th style="width:15%;text-align:center;">PERIODE</th>
 											<th style="width:10%;text-align:center;">BIAYA</th>
 											<th style="width:12%;text-align:center;">STATUS</th>
@@ -207,11 +214,12 @@
 											$periode = executeScalar("select periode_name from e_periode where periode_id = '".$r['periode_id']."'");
 										?>
 										<tr>
-											<td style="text-align:right;"><?php echo $no; ?></td>
-											<td style="text-align:center;"><?php echo date("d M Y", strtotime($periode)) ?></td>
-											<td style="text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
-											<td style="text-align:center;"><?php echo $r['pay_sts']; ?></td>
-											<td>
+											<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
+											<td style="vertical-align: middle; vertical-align: middle; text-align:center;"><?php echo 'TL' . $r['pay_id']; ?></td>
+											<td style="vertical-align: middle; text-align:center;"><?php echo $periode ?></td>
+											<td style="vertical-align: middle; text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
+											<td style="vertical-align: middle; text-align:center;"><?php echo $r['pay_sts']; ?></td>
+											<td style="vertical-align: middle; text-align:center;">
 												<center><a style="text-decoration: none" href="htmltopdf/merchant_bill2.php?id=<?php echo $r['pay_id']; ?>" target="_blank">
 													<button class="btn btn-outline btn-primary btn-block btn-xs"><i class="fa fa-print"></i>&nbsp;Cetak</button></a>
 												</center>
@@ -233,11 +241,12 @@
 								<table id="historybayar" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>
 										<tr>
-											<th style="width:5%;text-align:center;">NO</th>
-											<th style="width:15%;text-align:center;">PERIODE</th>
-											<th style="width:10%;text-align:center;">BIAYA</th>
-											<th style="width:12%;text-align:center;">TGL BAYAR</th>
-											<th style="width:10%;text-align:center;">KWITANSI</th>
+											<th style="vertical-align: middle; width:5%;text-align:center;">NO</th>
+											<th style="vertical-align: middle; width:5%;text-align:center;">TAGIHAN</th>
+											<th style="vertical-align: middle; width:15%;text-align:center;">PERIODE</th>
+											<th style="vertical-align: middle; width:10%;text-align:center;">BIAYA</th>
+											<th style="vertical-align: middle; width:12%;text-align:center;">TGL BAYAR</th>
+											<th style="vertical-align: middle; width:10%;text-align:center;">KWITANSI</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -249,11 +258,12 @@
 											$periode = executeScalar("select periode_name from e_periode where periode_id = '".$r['periode_id']."'");
 										?>
 										<tr>
-											<td style="text-align:right;"><?php echo $no; ?></td>
-											<td style="text-align:center;"><?php echo date("d M Y", strtotime($periode)); ?></td>
-											<td style="text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
-											<td style="text-align:center;"><?php echo date("d M Y", strtotime($r['pay_date'])); ?></td>
-											<td>
+											<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
+											<td style="vertical-align: middle; text-align:center;"><?php echo 'TL' . $r['pay_id']; ?></td>
+											<td style="vertical-align: middle; text-align:center;"><?php echo $periode; ?></td>
+											<td style="vertical-align: middle; text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
+											<td style="vertical-align: middle; text-align:center;"><?php echo date("d M Y", strtotime($r['pay_date'])); ?></td>
+											<td style="vertical-align: middle; text-align:right;">
 												<center><a style="text-decoration: none" href="htmltopdf/merchant_bill3.php?id=<?php echo $r['pay_id']; ?>" target="_blank">
 													<button class="btn btn-outline btn-primary btn-block btn-xs"><i class="fa fa-print"></i>&nbsp;Cetak</button>
 												</a></center>

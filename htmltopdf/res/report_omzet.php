@@ -8,9 +8,9 @@
     <page_header>
         <table style="width:97%; border:0px; margin-top:20px; margin-left:10px; margin-right:10px;">
             <tr>
-                <td style="text-align:left; width:33%">PISS</td>
+                <td style="text-align:left; width:33%"></td>
                 <td style="text-align:center; width:34%"></td>
-                <td style="text-align:right; width:33%">Dicetak : <?php echo date('d/m/Y'); ?></td>
+                <td style="text-align:right; width:33%">Dicetak : <?php echo date('d M Y'); ?></td>
             </tr>
         </table>
     </page_header>
@@ -23,13 +23,14 @@
         </table>
     </page_footer>
     <div style="font-size: 18px; font-weight: bold; text-align: center; margin-top:15px;">
-		Pendapatan Listrik PISS
+		LAPORAN PENDAPATAN LISTRIK <br>
+		PASAR INDUK SURABAYA (PISS) 
 	</div>
-	<br/>
-	<table style="margin-bottom: 5px;font-size:10pt; width:250px;" >
+	<br/><br>
+	<table style="margin-bottom: 5px;font-size:10pt; width:100%;" >
 		<tr>
-			<td style="width: 30%;">Tanggal</td>
-			<td style="width: 70%;">: <?php echo date("d-m-Y", strtotime($date1)).' sd '.date("d-m-Y", strtotime($date2)); ?></td>
+			<td style="width: 7%;">Tanggal</td>
+			<td style="width: 93%;">: <?php echo date("d M Y", strtotime($date1)).' sd '.date("d M Y", strtotime($date2)); ?></td>
 		</tr>
 	</table>
 	<br />
@@ -43,7 +44,7 @@
 			<th style="text-align: center;width: 12%;border: solid 1px black;">PERIODE</th>
 			<th style="text-align: center;width: 10%;border: solid 1px black;">TGL BAYAR</th>
 			<th style="text-align: center;width: 10%; border: solid 1px black;">TARIF</th>
-			<th style="text-align: center;width: 12%;border: solid 1px black;">BAYAR</th>
+			<th style="text-align: center;width: 12%;border: solid 1px black;">BAYAR (RP)</th>
 		</tr>
 		 <?php
 			$query 	= mysql_query("	select 	p.pay_id, 
@@ -81,12 +82,12 @@
 			<td style="text-align: center;height: 1%;font-size:8pt;border: solid 1px black;"><?php echo $no;  ?></td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;">TL<?php echo $tlid; ?></td>
 			<td style="text-align: left;font-size:8pt;border: solid 1px black;"><?php echo $name; ?></td>
-			<td style="text-align: left;font-size:8pt;border: solid 1px black;"><?php echo $r['lapak_name']; ?></td>
+			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $r['lapak_name']; ?></td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $r['e_cost_ampere']; ?> Ampere</td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $r['periode_name']; ?></td>
-			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['pay_date'])); ?></td>
-			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_rupiah($r['e_cost_price']);  ?></td>
-			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_rupiah($r['pay_total']);  ?></td>
+			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo date("d M Y", strtotime($r['pay_date'])); ?></td>
+			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo $r['e_cost_price'];  ?></td>
+			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo $r['pay_total'];  ?></td>
 		</tr>
 		<?php
 				$no++; 
@@ -94,8 +95,8 @@
 			} 
 		?>
 		<tr>
-			<td style="text-align: right;font-size:8pt;border: solid 1px black;" colspan="8"><b>Total </b></td>
-			<td style="text-align: right;font-size:8pt;border: solid 1px black;font-weight:bold;"><?php echo format_rupiah($total); ?></td>
+			<td style="text-align: center;font-size:8pt;border: solid 1px black;" colspan="8"><b>TOTAL </b></td>
+			<td style="text-align: right;font-size:8pt;border: solid 1px black;font-weight:bold;"><?php echo $total; ?></td>
 		</tr>
 	</table>
 </page>

@@ -14,19 +14,20 @@
 <table id="merchantView" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th style="width:5%;text-align:center;">NO</th>
-			<th style="width:5%;text-align:center;">KODE</th>
-			<th style="width:30%;">NAMA PENGGUNA</th>
-			<th style="width:12%;text-align:center;">PERIODE</th>
-			<th style="width:10%;text-align:center;">DAYA</th>
-			<th style="width:10%;text-align:center;">BIAYA</th>
-			<th style="width:12%;text-align:center;">STATUS</th>
-			<th style="width:10%;text-align:center;">AKSI</th>
+			<th style="vertical-align: middle; width:5%;text-align:center;">NO</th>
+			<th style="vertical-align: middle; width:5%;text-align:center;">TAGIHAN</th>
+			<th style="vertical-align: middle; width:5%;text-align:center;">KODE</th>
+			<th style="vertical-align: middle; width:25%;">NAMA PENGGUNA</th>
+			<th style="vertical-align: middle; width:12%;text-align:center;">PERIODE</th>
+			<th style="vertical-align: middle; width:10%;text-align:center;">DAYA</th>
+			<th style="vertical-align: middle; width:10%;text-align:center;">BIAYA</th>
+			<th style="vertical-align: middle; width:12%;text-align:center;">STATUS</th>
+			<th style="vertical-align: middle; width:10%;text-align:center;">AKSI</th>
 		</tr>
 	</thead>
 	<tbody>
 		<?php
-			$sql 	= "select * from e_pay where pay_sts = 'Belum Lunas' order by pay_id desc";
+			$sql 	= "select * from e_pay where pay_sts != 'Lunas' order by pay_id desc";
 			$query 	= mysql_query($sql);
 			$no		= 1;
 			$angs	= 0;
@@ -38,6 +39,7 @@
 		?>
 		<tr>
 			<td style="text-align:center;"><?php echo $no; ?></td>
+			<td style="text-align:center;"><?php echo 'TL' . $r['pay_id']; ?></td>
 			<td style="text-align:center;"><?php echo $r['merchant_id']; ?></td>
 			<td style="text-align:left;"><?php echo $name; ?></td>
 			<td style="text-align:center;"><?php echo $periode; ?></td>
@@ -50,9 +52,15 @@
 					
 				}
 				else{
-					echo '<center><a style="text-decoration: none;" href="pay_action.php?task=absen&id='.$r['pay_id'].'">
-					<button class="btn btn-outline btn-danger btn-block btn-xs"><i class="fa fa-remove"></i>&nbsp;&nbsp;Batalkan Tagihan</button>
-				</a></center>';
+					if ($r['pay_sts'] == 'Belum Lunas') {
+						echo '<center><a style="text-decoration: none;" href="pay_action.php?task=absen&id='.$r['pay_id'].'">
+						<button class="btn btn-outline btn-danger btn-block btn-xs"><i class="fa fa-remove"></i>&nbsp;&nbsp;Batalkan Tagihan</button>
+					</a></center>';
+					} elseif ($r['pay_sts'] == 'Batal') {
+						echo '<center><a style="text-decoration: none;" href="pay_action.php?task=active&id='.$r['pay_id'].'">
+						<button class="btn btn-outline btn-success btn-block btn-xs"><i class="fa fa-check"></i>&nbsp;&nbsp;Aktifkan Tagihan</button>
+					</a></center>';
+					}
 				}
 			?>
 			</td>

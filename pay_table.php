@@ -9,13 +9,14 @@
 		$('#merchantView').dataTable({"aLengthMenu": [[10, 50, 100, -1], [10, 50, 100, "All"]]});
 	});
 </script>
-<h3>Tagihan Listrik PISS</h3>
+<!-- <h3>Tagihan Listrik PISS</h3> -->
 <table id="merchantView" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 	<thead>
 		<tr>
 			<th style="width:6%;text-align:center;">NO</th>
-			<th style="width:8%;text-align:center;">KODE TAGIHAN</th>
-			<th style="width:30%;text-align:center;">NAMA</th>
+			<th style="width:8%;text-align:center;">TAGIHAN</th>
+			<th style="width:8%;text-align:center;">KODE</th>
+			<th style="width:25%;text-align:center;">NAMA PENGGUNA</th>
 			<th style="width:12%;text-align:center;">PERIODE</th>
 			<th style="width:10%;text-align:center;">DAYA</th>
 			<th style="width:10%;text-align:center;">BIAYA</th>
@@ -40,18 +41,41 @@
 			
 		?>
 		<tr>
-			<td style="text-align:center;"><?php echo $no; ?></td>
-			<td style="text-align:center;"><?php echo "TL".$r['pay_id']; ?></td>
-			<td style="text-align:left;"><?php echo $name.' / '.$nick; ?></td>
-			<td style="text-align:center;"><?php echo $periode; ?></td>
-			<td style="text-align:right;"><?php echo $ampere; ?> Ampere</td>
-			<td style="text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
-			<td style="text-align:center;"><?php echo $r['pay_sts']; ?></td>
-			<td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo "TL".$r['pay_id']; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $r['merchant_id']; ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo $name.' / '.$nick; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $periode; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $ampere; ?> Ampere</td>
+			<td style="vertical-align: middle; text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
+			<td style="vertical-align: middle; text-align:center;">
+				<div style="vertical-align: middle; background-color: <?php echo $r['pay_sts'] == 'Belum Lunas' ? 'red' : 'green'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
+					<i class="fa <?php echo $r['pay_sts'] == 'Belum Lunas' ? 'fa-remove' : 'fa-check'; ?>"></i>&nbsp;<?php echo $r['pay_sts']; ?>
+				</div>
+			</td>
+			<td style="vertical-align: middle; text-align:center;">
 				<!-- Button HTML (to Trigger Modal) -->
-				<a href="pay_modal.php?id=<?php echo $r['pay_id']; ?>" class="btn btn-xs btn-outline btn-primary btn-block" data-toggle="modal" data-target="#modalPay">Bayar</a>
+				<a class="btn btn-xs btn-outline btn-primary btn-block modalPay" data-toggle="modal" data-target="#modalPay" data-id="<?php echo $r['pay_id']; ?>"><i class="fa fa-money"></i>&nbsp;&nbsp;Bayar</a>
 			</td>
 		</tr>
 		<?php $no++;} ?>
 	</tbody>
 </table>
+
+<script>
+	$(document).ready(function() {
+		$('body').on('click', '.modalPay', function() {
+			var payID = $(this).data('id'); 
+
+			$.ajax({
+				url: 'pay_modal.php',
+				type: 'GET',
+				data: { id: payID }, 
+				success: function(response) {
+					$('#modalPay .modal-content').html(response);
+					$('#modalPay').modal('show');
+				}
+			});
+		});
+	});
+</script>

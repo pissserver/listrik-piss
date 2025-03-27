@@ -14,12 +14,14 @@
 	<table id="historyoutstanding" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 		<thead>
 			<tr>
-				<th style="width:8%;text-align:center;">NO</th>
-				<th style="width:15%;text-align:left;">PERIODE</th>
-				<th style="width:25;text-align:left;">PENGGUNA LISTRIK</th>
-				<th style="width:15%;text-align:center;">BIAYA</th>
-				<th style="width:15%;text-align:center;">STATUS</th>
-				<th style="width:10%;text-align:center;">AKSI</th>
+				<th style="vertical-align: middle; width:8%;text-align:center;">NO</th>
+				<th style="vertical-align: middle; width:8%;text-align:center;">TAGIHAN</th>
+				<th style="vertical-align: middle; width:8%;text-align:center;">KODE</th>
+				<th style="vertical-align: middle; width:25;text-align:center;">PENGGUNA LISTRIK</th>
+				<th style="vertical-align: middle; width:15%;text-align:center;">PERIODE</th>
+				<th style="vertical-align: middle; width:15%;text-align:center;">BIAYA</th>
+				<th style="vertical-align: middle; width:15%;text-align:center;">STATUS</th>
+				<th style="vertical-align: middle; width:10%;text-align:center;">AKSI</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,8 +36,10 @@
 			?>
 			<tr>
 				<td style="text-align:center;"><?php echo $no; ?></td>
-				<td style="text-align:center;"><?php echo $periode; ?></td>
+				<td style="text-align:center;"><?php echo 'TL' . $r['pay_id']; ?></td>
+				<td style="text-align:center;"><?php echo $r['merchant_id']; ?></td>
 				<td style="text-align:left;"><?php echo $name; ?></td>
+				<td style="text-align:center;"><?php echo $periode; ?></td>
 				<td style="text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
 				<td style="text-align:center;"><?php echo $r['pay_sts']; ?></td>
 				<td>

@@ -49,26 +49,62 @@
 					<input type="hidden" id="value_day1" />
 					<div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-book fa-fw"></i> Laporan Pendapatan Listrik PISS
+                            <i class="fa fa-file-text fa-fw"></i> Laporan Pendapatan Listrik
                         </div>
                         <div class="panel-body">
-							<form class="form-horizontal" action="htmltopdf/report_omzet.php" id="reportOmzetBlock" name = "reportOmzetBlock" method="POST" target="_blank">
+							<form class="form-horizontal" id="reportOmzet" name = "reportOmzet" method="POST" target="_blank">
 								<div class="row">
 									<div class="col-md-6">
-										<div class="form-group" style="padding:10px; margin-top:-10px;">
+										<div class="form-group" style="padding: 0 15px; margin-top:0px;">
 											<label>Tanggal Awal</label>
-											<input name="date1" value="<?php echo $date_now;?>" type="date" class="form-control" placeholder="DD/MM/YYYY" required
+											<input name="date1" type="date" class="form-control" required
 											data-fv-notempty-message="Tanggal Belum Diisi"/>
 										</div>
 									</div>
 									<div class="col-md-6">
-										<div class="form-group" style="padding:10px; margin-top:-10px;">
+										<div class="form-group" style="padding: 0 15px; margin-top:0px;">
 											<label>Tanggal Akhir</label>
-											<input name="date2" value="<?php echo $date_now;?>" type="date" class="form-control" placeholder="DD/MM/YYYY" required
+											<input name="date2"  type="date" class="form-control" required
 											data-fv-notempty-message="Tanggal Belum Diisi"/>
 										</div>
 									</div>
-									<div class="form-group" style="padding:10px; margin-top:30px; margin-right:5px; margin-left:5px;">
+									<div class="col-md-6">
+										<div class="form-group" style="margin-top:5px; margin-right:0px; margin-left:0px">
+												<button type="submit" class="btn btn-primary btn-block"  onclick="setAction('pdf')"><i class="fa fa-file-pdf-o fa-lg" style="font-size: 16px;"></i>&nbsp;&nbsp;Print PDF</button>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group" style="margin-top:5px; margin-left:0px; margin-right: 0px">
+											<button type="submit" class="btn btn-success btn-block" style="background-color: #008000;" onclick="setAction('excel')"><i class="fa fa-file-excel-o fa-lg" style="font-size: 16px;"></i>&nbsp;&nbsp;Export Excel</button>
+										</div>
+									</div>
+								</div>
+							</form>
+                        </div>
+                    </div>
+
+					<div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <i class="fa fa-file-text fa-fw"></i> Laporan Pembatalan Tagihan Listrik
+                        </div>
+                        <div class="panel-body">
+							<form class="form-horizontal" action="htmltopdf/report_cancel.php" id="report_cancel" name="report_cancel" method="POST" target="_blank">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group" style="padding: 0 15px; margin-top:0px;">
+											<label>Tanggal Awal</label>
+											<input name="date1" type="date" class="form-control" required
+											data-fv-notempty-message="Tanggal Belum Diisi"/>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group" style="padding: 0 15px; margin-top:0px;">
+											<label>Tanggal Akhir</label>
+											<input name="date2" type="date" class="form-control" required
+											data-fv-notempty-message="Tanggal Belum Diisi"/>
+										</div>
+									</div>
+									<div class="form-group" style="padding: 0 15px; margin-top:0; margin-right:5px; margin-left:5px;">
 										<center><button type="submit" class="btn btn-outline btn-primary btn-block">Lihat <i class="fa fa-angle-double-right fa-lg"></i></button></center>
 									</div>
 								</div>
@@ -85,40 +121,12 @@
 					<input type="hidden" id="value_day2" />
 					<div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-book fa-fw"></i> Laporan Outstanding Listrik PISS
+                            <i class="fa fa-file-text fa-fw"></i> Laporan Outstanding Listrik
                         </div>
                         <div class="panel-body">
 							<form class="form-horizontal" action="htmltopdf/report_outstanding.php" id="reportOmzetMerchant" name="reportOmzetMerchant" method="POST" target="_blank">
-								<div class="form-group" style="padding:10px; margin-top:0px; margin-right:5px; margin-left:5px;">
+								<div class="form-group" style="padding: 0 15px; margin-top:0; margin-right:5px; margin-left:5px;">
 									<center><button type="submit" class="btn btn-outline btn-primary btn-block">Lihat <i class="fa fa-angle-double-right fa-lg"></i></button></center>
-								</div>
-							</form>
-                        </div>
-                    </div>
-					<div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <i class="fa fa-book fa-fw"></i> Laporan Pembatalan Tagihan Listrik PISS
-                        </div>
-                        <div class="panel-body">
-							<form class="form-horizontal" action="htmltopdf/report_cancel.php" id="report_cancel" name="report_cancel" method="POST" target="_blank">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group" style="padding:10px; margin-top:-10px;">
-											<label>Tanggal Awal</label>
-											<input name="date1" value="<?php echo $date_now;?>" type="date" class="form-control" placeholder="DD/MM/YYYY" required
-											data-fv-notempty-message="Tanggal Belum Diisi"/>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group" style="padding:10px; margin-top:-10px;">
-											<label>Tanggal Akhir</label>
-											<input name="date2" value="<?php echo $date_now;?>" type="date" class="form-control" placeholder="DD/MM/YYYY" required
-											data-fv-notempty-message="Tanggal Belum Diisi"/>
-										</div>
-									</div>
-									<div class="form-group" style="padding:10px; margin-top:0px; margin-right:5px; margin-left:5px;">
-										<center><button type="submit" class="btn btn-outline btn-primary btn-block">Lihat <i class="fa fa-angle-double-right fa-lg"></i></button></center>
-									</div>
 								</div>
 							</form>
                         </div>
@@ -134,7 +142,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src='img/Delete.png' width='25' height='25'/></button>
-					<h4 id="header_tonase">Tonase Timbangan PIOS </h4>
+					<h4 id="header_tonase">Tonase Timbangan </h4>
 				</div>
 				<div class="modal-body">
 					<div id="body_tonase" style="margin-bottom: 0px;">
@@ -227,5 +235,22 @@
 		
 		function clearNotif(){$("#notifArea").html("");}
     </script>
+	<script>
+		function setAction(type) {
+			var form1 = document.getElementById("reportOmzet");
+			var form2 = document.getElementById("reportMerchant2");
+			if (type === 'pdf') {
+				form1.action = "htmltopdf/report_omzet.php";
+				form2.action = "htmltopdf/laporan_pedagang2.php";
+				form1.target = "_blank";
+				form2.target = "_blank";
+			} else if (type === 'excel') {
+				form1.action = "exportExcel/exportReportOmzet.php";
+				form2.action = "exportExcel/exportLaporanPedagang2.php";
+				form1.target = "_self";
+				form2.target = "_self";
+			}
+		}
+	</script>
 </body>
 </html>
