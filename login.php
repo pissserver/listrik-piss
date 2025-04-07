@@ -157,10 +157,20 @@
                                     Ingat saya
                                 </label>
                             </div>
-                            <!-- 
                             <div>
-                                <a href="#" class="txt1"> Lupa Password? </a>
-                            </div> -->
+                                <a
+                                    href="#"
+                                    class="txt1"
+                                    data-toggle="modal"
+                                    data-target="#modalForgetPassword"
+                                    style="
+                                        color: #428bca;
+                                        text-decoration: none;
+                                    "
+                                >
+                                    Lupa Password?
+                                </a>
+                            </div>
                         </div>
 
                         <div class="container-login100-form-btn">
@@ -216,6 +226,20 @@
             </div>
         </div>
 
+        <!-- Modal Forget Password -->
+        <div
+            id="modalForgetPassword"
+            class="modal fade"
+            tabindex="-1"
+            role="dialog"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Meload modal "forget_password.php" file -->
+                </div>
+            </div>
+        </div>
+
         <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
         <script src="vendor/animsition/js/animsition.min.js"></script>
         <script src="vendor/bootstrap/js/popper.js"></script>
@@ -246,6 +270,68 @@
                         icon.classList.remove("fa-eye-slash");
                     }
                 });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $("#modalForgetPassword").on("show.bs.modal", function () {
+                    $(this).find(".modal-content").load("forget_password.php");
+                });
+            });
+        </script>
+        <script>
+            // Fungsi untuk set cookie
+            function setCookie(name, value, days) {
+                let expires = "";
+                if (days) {
+                    const date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+            }
+
+            // Fungsi untuk ambil cookie
+            function getCookie(name) {
+                const nameEQ = name + "=";
+                const ca = document.cookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            }
+
+            // Fungsi untuk hapus cookie
+            function eraseCookie(name) {
+                document.cookie = name + "=; Max-Age=-99999999;";
+            }
+
+            // Saat DOM siap
+            document.addEventListener("DOMContentLoaded", function () {
+                const usernameInput = document.getElementById("user");
+                const passwordInput = document.getElementById("password");
+                const rememberCheckbox = document.getElementById("ckb1");
+
+                // Jika ada cookie, isi otomatis
+                if (getCookie("user") && getCookie("password")) {
+                    usernameInput.value = getCookie("user");
+                    passwordInput.value = getCookie("password");
+                    rememberCheckbox.checked = true;
+                }
+
+                // Saat form disubmit
+                const form = document.querySelector("form");
+                form.addEventListener("submit", function () {
+                    if (rememberCheckbox.checked) {
+                        setCookie("user", usernameInput.value, 7); // simpan 7 hari
+                        setCookie("password", passwordInput.value, 7);
+                    } else {
+                        eraseCookie("user");
+                        eraseCookie("password");
+                    }
+                });
+            });
         </script>
     </body>
 </html>
