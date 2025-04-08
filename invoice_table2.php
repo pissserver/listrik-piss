@@ -22,7 +22,13 @@
 			<th style="vertical-align: middle; width:10%;text-align:center;">DAYA</th>
 			<th style="vertical-align: middle; width:10%;text-align:center;">BIAYA</th>
 			<th style="vertical-align: middle; width:12%;text-align:center;">STATUS</th>
-			<th style="vertical-align: middle; width:10%;text-align:center;">AKSI</th>
+			<?php 
+				if($_SESSION['role']=='Cashier'){
+				}
+				else{
+					echo '<th style="vertical-align: middle; width:10%;text-align:center;">AKSI</th>';
+				}
+			?>
 		</tr>
 	</thead>
 	<tbody>
@@ -38,32 +44,34 @@
 				$ampere = executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$cost_id."'");
 		?>
 		<tr>
-			<td style="text-align:center;"><?php echo $no; ?></td>
-			<td style="text-align:center;"><?php echo 'TL' . $r['pay_id']; ?></td>
-			<td style="text-align:center;"><?php echo $r['merchant_id']; ?></td>
-			<td style="text-align:left;"><?php echo $name; ?></td>
-			<td style="text-align:center;"><?php echo $periode; ?></td>
-			<td style="text-align:center;"><?php echo $ampere; ?> Ampere</td>
-			<td style="text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
-			<td style="text-align:center;"><?php echo $r['pay_sts']; ?></td>
-			<td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo 'TL' . $r['pay_id']; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $r['merchant_id']; ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo $name; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $periode; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $ampere; ?> Ampere</td>
+			<td style="vertical-align: middle; text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $r['pay_sts']; ?></td>
 			<?php 
 				if($_SESSION['role']=='Cashier'){
 					
 				}
 				else{
 					if ($r['pay_sts'] == 'Belum Lunas') {
-						echo '<center><a style="text-decoration: none;" href="pay_action.php?task=absen&id='.$r['pay_id'].'">
-						<button class="btn btn-outline btn-danger btn-block btn-xs"><i class="fa fa-remove"></i>&nbsp;&nbsp;Batalkan Tagihan</button>
-					</a></center>';
+						echo '<td style="vertical-align: middle; text-align:center;">
+							<center><a style="text-decoration: none;" href="pay_action.php?task=absen&id='.$r['pay_id'].'">
+							<button class="btn btn-outline btn-danger btn-block btn-xs"><i class="fa fa-remove"></i>&nbsp;&nbsp;Batalkan Tagihan</button>
+							</a></center>
+						</td>';
 					} elseif ($r['pay_sts'] == 'Batal') {
-						echo '<center><a style="text-decoration: none;" href="pay_action.php?task=active&id='.$r['pay_id'].'">
-						<button class="btn btn-outline btn-success btn-block btn-xs"><i class="fa fa-check"></i>&nbsp;&nbsp;Aktifkan Tagihan</button>
-					</a></center>';
+						echo '<td style="vertical-align: middle; text-align:center;">
+							<center><a style="text-decoration: none;" href="pay_action.php?task=active&id='.$r['pay_id'].'">
+							<button class="btn btn-outline btn-success btn-block btn-xs"><i class="fa fa-check"></i>&nbsp;&nbsp;Aktifkan Tagihan</button>
+							</a></center>
+						</td>';
 					}
 				}
 			?>
-			</td>
 		</tr>
 		<?php $no++;} ?>
 	</tbody>

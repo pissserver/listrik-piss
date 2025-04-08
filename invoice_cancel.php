@@ -56,7 +56,7 @@
 
         <div id="page-wrapper">
             <div class="row"><br><br><br><br>
-                <div class="col-md-12" style="margin-top:10px;">
+                <div class="col-md-12">
                     <div class="panel panel-primary" style="overflow-x: auto">
                         <div class="panel-heading">
                             <i class="fa fa-user fa-fw"></i> Data Tagihan Listrik
