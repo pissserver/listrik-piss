@@ -22,7 +22,13 @@
 			<th style="vertical-align: middle; width:10%;text-align:center;">JUMLAH BAYAR</th>
 			<th style="vertical-align: middle; width:12%;text-align:center;">STATUS</th>
 			<th style="vertical-align: middle; width:12%;text-align:center;">TANGGAL BAYAR</th>
-			<th style="vertical-align: middle; width:10%;text-align:center;">AKSI</th>
+			<?php 
+				if($_SESSION['role']=='Cashier'){
+				}
+				else{
+					echo '<th style="vertical-align: middle; width:10%;text-align:center;">AKSI</th>';
+				}
+			?>
 		</tr>
 	</thead>
 	<tbody>
@@ -48,16 +54,16 @@
 				</div>
 			</td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo date('d M Y', strtotime($r['pay_date'])); ?></td>
-			<td style="vertical-align: middle; text-align:center;">
 				<?php 
 					if($_SESSION['role']=='Cashier'){
 						
 					}
 					else{
-						echo '<a style="text-decoration: none;" href="pay_action.php?task=batal&id='.$r['pay_id'].'"><button class="btn btn-xs btn-outline btn-danger btn-block"><i class="fa fa-remove"></i>&nbsp;Batalkan Pembayaran</button></a>';
+						echo '<td style="vertical-align: middle; text-align:center;">
+							<a style="text-decoration: none;" href="pay_action.php?task=batal&id='.$r['pay_id'].'"><button class="btn btn-xs btn-outline btn-danger btn-block"><i class="fa fa-remove"></i>&nbsp;Batalkan Pembayaran</button></a>
+							</td>';
 					}
 				?>
-			</td>
 		</tr>
 		<?php $no++;} ?>
 	</tbody>
