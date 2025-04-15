@@ -26,7 +26,7 @@
 								order by l.block_id, l.lapak_no");
 	while($r=mysql_fetch_array($sql)){
 		$ampere 	= executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$r['e_cost_id']."'");
-		$price 		= executeScalar("select e_cost_price from e_cost where e_cost_id = '".$r['e_cost_id']."'");
+		$price 		= executeScalar("select pay_total from e_pay where merchant_id = '".$r['merchant_id']."'");
 		$payStatus	= executeScalar("select pay_sts from e_pay where merchant_id = '".$r['merchant_id']."' and periode_id = '".$_POST['periode']."'");
 		$payDate	= executeScalar("select pay_date from e_pay where merchant_id = '".$r['merchant_id']."' and periode_id = '".$_POST['periode']."'");
 		$periode 	= executeScalar("select periode_name from e_periode where periode_id = '".$_POST['periode']."'");
@@ -40,6 +40,9 @@
 								where 	merchant_id = '".$r['merchant_id']."' and
 										electricity_id = '".$r['electricity_id']."' and
 										periode_id = '".$_POST['periode']."'");
+
+		$totalPrice = ($r['merchant_id'] == "L0039") ? 0 : $price;
+									
 		if($ada==0){ //jika tidak ada / blm dicetak
 			$count 	= executeScalar("select count(periode_id) from e_pay where periode_id = '".$_POST['periode']."'");
 			//Generate ID
@@ -58,9 +61,11 @@
 											'".$r['merchant_id']."',
 											'".$r['id_lapak_dipasang']."', 
 											'".$_POST['periode']."', 
-											'".$price."', 
+											'".$totalPrice."', 
 											'Belum Lunas')");
 			//$tlid = mysql_insert_id();
+			$payStatus = "Belum Lunas";
+			$payDate = null;
 		}else{//jika sdh ada
 			$id 	= executeScalar("	select 	pay_id 
 										from 	e_pay 

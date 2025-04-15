@@ -11,7 +11,7 @@
 	// Input 
 	if ($task == 'insert'){
 		$month	= substr($_POST['periode'], 0, 2);
-		$year	= substr($_POST['periode'], 2, 5);
+		$year	= substr($_POST['periode'], 2, 4);
 		$ada	= executeScalar("select count(periode_id) from e_periode 
 		where periode_month = '".$month."' and periode_year = '".$year."'");
 		//Jika periode sudah Ada d database
@@ -42,6 +42,7 @@
 		}
 		
 		$name	= $bulan.' '.$year;
+		
 		if($ada==0){
 			$insert = mysql_query("insert into e_periode (`periode_id`, `periode_name`, `periode_month`, `periode_year`) 
 			VALUES ('', '".$name."', '".$month."', '".$year."')");
