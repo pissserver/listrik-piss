@@ -26,7 +26,7 @@
 								order by l.block_id, l.lapak_no");
 	while($r=mysql_fetch_array($sql)){
 		$ampere 	= executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$r['e_cost_id']."'");
-		$price 		= executeScalar("select pay_total from e_pay where merchant_id = '".$r['merchant_id']."'");
+		$price 		= executeScalar("SELECT pay_total FROM e_pay WHERE merchant_id = '".$r['merchant_id']."' AND electricity_id = '".$r['electricity_id']."' ORDER BY pay_id DESC LIMIT 1");
 		$payStatus	= executeScalar("select pay_sts from e_pay where merchant_id = '".$r['merchant_id']."' and periode_id = '".$_POST['periode']."'");
 		$payDate	= executeScalar("select pay_date from e_pay where merchant_id = '".$r['merchant_id']."' and periode_id = '".$_POST['periode']."'");
 		$periode 	= executeScalar("select periode_name from e_periode where periode_id = '".$_POST['periode']."'");
