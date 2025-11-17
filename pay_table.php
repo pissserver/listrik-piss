@@ -44,7 +44,7 @@
 			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo "TL".$r['pay_id']; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $r['merchant_id']; ?></td>
-			<td style="vertical-align: middle; text-align:left;"><?php echo $name.' / '.$nick; ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo $name.' / '.($nick != NULL ? $nick : '-'); ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $periode; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $ampere; ?> Ampere</td>
 			<td style="vertical-align: middle; text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>

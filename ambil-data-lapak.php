@@ -2,11 +2,10 @@
     include "connection.php";
     if (isset($_POST['merchant'])) {
         $merchant = $_POST["merchant"];
-        $sql    = " select lapak.lapak_id as id_lapak, lapak.lapak_name as nama_lapak 
-                    from rent
-                    join lapak ON lapak.lapak_id = rent.lapak_id 
-                    where rent.merchant_id = '".$merchant."' AND
-                        ( rent_sts != 'Batal' AND rent_sts2 != 'Batal' )";
+        $sql    = " select l.lapak_id as id_lapak, l.lapak_name as nama_lapak 
+                    from rent r
+                    join lapak l ON l.lapak_id = r.lapak_id 
+                    where r.merchant_id = '".$merchant."' AND (r.rent_sts != 'Batal' AND r.rent_sts2 NOT IN ('Batal', 'Pindah'))";
         $hasil  = mysql_query($sql);
         if($hasil === FALSE) { 
             trigger_error(mysql_error(), E_USER_ERROR);

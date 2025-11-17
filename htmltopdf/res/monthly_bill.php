@@ -66,7 +66,7 @@
 			<td style="text-align: left;font-size:8pt;border: solid 1px black;"><?php echo $r['merchant_name']; ?></td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $lapak; ?></td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $ampere; ?> Ampere</td>
-			<td style="text-align: right;font-size:8pt;border: solid 1px black;">
+			<td style="text-align: center;font-size:8pt;border: solid 1px black;">
 				<?php 
 					if($r['pay_sts']=='Lunas'){
 						echo date("d M Y", strtotime($r['pay_date']));

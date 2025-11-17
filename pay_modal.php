@@ -16,7 +16,7 @@
 			<input id="kode" name="kode" type="text" value="<?php echo 'TL' . $_GET['id']; ?>" class="form-control form-xs" disabled />
 		</div>
 		<div class="form-group" style="padding: 0 35px; margin-top: 0px;">
-			<label>Input Tanggal Bayar</label>
+			<label>Tanggal Bayar</label>
 			<input id="pay_date" name="pay_date" type="date" class="form-control form-xs" required />
 		</div>
 		<div class="fomr-group" style="padding: 0 20px;">

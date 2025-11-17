@@ -53,10 +53,10 @@
                                         <label>Periode Tagihan Listrik</label>
                                         <select class="form-control" name="periode" id="periode" required>
                                             <?php 
-                                                $month 	= date('M Y');
-                                                $month2 = date("M Y",strtotime("+29 day"));
-                                                $vmonth = date('mY');
-                                                $vmonth2 = date("mY",strtotime("+29 day"));
+                                                $month     = date('M Y');
+                                                $month2    = date("M Y", strtotime("first day of next month"));
+                                                $vmonth    = date('mY');
+                                                $vmonth2   = date("mY", strtotime("first day of next month"));                
                                                 ?>
                                             <option value="">- Pilih Periode Tagihan -</option>
                                             <option value="<?php echo $vmonth;?>"><?php echo $month; ?></option>

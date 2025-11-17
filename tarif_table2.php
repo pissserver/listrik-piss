@@ -30,7 +30,7 @@
 		<tr>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
 			<td style="vertical-align: middle; text-align:center"><?php echo $data['e_tools_name']; ?></td>
-			<td style="vertical-align: middle; text-align:right"><?php echo format_rupiah($data['e_tools_price']); ?></td>
+			<td style="vertical-align: middle; text-align:center"><?php echo format_rupiah($data['e_tools_price']); ?></td>
 			<td><center>
 				<a style="text-decoration: none" class="btn btn-outline btn-block btn-primary btn-xs modalEditTarif2" data-toggle="modal" data-target="#modalEditTarif2" data-id="<?php echo $data['e_tools_id']; ?>">
 					<i class="fa fa-edit"></i>&nbsp;&nbsp;Edit

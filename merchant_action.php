@@ -76,8 +76,18 @@
 		$eid	= $_GET['id'];
 		$mid	= $_GET['kode'];
 		$sts	= $_POST['sts'];
+		$lapak	= $_POST['lapak'];
+		$daya	= $_POST['daya'];
+		$petugas= $_POST['petugas'];
 		$sts2	= '';
-		$update	= mysql_query("update electricity set electricity_sts = '".$sts."' where merchant_id = '".$mid."'");
+
+		$update	= mysql_query("update electricity set 
+								electricity_sts = '".$sts."',
+								id_lapak_dipasang = '".$lapak."',
+								e_cost_id = '".$daya."',
+								id_petugas = '".$petugas."' 
+								where merchant_id = '".$mid."'");
+
 		if($update){
 			if($sts=='Aktif'){
 				$sts2	= 'Yes';

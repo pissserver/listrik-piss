@@ -48,13 +48,16 @@
 				</div>
 			</td>
 			<td style="vertical-align: middle; text-align:center;">
-				<div style="vertical-align: middle; background-color: <?php echo $data['id_petugas'] == '26' ? '#428bca' : 'green'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
-					<?php echo $petugas; ?>
+				<div style="vertical-align: middle; background-color: <?php echo $data['id_petugas'] == '26' ? '#428bca' : 'green'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 140px;">		
+					<i class="fa fa-user"></i>&nbsp;&nbsp;<?php echo $petugas; ?>
 				</div>
 			</td>
 			<td style="vertical-align: middle; text-align:center;"><center>
-				<a style="text-decoration: none" class="btn btn-outline btn-block btn-primary btn-xs modalEditRegister" data-toggle="modal" data-target="#modalEditRegister" data-id="<?php echo $data['electricity_id']; ?>">
+				<!-- <a style="text-decoration: none" class="btn btn-outline btn-block btn-primary btn-xs modalEditRegister" data-toggle="modal" data-target="#modalEditRegister" data-id="<?php echo $data['electricity_id']; ?>">
 					<i class="fa fa-edit"></i>&nbsp;&nbsp;Edit
+				</a> -->
+				<a style="text-decoration: none" href="merchant_edit.php?id=<?php echo $data['electricity_id']; ?>&kode=<?php echo $data['merchant_id'];?>">
+					<button class="btn btn-outline btn-primary btn-block btn-xs" style="margin-bottom: 5px;"><i class="fa fa-eye"></i>&nbsp;&nbsp;Lihat Detail</button>
 				</a>
 				<a style="text-decoration: none" class="btn btn-outline btn-block btn-danger btn-xs modalDeleteRegister" data-toggle="modal" data-target="#modalDeleteRegister" data-id="<?php echo $data['electricity_id']; ?>">
 					<i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus
