@@ -20,7 +20,7 @@
 			<th style="text-align:center;">DAYA</th>
 			<th style="text-align:center;">TARIF</th>
 			<th style="text-align:center;">STATUS</th>
-			<th style="text-align:left">PETUGAS</th>
+			<th style="text-align:center">PETUGAS</th>
 			<th style="text-align:center;">AKSI</th>
 		</tr>
 	</thead>

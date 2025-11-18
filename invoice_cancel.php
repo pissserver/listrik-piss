@@ -62,6 +62,12 @@
                             <i class="fa fa-user fa-fw"></i> Data Tagihan Listrik
                         </div>
                         <div class="panel-body">
+							<div class="alert alert-info d-flex align-items-center" role="alert" style="margin: 0 0;">
+								<i class="fa fa-warning me-2" style="font-size: 18px;"></i>
+								<span style="font-size: 14px;">
+									Daftar tagihan listrik hanya menampilkan pedagang yang masih berlangganan.
+								</span>
+							</div><br>
                             <div id="Area1">
                                 <div class="alert alert-info" onclick="clearNotif()">
                                     <center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>

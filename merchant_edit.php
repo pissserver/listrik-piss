@@ -258,7 +258,7 @@
 									</thead>
 									<tbody>
 										<?php
-										$sql 	= "select * from e_pay where merchant_id = '".$mid."' and electricity_id = '".$id."' and pay_sts != 'Lunas' order by pay_id desc limit 10";
+										$sql 	= "select * from e_pay where merchant_id = '".$mid."' and electricity_id = '".$id."' and pay_sts not in ('Lunas', 'Batal')  order by pay_id desc limit 10";
 										$query 	= mysql_query($sql);
 										$no		= 1;
 										$angs	= 0;
