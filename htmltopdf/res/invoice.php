@@ -21,12 +21,13 @@
 										m.merchant_id = r.merchant_id and
 										r.lapak_id = l.lapak_id and 
 										e.electricity_sts = 'Aktif' and
-										(r.rent_sts2 != 'Pindah' && r.rent_sts2 != 'Batal') 
+										(r.rent_sts != 'Batal' and r.rent_sts2 not in ('Batal', 'Pindah'))
 								group by e.electricity_id 
 								order by l.block_id, l.lapak_no");
 	while($r=mysql_fetch_array($sql)){
 		$ampere 	= executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$r['e_cost_id']."'");
-		$price 		= executeScalar("SELECT pay_total FROM e_pay WHERE merchant_id = '".$r['merchant_id']."' AND electricity_id = '".$r['electricity_id']."' ORDER BY pay_id DESC LIMIT 1");
+		$price 		= executeScalar("SELECT pay_total FROM e_pay WHERE merchant_id = '".$r['merchant_id']."' AND periode_id = '".$_POST['periode']."'");
+		$priceByAmpere = executeScalar("SELECT e_cost_price FROM e_cost where e_cost_id = '".$r['e_cost_id']."'");
 		$payStatus	= executeScalar("select pay_sts from e_pay where merchant_id = '".$r['merchant_id']."' and periode_id = '".$_POST['periode']."'");
 		$payDate	= executeScalar("select pay_date from e_pay where merchant_id = '".$r['merchant_id']."' and periode_id = '".$_POST['periode']."'");
 		$periode 	= executeScalar("select periode_name from e_periode where periode_id = '".$_POST['periode']."'");
@@ -41,7 +42,8 @@
 										electricity_id = '".$r['electricity_id']."' and
 										periode_id = '".$_POST['periode']."'");
 
-		$totalPrice = ($r['merchant_id'] == "L0039") ? 0 : $price;
+		// $totalPrice = ($r['merchant_id'] == "L0039") ? 0 : $price;
+		$totalPrice = ($r['merchant_id'] == "L0039") ? 0 : $priceByAmpere;
 									
 		if($ada==0){ //jika tidak ada / blm dicetak
 			$count 	= executeScalar("select count(periode_id) from e_pay where periode_id = '".$_POST['periode']."'");

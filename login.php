@@ -72,8 +72,11 @@
                                 >PISS👋</span
                             >
                         </span>
+                        <p class="text-center" style="margin-top: -10px">
+                            Version 1.2.0
+                        </p>
 
-                        <div class="illustration text-center mb-4">
+                        <div class="illustration text-center mb-4 mt-3">
                             <img
                                 src="img/login.png"
                                 alt="Illustration"

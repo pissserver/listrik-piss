@@ -53,8 +53,8 @@
 								<form action="htmltopdf/invoice.php" target="_blank" class="form-horizontal" id="formMerchant" name="formMerchant" method="POST">
 									<div class="form-group" style="margin-left:5px; margin-right:5px;">
 										<label>Periode Tagihan</label>
-										<select class="form-control" name="periode" id="periode" required>
-											<option value="">- Pilih Periode Tagihan -</option>
+										<select class="form-control chzn-select" name="periode" id="periode" required>
+											<!-- <option value="">- Pilih Periode Tagihan -</option> -->
 											<?php 
 												$sql 	= mysql_query("select * from e_periode order by periode_id desc");
 												while($d= mysql_fetch_array($sql)){
@@ -73,9 +73,15 @@
 					<div class="col-md-12" style="margin-top:10px;">
                         <div class="panel panel-primary" style="overflow-x: auto">
                             <div class="panel-heading">
-                                <i class="fa fa-user fa-fw"></i> Daftar Tagihan Listrik Belum Lunas
+                                <i class="fa fa-user fa-fw"></i> Daftar Tagihan Listrik
                             </div>
                             <div class="panel-body">
+								<div class="alert alert-warning d-flex align-items-center" role="alert" style="margin: 0 0;">
+									<i class="fa fa-warning me-2" style="font-size: 18px;"></i>
+									<span style="font-size: 14px;">
+										Tagihan yang tidak terbayar wajib dibatalkan, dan tagihan yang sudah dibatalkan tidak akan muncul di daftar tagihan.
+									</span>
+								</div><br>
                                 <div id="Area1">
                                     <div class="alert alert-info" onclick="clearNotif()">
                                         <center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
@@ -107,6 +113,51 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- Modal edit price -->
+		<div class="modal fade" id="modalEditPrice" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<!-- AJAX akan mengisi konten modal di sini -->
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal konfirmasi hapus -->
+		<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header bg-primary" >
+						<h5 class="modal-title" id="confirmationModalLabel"><b>KONFIRMASI HAPUS</b></h5>
+						<button type="button" style="margin-top: -20px;" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						Apakah anda yakin ingin membatalkan tagihan?
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+						<button type="button" class="btn btn-primary" onclick="postAndReload()">Ya, Batalkan</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			let actionUrl = "";
+
+			// ketika tombol Batalkan Tagihan diklik
+			$(document).on('click', '.open-confirm', function () {
+				actionUrl = $(this).data('url');  
+			});
+
+			// ketika tombol "Simpan" di modal diklik
+			function postAndReload() {
+				window.location.href = actionUrl; // redirect
+			}
+		</script>
+
 		
 		<script>
 		$(document).ready(function(){
@@ -120,6 +171,23 @@
 					$("#notifArea").html(alertLoadProcess);
 					$("#data_password").load("password.php",function(){clearNotif();});
 				})
+
+
+				// Modal Edit Price
+				$('body').on('click', '.modalEditPrice', function(e) {
+					e.preventDefault()
+					var priceID = $(this).data('id'); 
+
+					$.ajax({
+						url: 'price_modal2.php',
+						type: 'GET',
+						data: { id: priceID }, 
+						success: function(response) {
+							$('#modalEditPrice .modal-content').html(response);
+							$('#modalEditPrice').modal('show');
+						}
+					});
+				});
 			});
 			function clearNotif(){$("#notifArea").html("")};
 		</script>
@@ -139,5 +207,28 @@
 		<script src="js/plugins/metisMenu/metisMenu.min.js"></script>
 		<!-- Custom Theme JavaScript -->
 		<script src="js/sb-admin-2.js"></script>
+		<script src="js/plugins/chosen/chosen.jquery.js"></script>
+		<script type="text/javascript">
+			$(".chzn-select").chosen({"search_contains": true,"width":"100%", "no_results_text":"Hasil tidak ditemukan !"});
+		</script>
+		<!-- Sweet Alert -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+		<?php
+			// Menampilkan SweetAlert jika session success ada dan bernilai true
+			if (isset($_SESSION['success'])) {
+				$title = $_SESSION['title'];
+				$message = $_SESSION['message'];
+				$icon = $_SESSION['success'] ? 'success' : 'error';
+				echo "<script>
+					Swal.fire({
+						title: '$title',
+						text: '$message',
+						icon: '$icon'
+					});
+				</script>";
+				unset($_SESSION['success']);
+				unset($_SESSION['message']);
+			}
+		?>
 	</body>
 </html>

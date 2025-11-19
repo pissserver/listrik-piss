@@ -58,9 +58,11 @@
 		</tr>
 	</table>
 	<br />
-    <div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:5px; margin-bottom:15px;">
-		TAGIHAN LISTRIK PISS
-	</div><br>
+    <div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:0px;">
+		TAGIHAN LISTRIK
+	</div>
+	<p style="font-size: 10px; font-weight: bold; text-align: center; margin-top:0px;">(PASAR INDUK SURABAYA SIDOTOPO)</p>
+	<br />
 	<table style="margin-bottom: 5px;font-size:11pt;" id="tableCheckout">
 		<tr><td style="padding-bottom: 10px;">Nama 				</td><td style="padding-bottom: 10px;"> : <?php echo $name; ?> </td></tr>
 		<tr><td style="padding-bottom: 10px;">Nama Alias			</td><td style="padding-bottom: 10px;"> : <?php echo $nick != NULL ? $nick : '-'; ?> </td></tr>
@@ -72,10 +74,10 @@
 	</table>
     <br/><br/>
 	<table style="width: 100%">
-		<tr>
+		<tr style="vertical-align: top;">
 			<td><b>NB</b></td>
 			<td> : </td>
-			<td style="font-size: 12px; width: 90%;">
+			<td style="font-size:12px; width:90%;">
 				<?php 
 					if($note!=''){
 						echo $note;
@@ -89,8 +91,8 @@
     <page_footer>
 		<table style="width: 100%; border: 0px black; margin-top:10px; margin-bottom:30px; margin-right:5px; font-size:8pt;">
 			<tr>
-				<td style="text-align: center;width: 50%">(TTD & Nama Petugas)</td>
-				<td style="text-align: center;width: 50%">(TTD Pelanggan)</td>
+				<td style="text-align: center;width: 50%">( Petugas )</td>
+				<td style="text-align: center;width: 50%">( Pelanggan )</td>
 			</tr>
 		</table>
     </page_footer>

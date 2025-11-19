@@ -48,6 +48,12 @@
 					<i class="fa fa-clock-o fa-fw"></i> Histori Pembayaran Tagihan
 				</div>
 				<div class="panel-body">
+					<div class="alert alert-info d-flex align-items-center" role="alert" style="margin: 0 0;">
+						<i class="fa fa-warning me-2" style="font-size: 18px;"></i>
+						<span style="font-size: 14px;">
+							History ini menampilkan data pembayaran listrik lunas dalam <b>1 tahun terakhir</b>.
+						</span>
+					</div><br>
 					<div id="Area1"><div class="alert alert-info" onclick="clearNotif()"><center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center></div></div>
 				</div>
 			</div>

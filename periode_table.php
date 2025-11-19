@@ -33,7 +33,7 @@
 			<td style="text-align:center;"><?php echo $data['periode_name']; ?></td>
 			<td>
 				<a style="text-decoration: none;" class="btn btn-block btn-outline btn-primary btn-xs" href="htmltopdf/monthly_bill.php?id=<?php echo $data['periode_id'];?>" target="_blank">
-					<i class="fa fa-file-text"></i>&nbsp;&nbsp;Status Tagihan
+					<i class="fa fa-file-text"></i>&nbsp;&nbsp;Rekap Tagihan
 				</a>
 			</td>
 		</tr>

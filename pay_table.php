@@ -26,7 +26,11 @@
 	</thead>
 	<tbody>
 		<?php
-		$sql 	= "select * from e_pay where pay_sts = 'Belum Lunas' order by pay_id desc";
+		$sql = "SELECT *
+				FROM e_pay p
+				JOIN electricity e ON p.electricity_id = e.electricity_id
+				WHERE p.pay_sts = 'Belum Lunas'
+				ORDER BY p.pay_id DESC";
 		$query 	= mysql_query($sql);
 		$no		= 1;
 		$angs	= 0;
@@ -44,10 +48,10 @@
 			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo "TL".$r['pay_id']; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $r['merchant_id']; ?></td>
-			<td style="vertical-align: middle; text-align:left;"><?php echo $name.' / '.$nick; ?></td>
+			<td style="vertical-align: middle; text-align:left;"><?php echo $name.' / '.($nick != NULL ? $nick : '-'); ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $periode; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $ampere; ?> Ampere</td>
-			<td style="vertical-align: middle; text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo format_rupiah($r['pay_total']); ?></td>
 			<td style="vertical-align: middle; text-align:center;">
 				<div style="vertical-align: middle; background-color: <?php echo $r['pay_sts'] == 'Belum Lunas' ? 'red' : 'green'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
 					<i class="fa <?php echo $r['pay_sts'] == 'Belum Lunas' ? 'fa-remove' : 'fa-check'; ?>"></i>&nbsp;<?php echo $r['pay_sts']; ?>

@@ -30,7 +30,7 @@
 		<tr>
 			<td style="text-align:center;"><?php echo $no; ?></td>
 			<td style="text-align:center"><?php echo $data['e_cost_ampere']; ?> Ampere</td>
-			<td style="text-align:right"><?php echo format_rupiah($data['e_cost_price']); ?></td>
+			<td style="text-align:center"><?php echo format_rupiah($data['e_cost_price']); ?></td>
 			<td><center>
 				<a style="text-decoration: none" class="btn btn-outline btn-block btn-primary btn-xs modalEditTarif" data-toggle="modal" data-target="#modalEditTarif" data-id="<?php echo $data['e_cost_id']; ?>">
 					<i class="fa fa-edit"></i>&nbsp;&nbsp;Edit

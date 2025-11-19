@@ -39,6 +39,38 @@
 
         <div id="page-wrapper">
 			<br /><br><br><br>
+			<?php 
+				if($_SESSION['role'] == 'Cashier') { ?>
+				<div class="row">
+					<div class="col-lg-12">
+						<div id="Area2">
+							<div class="alert alert-info" onclick="clearNotif()">
+								<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+							</div>
+						</div>
+						<input type="hidden" id="value_day2" />
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<i class="fa fa-file-text fa-fw"></i> Laporan Outstanding Listrik
+							</div>
+							<div class="panel-body">
+								<form class="form-horizontal" id="reportOutstanding" name="reportOutstanding" method="POST">
+									<div class="col-md-6">
+										<div class="form-group" style="margin-top:5px; margin-right:0px; margin-left:0px">
+												<button type="submit" class="btn btn-primary btn-block"  onclick="setAction('pdf')"><i class="fa fa-file-pdf-o fa-lg" style="font-size: 16px;"></i>&nbsp;&nbsp;Print PDF</button>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group" style="margin-top:5px; margin-left:0px; margin-right: 0px">
+											<button type="submit" class="btn btn-success btn-block" style="background-color: #008000;" onclick="setAction('excel')"><i class="fa fa-file-excel-o fa-lg" style="font-size: 16px;"></i>&nbsp;&nbsp;Export Excel</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php } else { ?> 
             <div class="row">
                 <div class="col-lg-6">
                     <div id="Area1">
@@ -119,6 +151,7 @@
                         </div>
                     </div>
 				</div>
+
 				<div class="col-lg-6">
 					<div id="Area2">
 						<div class="alert alert-info" onclick="clearNotif()">
@@ -146,8 +179,9 @@
                         </div>
                     </div>
 				</div>
-				
             </div>
+			<?php } ?>
+
         </div>
     </div>
 	<!-- Modal Tonase -->

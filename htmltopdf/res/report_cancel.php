@@ -24,7 +24,7 @@
     </page_footer>
     <div style="font-size: 18px; font-weight: bold; text-align: center; margin-top:15px;">
 		LAPORAN PEMBATALAN TAGIHAN LISTRIK <br>
-		PASAR INDUK SURABAYA (PISS)
+		PASAR INDUK SURABAYA SIDOTOPO (PISS)
 	</div>
 	<br/><br>
 	<table style="margin-bottom: 5px;font-size:10pt; width:100%;" >

@@ -24,7 +24,7 @@
         </table>
     </page_footer>
     <div style=" font-weight: bold; text-align: center; margin-top:10px;">
-		STATUS TAGUHAN LISTRIK BULAN <?php echo strtoupper($pname); ?>
+		REKAP TAGIHAN LISTRIK BULAN <?php echo strtoupper($pname); ?>
 		<br>
 		PASAR INDUK SURABAYA SIDOTOPO (PISS)
 	</div>
@@ -66,7 +66,7 @@
 			<td style="text-align: left;font-size:8pt;border: solid 1px black;"><?php echo $r['merchant_name']; ?></td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $lapak; ?></td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $ampere; ?> Ampere</td>
-			<td style="text-align: right;font-size:8pt;border: solid 1px black;">
+			<td style="text-align: center;font-size:8pt;border: solid 1px black;">
 				<?php 
 					if($r['pay_sts']=='Lunas'){
 						echo date("d M Y", strtotime($r['pay_date']));
@@ -75,7 +75,8 @@
 					} ?>
 			</td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $r['pay_sts']; ?></td>
-			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_rupiah($price);  ?></td>
+			<!-- <td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_rupiah($price);  ?></td> -->
+			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_rupiah($r['pay_total']);  ?></td>
 		</tr>
 		<?php 
 				$no++; 

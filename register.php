@@ -56,7 +56,11 @@
 
         <div id="page-wrapper">
             <div class="row"><br><br><br><br>
-                <div class="col-lg-12">
+				<?php 
+					if($_SESSION['role'] == 'Cashier') { ?>
+
+				<?php } else { ?> 
+                <div class="col-lg-12" style="margin-bottom: 10px;">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-pencil fa-fw"></i> Tambah Pengguna Listrik
@@ -128,12 +132,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12" style="margin-top:10px;">
+				<?php } ?>
+                <div class="col-md-12">
 					<div class="panel panel-primary" style="overflow-x: auto">
 						<div class="panel-heading">
 							<i class="fa fa-group fa-fw"></i> Data Pengguna Listrik
 						</div>
 						<div class="panel-body">
+							<div class="alert alert-warning d-flex align-items-center" role="alert" style="margin: 0 0;">
+								<i class="fa fa-warning me-2" style="font-size: 18px;"></i>
+								<span style="font-size: 14px;">
+									Pedagang yang sudah tidak aktif wajib dihapus dari berlangganan listrik.
+								</span>
+							</div><br>
 							<div id="Area1">
 								<div class="alert alert-info" onclick="clearNotif()">
 									<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
@@ -145,26 +156,6 @@
             </div>
         </div>
     </div>
-
-	<!-- Modal nonkomoditi -->
-	<div class="modal fade" id="modalPerlengkapan" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-					<h4 id="header_nonkomoditi">Data Barang Non Komoditi</h4>
-				</div>
-				<div class="modal-body">
-					<div id="data_nonkomoditi" style="margin-bottom: 0px;">
-						<div class="alert alert-info" onclick="clearNotif()"><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></div>
-					</div>
-					<input type="hidden" id="value_id" />
-				</div>
-				<div class="modal-footer">
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<!-- Modal Edit -->
 	<div id="modalEditRegister" class="modal fade">
