@@ -82,14 +82,15 @@
 										</div>
 										<div id="ver120" class="panel-collapse collapse in">
 											<div class="panel-body">
-												<h5># Penambahan & Optimalisasi Fitur</h5>
+												<h5># Perubahan & Optimalisasi Fitur</h5>
 												<ul>
-													<li>✨ Sistem versioning timbangan 1.2.0</li>
-													<li>🐞 Sedikit perubahan tampilan pada nota timbang, tagihan, mitra, dan hasil timbang</li>
-													<li>⚙️ Optimalisasi pada fitur 'Data Belum Dicek' & 'Data Sudah Dicek'</li>
-													<li>🦴 Fixing bug pada fitur 'Listing Data'</li>
-													<li>🎊 Sedikit perubahan button (Tombol Aksi) pada fitur 'Pembayaran & Setoran'</li>
-													<li>🎈 Penambahan fitur log update (changelog)</li>
+													<li>✨ Sistem versioning listrik 1.2.0</li>
+													<li>🐞 Merubah Hak akses fitur untuk spv, pp, dan kasir</li>
+													<li>⚙️ Sedikit merubah tampilan interface sistem listrik pada beberapa menu</li>
+													<li>🦴 Fixing query pada pemanggilan data pengguna listrik</li>
+													<li>🎈 Fixing bug biaya saat pembuatan tagihan</li>
+													<li>🎊 Menambahkan fitur edit biaya pada tagihan</li>
+													<li>🌭 Merubah menu sidebar menjadi lebih minimalis</li>
 													<li>⏰ Penambahan fitur jam disamping nama akun</li>
 													<li>🙌 Fixing bug notification pada icon "bell" disamping nama akun pada saat ada pembaruan sistem</li>
 												</ul>

@@ -79,8 +79,8 @@
 								<div class="col-lg-12">
 									<div class="form-group" class="margin-left: 20px;">
 										<label>Lapak</label>
-										<select class="form-control" name="lapak" id="lapak" required>
-											<option value="<?php echo $idLapak; ?>" selected><?php echo $lapak; ?></option>
+										<select class="form-control" name="lapak" id="lapak" required <?php echo $_SESSION['role']=='Cashier' ? 'disabled' : ''; ?>>
+											<option value="<?php echo $idLapak; ?>" selected><?php echo $lapak != NULL ? $lapak : 'Tidak Ada'; ?></option>
 											<?php 
 												$sql    = "select l.lapak_id as id_lapak, l.lapak_name as nama_lapak 
 													from rent r
@@ -106,13 +106,13 @@
 								<div class="col-lg-3" style="padding-right: 30px;">
 									<div class="form-group">
 										<label>Telepon 1</label>
-										<input class="form-control" value="<?php echo $r['phone1']; ?>" disabled></input>
+										<input class="form-control" value="<?php echo $r['phone1'] != NULL ? $r['phone1'] : '-'; ?>" disabled></input>
 									</div>
 								</div>
 								<div class="col-lg-3">
 									<div class="form-group" style="margin-top:0px;">
 										<label>Daya Yang Digunakan</label>
-										<select class="form-control" name="daya" id="daya" required>
+										<select class="form-control" name="daya" id="daya" required <?php echo $_SESSION['role']=='Cashier' ? 'disabled' : ''; ?>>
 										<option value="<?php echo $eid; ?>" selected><?php echo $ampere; ?> Ampere</option>
 										<?php 
 											$sql 	= mysql_query("select * from e_cost order by e_cost_ampere");
@@ -136,7 +136,7 @@
 								<div class="col-lg-3" style="padding-right: 30px;">
 									<div class="form-group" style="margin-top:0px;">
 										<label>Telepon 2</label>
-										<input class="form-control" value="<?php echo $r['phone2']; ?>" disabled></input>
+										<input class="form-control" value="<?php echo $r['phone2'] != NULL ? $r['phone2'] : '-'; ?>" disabled></input>
 									</div>
 								</div>
 
@@ -196,7 +196,7 @@
 								<div class="col-lg-3">
 									<div class="form-group" style="margin-top:-10px;">
 											<label>Petugas Lapangan</label>
-											<select class="form-control" name="petugas" id="petugas" required>
+											<select class="form-control" name="petugas" id="petugas" required <?php echo $_SESSION['role']=='Cashier' ? 'disabled' : ''; ?>>
 												<option value="<?php echo $idPetugas; ?>"><?php echo $namapetugas; ?></option>
 												<?php 
 													$sql = mysql_query("select * from checker where checker_role = 'Kepala Teknisi' OR checker_role = 'Teknisi'");
@@ -220,12 +220,17 @@
 								<div class="col-lg-6">
 									<div class="form-group" style="margin-top:-30px;">
 										<label>Status Langganan Listrik</label>
-										<select class="form-control" name="sts" id="sts">
+										<select class="form-control" name="sts" id="sts" <?php echo $_SESSION['role']=='Cashier' ? 'disabled' : ''; ?>>
 											<option value="<?php echo $e_sts;?>"><?php echo $e_sts;?></option>
 											<option value="Aktif">Aktif</option>
 											<option value="Tidak Aktif">Tidak Aktif</option>
 										</select><br />
+										<?php if($_SESSION['role']=='Cashier'){
+											
+										}
+										else{ ?>
 										<button type="submit" class="btn btn-block btn-primary btn-sm"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button>
+										<?php } ?>
 									</div>
 								</div>
 							</div>
@@ -243,7 +248,7 @@
 							</div>
 							<div class="panel-body">
 								<?php 
-									$cekOutstanding = executeScalar("select count(*) from e_pay where merchant_id = '".$mid."' and electricity_id = '".$id."' and pay_sts != 'Lunas'");
+									$cekOutstanding = executeScalar("select count(*) from e_pay where merchant_id = '".$mid."' and electricity_id = '".$id."' and pay_sts = 'Belum Lunas'");
 									if($cekOutstanding > 0){ ?>
 								<table id="historyoutstanding" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>
@@ -272,12 +277,31 @@
 											<td style="vertical-align: middle; text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
 											<td style="vertical-align: middle; text-align:center;"><?php echo $r['pay_sts']; ?></td>
 											<td style="vertical-align: middle; text-align:center;">
+												<?php if($_SESSION['role']=='Cashier'){
+														
+												} else{ ?>
 												<a href="#" style="text-decoration: none; margin-bottom:5px;" class="btn btn-outline btn-warning btn-block btn-xs modalEditPrice" data-id="<?php echo $r['pay_id']; ?>">
 													<i class="fa fa-edit"></i>&nbsp;Edit
 												</a>
-												<center><a style="text-decoration: none" href="htmltopdf/merchant_bill2.php?id=<?php echo $r['pay_id']; ?>" target="_blank">
+												<?php } ?>
+												<a style="text-decoration: none" href="htmltopdf/merchant_bill2.php?id=<?php echo $r['pay_id']; ?>" target="_blank">
 													<button class="btn btn-outline btn-primary btn-block btn-xs"><i class="fa fa-print"></i>&nbsp;Cetak</button></a>
-												</center>
+												<?php 
+													if($_SESSION['role']=='Cashier'){
+														
+													}
+													else{
+														if ($r['pay_sts'] == 'Belum Lunas') {
+															echo '<button class="btn btn-danger btn-outline btn-block btn-xs open-confirm" 
+																	style="margin-top: 5px;" 
+																	data-url="price_action.php?task=cancelBill&id='.$r['pay_id'].'&merchant='.$mid.'&eid='.$id.'"
+																	data-toggle="modal" 
+																	data-target="#confirmationModal">
+																	<i class="fa fa-remove"></i>&nbsp;&nbsp;Batalkan 
+																</button>';
+														}
+													}
+												?>
 											</td>
 										</tr>
 										<?php $no++;} ?>
@@ -379,6 +403,41 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- Modal konfirmasi hapus -->
+		<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header bg-primary" >
+						<h5 class="modal-title" id="confirmationModalLabel"><b>KONFIRMASI HAPUS</b></h5>
+						<button type="button" style="margin-top: -20px;" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						Apakah anda yakin ingin membatalkan tagihan?
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+						<button type="button" class="btn btn-primary" onclick="postAndReload()">Ya, Batalkan</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			let actionUrl = "";
+
+			// ketika tombol Batalkan Tagihan diklik
+			$(document).on('click', '.open-confirm', function () {
+				actionUrl = $(this).data('url');  
+			});
+
+			// ketika tombol "Simpan" di modal diklik
+			function postAndReload() {
+				window.location.href = actionUrl; // redirect
+			}
+		</script>
 		
 		<script>
 		$(document).ready(function(){

@@ -57,7 +57,7 @@
 		}
 	}
 	
-	//Pembatalan Pembayaran
+	//Pembatalan Tagihan
 	if ($task=='absen'){
 		$id		= $_GET['id'];
 		$insert = mysql_query("update e_pay set `pay_date` 	= null, 
@@ -70,7 +70,7 @@
 			$_SESSION['title'] = 'Berhasil';
 			$_SESSION['message'] = "Membatalkan tagihan";
 			echo "<script>
-			window.location=('invoice_cancel.php')</script>";
+			window.location=('invoice.php')</script>";
 			exit();
 		}
 		else{
@@ -79,11 +79,11 @@
 			$_SESSION['title'] = 'Gagal';
 			$_SESSION['message'] = "Membatalkan tagihan";
 			echo "<script>
-			window.location=('invoice_cancel.php')</script>";
+			window.location=('invoice.php')</script>";
 			exit();
 		}
 	}
-
+	
 	//Aktifkan Pembayaran
 	if ($task=='active'){
 		$id		= $_GET['id'];

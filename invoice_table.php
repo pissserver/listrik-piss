@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include "connection.php";
 ?>
 <!-- jquery -->
@@ -18,6 +19,7 @@
 				<th style="vertical-align: middle; width:8%;text-align:center;">TAGIHAN</th>
 				<th style="vertical-align: middle; width:8%;text-align:center;">KODE</th>
 				<th style="vertical-align: middle; width:25;text-align:center;">PENGGUNA LISTRIK</th>
+				<th style="vertical-align: middle; width:15%;text-align:center;">LAPAK PASANG</th>
 				<th style="vertical-align: middle; width:15%;text-align:center;">PERIODE</th>
 				<th style="vertical-align: middle; width:15%;text-align:center;">BIAYA</th>
 				<th style="vertical-align: middle; width:15%;text-align:center;">STATUS</th>
@@ -26,26 +28,52 @@
 		</thead>
 		<tbody>
 			<?php
-			$sql 	= "select * from e_pay where pay_sts != 'Lunas' order by pay_id desc";
+			// $sql 	= "select * from e_pay where pay_sts != 'Lunas' order by pay_id desc";
+			$sql 	= "select * from e_pay p join electricity e on p.electricity_id = e.electricity_id where pay_sts = 'Belum Lunas' order by pay_id desc";;
 			$query 	= mysql_query($sql);
 			$no		= 1;
 			$angs	= 0;
 			while($r=mysql_fetch_array($query)){
 				$periode = executeScalar("select periode_name from e_periode where periode_id = '".$r['periode_id']."'");
 				$name	 = executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
+				$lapakpasang	= executeScalar("select lapak_name from lapak where lapak_id = '".$r['id_lapak_dipasang']."'");
 			?>
 			<tr>
-				<td style="text-align:center;"><?php echo $no; ?></td>
-				<td style="text-align:center;"><?php echo 'TL' . $r['pay_id']; ?></td>
-				<td style="text-align:center;"><?php echo $r['merchant_id']; ?></td>
-				<td style="text-align:left;"><?php echo $name; ?></td>
-				<td style="text-align:center;"><?php echo $periode; ?></td>
-				<td style="text-align:right;"><?php echo format_rupiah($r['pay_total']); ?></td>
-				<td style="text-align:center;"><?php echo $r['pay_sts']; ?></td>
-				<td>
-					<center><a href="htmltopdf/merchant_bill2.php?id=<?php echo $r[0]; ?>" target="_blank">
-						<button class="btn btn-primary btn-block btn-xs"><i class="fa fa-print"></i>&nbsp;&nbsp;Cetak</button>
-					</a></center>
+				<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
+				<td style="vertical-align: middle; text-align:center;"><?php echo 'TL' . $r['pay_id']; ?></td>
+				<td style="vertical-align: middle; text-align:center;"><?php echo $r['merchant_id']; ?></td>
+				<td style="vertical-align: middle; text-align:left;"><?php echo $name; ?></td>
+				<td style="vertical-align: middle; text-align:center;"><?php echo $lapakpasang; ?></td>
+				<td style="vertical-align: middle; text-align:center;"><?php echo $periode; ?></td>
+				<td style="vertical-align: middle; text-align:center;"><?php echo format_rupiah($r['pay_total']); ?></td>
+				<td style="vertical-align: middle; text-align:center;"><?php echo $r['pay_sts']; ?></td>
+				<td style="vertical-align: middle;">
+					<?php if($_SESSION['role'] == 'Cashier') {
+
+					} else { ?>
+					<a href="#" style="text-decoration: none; margin-bottom:5px;" class="btn btn-outline btn-warning btn-block btn-xs modalEditPrice" data-id="<?php echo $r['pay_id']; ?>">
+						<i class="fa fa-edit"></i>&nbsp;Edit
+					</a>
+					<?php } ?>
+					<a style="text-decoration: none;" href="htmltopdf/merchant_bill2.php?id=<?php echo $r[0]; ?>" target="_blank">
+						<button class="btn btn-primary btn-outline btn-block btn-xs"><i class="fa fa-print"></i>&nbsp;&nbsp;Cetak</button>
+					</a>
+					<?php 
+						if($_SESSION['role']=='Cashier'){
+							
+						}
+						else{
+							if ($r['pay_sts'] == 'Belum Lunas') {
+								echo '<button class="btn btn-danger btn-outline btn-block btn-xs open-confirm" 
+										style="margin-top: 5px;" 
+										data-url="pay_action.php?task=absen&id='.$r['pay_id'].'"
+										data-toggle="modal" 
+										data-target="#confirmationModal">
+										<i class="fa fa-remove"></i>&nbsp;&nbsp;Batalkan 
+									</button>';
+							}
+						}
+					?>
 				</td>
 			</tr>
 			<?php $no++;} ?>

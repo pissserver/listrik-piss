@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include "connection.php";
 ?>
 <script src="dataTables/jquery.dataTables.js"></script>
@@ -19,7 +20,8 @@
 			<th style="text-align:center;">LAPAK</th>
 			<th style="text-align:center;">DAYA</th>
 			<th style="text-align:center;">TARIF</th>
-			<th style="text-align:center;">STATUS</th>
+			<th style="text-align:center;">STS PEDAGANG</th>
+			<th style="text-align:center;">STS LISTRIK</th>
 			<th style="text-align:center">PETUGAS</th>
 			<th style="text-align:center;">AKSI</th>
 		</tr>
@@ -34,14 +36,20 @@
 				$name 			= executeScalar("select merchant_name from merchant where merchant_id = '".$data['merchant_id']."'");
 				$petugas 		= executeScalar("select checker_name from checker where checker_id = '".$data['id_petugas']."'");
 				$lapakpasang	= executeScalar("select lapak_name from lapak where lapak_id = '".$data['id_lapak_dipasang']."'");
+				$statusPedagang = executeScalar("select merchant_status from merchant where merchant_id = '".$data['merchant_id']."'");
 		?>
 		<tr>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $data['merchant_id']; ?></td>
 			<td style="vertical-align: middle; text-align:left;"><?php echo $name; ?></td>
-			<td style="vertical-align: middle; text-align:center;"><?php echo $lapakpasang; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $lapakpasang != NULL ? $lapakpasang : 'Tidak Ada'; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $ampere; ?> Amp</td>
-			<td style="vertical-align: middle; text-align:right;"><?php echo format_rupiah($price); ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo format_rupiah($price); ?></td>
+			<td style="vertical-align: middle; text-align:center;">
+				<div style="vertical-align: middle; background-color: <?php echo $statusPedagang == 'Tidak Aktif' ? 'red' : 'green'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
+					<i class="fa <?php echo $statusPedagang == 'Tidak Aktif' ? 'fa-remove' : 'fa-check'; ?>"></i>&nbsp;<?php echo $statusPedagang; ?>
+				</div>
+			</td>
 			<td style="vertical-align: middle; text-align:center;">
 				<div style="vertical-align: middle; background-color: <?php echo $data['electricity_sts'] == 'Tidak Aktif' ? 'red' : 'green'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
 					<i class="fa <?php echo $data['electricity_sts'] == 'Tidak Aktif' ? 'fa-remove' : 'fa-check'; ?>"></i>&nbsp;<?php echo $data['electricity_sts']; ?>
@@ -59,9 +67,15 @@
 				<a style="text-decoration: none" href="merchant_edit.php?id=<?php echo $data['electricity_id']; ?>&kode=<?php echo $data['merchant_id'];?>">
 					<button class="btn btn-outline btn-primary btn-block btn-xs" style="margin-bottom: 5px;"><i class="fa fa-eye"></i>&nbsp;&nbsp;Lihat Detail</button>
 				</a>
+
+				<?php if($_SESSION['role']=='Cashier'){
+					
+				}
+				else{ ?>
 				<a style="text-decoration: none" class="btn btn-outline btn-block btn-danger btn-xs modalDeleteRegister" data-toggle="modal" data-target="#modalDeleteRegister" data-id="<?php echo $data['electricity_id']; ?>">
 					<i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus
 				</a>
+				<?php } ?>
 			</center></td>
 		</tr>
 		<?php $no++;} ?>

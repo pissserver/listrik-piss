@@ -56,7 +56,11 @@
 
         <div id="page-wrapper">
             <div class="row"><br><br><br><br>
-                <div class="col-lg-12">
+				<?php 
+					if($_SESSION['role'] == 'Cashier') { ?>
+
+				<?php } else { ?> 
+                <div class="col-lg-12" style="margin-bottom: 10px;">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-pencil fa-fw"></i> Tambah Pengguna Listrik
@@ -128,7 +132,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12" style="margin-top:10px;">
+				<?php } ?>
+                <div class="col-md-12">
 					<div class="panel panel-primary" style="overflow-x: auto">
 						<div class="panel-heading">
 							<i class="fa fa-group fa-fw"></i> Data Pengguna Listrik
@@ -137,7 +142,7 @@
 							<div class="alert alert-warning d-flex align-items-center" role="alert" style="margin: 0 0;">
 								<i class="fa fa-warning me-2" style="font-size: 18px;"></i>
 								<span style="font-size: 14px;">
-									Pedagang yang sudah tidak aktif lapak wajib dihapus dari berlangganan listrik.
+									Pedagang yang sudah tidak aktif wajib dihapus dari berlangganan listrik.
 								</span>
 							</div><br>
 							<div id="Area1">

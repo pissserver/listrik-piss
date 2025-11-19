@@ -51,7 +51,8 @@
                                 <form class="form-horizontal" id="form" name="form" method="POST" action="periode_action.php?task=insert">
                                     <div class="form-group" style="padding: 0 10px; margin-bottom: 20px;">
                                         <label>Periode Tagihan Listrik</label>
-                                        <select class="form-control" name="periode" id="periode" required>
+                                        <!-- old -->
+                                        <!-- <select class="form-control" name="periode" id="periode" required>
                                             <?php 
                                                 $month     = date('M Y');
                                                 $month2    = date("M Y", strtotime("first day of next month"));
@@ -61,11 +62,31 @@
                                             <option value="">- Pilih Periode Tagihan -</option>
                                             <option value="<?php echo $vmonth;?>"><?php echo $month; ?></option>
                                             <option value="<?php echo $vmonth2;?>"><?php echo $month2;?></option>
-                                        </select>
+                                        </select> -->
+
+                                        <!-- new -->
+                                        <?php 
+                                            $month     = date('mY');           
+                                            $displayMonth     = date('F Y');
+
+                                            $checkPeriod = executeScalar("select count(periode_id) from e_periode 
+                                                where periode_month = '".substr($month,0,2)."' and periode_year = '".substr($month,2,4)."'");
+                                        ?>
+                                        <input type="hidden" name="periode" value="<?php echo $month; ?>" />
+                                        <input type="text" class="form-control" id="periode_display" value="<?php echo $displayMonth ?>" readonly>
                                     </div>
-                                    <div class="form-group" style="padding: 0 10px; margin-bottom: 0px;">
-                                        <center><button type="submit" class="btn btn-block btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button></center>
-                                    </div>
+                                    <?php if($checkPeriod > 0){ ?>
+                                        <div class="form-group" style="padding: 0 10px; margin-bottom: -15px;">
+                                            <div class="alert alert-warning">
+                                                <center><i class="fa fa-exclamation-triangle"></i> Periode tagihan untuk bulan <?php echo $displayMonth; ?> sudah terbuat.</center>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                    <?php if($checkPeriod == 0){ ?>
+                                        <div class="form-group" style="padding: 0 10px; margin-bottom: 0px;">
+                                            <center><button type="submit" class="btn btn-block btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Buat Periode</button></center>
+                                        </div>
+                                    <?php } ?>
                                 </form> 
                             </div>
                         </div>

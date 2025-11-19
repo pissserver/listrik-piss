@@ -24,7 +24,7 @@
         </table>
     </page_footer>
     <div style=" font-weight: bold; text-align: center; margin-top:10px;">
-		STATUS TAGUHAN LISTRIK BULAN <?php echo strtoupper($pname); ?>
+		REKAP TAGIHAN LISTRIK BULAN <?php echo strtoupper($pname); ?>
 		<br>
 		PASAR INDUK SURABAYA SIDOTOPO (PISS)
 	</div>
@@ -75,7 +75,8 @@
 					} ?>
 			</td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $r['pay_sts']; ?></td>
-			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_rupiah($price);  ?></td>
+			<!-- <td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_rupiah($price);  ?></td> -->
+			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_rupiah($r['pay_total']);  ?></td>
 		</tr>
 		<?php 
 				$no++; 

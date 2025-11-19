@@ -23,7 +23,7 @@
     </page_footer>
     <div style="font-size: 18px; font-weight: bold; text-align: center; margin-top:15px;">
 		LAPORAN OUTSTANDING LISTRIK <br>
-		PASAR INDUK SURABAYA (PISS)
+		PASAR INDUK SURABAYA SIDOTOPO (PISS)
 	</div>
 	<br/><br>
 	<table style="border: solid 1px black; font-size:8pt; border-collapse: collapse; margin-bottom: 5px; width:680px; margin-right:0px;" id="tableNonkomoditi">
@@ -38,13 +38,15 @@
 			<th style="text-align: center;width: 13%;border: solid 1px black;">TAGIHAN</th>
 		</tr>
 		 <?php
-			$query 	= mysql_query("	select 	pay_id, 
-											merchant_id, 
-											pay_total, 
-											pay_sts,
-											id_lapak_dipasang, 
-											periode_id
-									from 	e_pay
+			$query 	= mysql_query("	select 	p.pay_id, 
+											p.merchant_id, 
+											p.pay_total, 
+											p.pay_sts,
+											p.id_lapak_dipasang, 
+											p.periode_id
+									from 	e_pay p
+									join    electricity e
+									on      p.merchant_id = e.merchant_id
 									where 	pay_sts = 'Belum Lunas'
 									order 	by periode_id, merchant_id");
 			$no		= 1;
@@ -63,7 +65,7 @@
 			<td style="text-align: center;font-size: 8pt;height: 1%;border: solid 1px black;"><?php echo $no;  ?></td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;">TL<?php echo $tlid; ?></td>
 			<td style="text-align: left;font-size:8pt;border: solid 1px black;"><?php echo $name; ?></td>
-			<td style="text-align: left;font-size:8pt;border: solid 1px black;"><?php echo $lapak; ?></td>
+			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $lapak; ?></td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $ampere; ?> Ampere</td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $periode; ?></td>
 			<td style="text-align: right;font-size:8pt;border: solid 1px black;"><?php echo format_rupiah($price);  ?></td>

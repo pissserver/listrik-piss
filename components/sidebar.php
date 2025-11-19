@@ -152,14 +152,39 @@
 								<li><a class="<?= isActive(['merchant.php', 'merchant_edit.php']); ?>" href="merchant.php"><i class="fa fa-users fa-fw"></i> Data Pengguna Listrik</a></li>
 							</ul>
 						</li> -->
-						<li class="<?= isParentActive(['periode.php', 'invoice.php', 'invoice_cancel.php']); ?>">
-                            <a href="#"><i class="fa fa-clipboard fa-fw"></i> Tagihan Listrik<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a class="<?= isActive(['periode.php']); ?>" href="periode.php"><i class="fa fa-clock-o fa-fw"></i> Periode Tagihan</a></li>
-								<li><a class="<?= isActive(['invoice.php']); ?>" href="invoice.php"><i class="fa fa-print fa-fw"></i> Cetak Tagihan</a></li>
-								<li><a class="<?= isActive(['invoice_cancel.php']); ?>" href="invoice_cancel.php"><i class="fa fa-close fa-fw"></i> Pembatalan Tagihan</a></li>
-							</ul>
-						</li>
+
+						<?php if ($_SESSION['role'] == 'Cashier') { ?>
+							<li><a class="<?= isActive(['invoice.php']); ?>" href="invoice.php">
+									<i class="fa fa-print fa-fw"></i> Cetak Tagihan
+							</a></li>
+						<?php } else { ?>
+							<li class="<?= isParentActive(['periode.php', 'invoice.php', 'invoice_cancel.php']); ?>">
+								<a href="#">
+									<i class="fa fa-clipboard fa-fw"></i> Tagihan Listrik
+									<span class="fa arrow"></span>
+								</a>
+								<ul class="nav nav-second-level">
+									<li>
+										<a class="<?= isActive(['periode.php']); ?>" href="periode.php">
+											<i class="fa fa-clock-o fa-fw"></i> Periode Tagihan
+										</a>
+									</li>
+									<li>
+										<a class="<?= isActive(['invoice.php']); ?>" href="invoice.php">
+											<i class="fa fa-print fa-fw"></i> Cetak Tagihan
+										</a>
+									</li>
+									<!--
+									<li>
+										<a class="<?= isActive(['invoice_cancel.php']); ?>" href="invoice_cancel.php">
+											<i class="fa fa-close fa-fw"></i> Pembatalan Tagihan
+										</a>
+									</li>
+									-->
+								</ul>
+							</li>
+						<?php } ?>
+
 						<li class="<?= isParentActive(['pay.php', 'pay_cancel.php']); ?>">
                             <a href="#"><i class="fa fa-money fa-fw"></i> Pembayaran<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
@@ -167,6 +192,11 @@
 								<li><a class="<?= isActive(['pay_cancel.php']); ?>" href="pay_cancel.php"><i class="fa fa-close fa-fw"></i> Pembatalan Pembayaran</a></li>
 							</ul>
 						</li>
+
+						<?php if($_SESSION['role']=='Cashier'){
+							
+						}
+						else{ ?>
 						<li class="<?= isParentActive(['tarif.php', 'tarif2.php', 'note.php']); ?>">
                             <a href="#"><i class="fa fa-database fa-fw"></i> Master<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
@@ -175,6 +205,8 @@
 								<li><a class="<?= isActive(['note.php']); ?>" href="note.php"><i class="fa fa-file-text fa-fw"></i> Catatan Pelanggan</a></li>
 							</ul>
 						</li>
+						<?php } ?>
+
 						<li><a class="<?= isActive(['report.php']); ?>" href="report.php"><i class="fa fa-clipboard fa-fw"></i> Laporan</a></li>
 						<li><a class="<?= isActive(['changelog.php']); ?>" href="changelog.php"><i class="fa fa-history fa-fw"></i> Update Log</a></li>
                     </ul>
