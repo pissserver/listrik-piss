@@ -37,9 +37,9 @@
 	<table style="border: solid 1px black; font-size:10pt; border-collapse: collapse; margin-bottom: 5px; width:700px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
 			<th style="text-align: center;width: 5%; border: solid 1px black;">NO</th>
+			<th style="text-align: center;width: 12%; border: solid 1px black;">NO TAGIHAN</th>
 			<th style="text-align: center;width: 20%; border: solid 1px black;">PENGGUNA LISTRIK</th>
 			<th style="text-align: center;width: 12%; border: solid 1px black;">LAPAK</th>
-			<th style="text-align: center;width: 12%; border: solid 1px black;">NO TAGIHAN</th>
 			<th style="text-align: center;width: 12%; border: solid 1px black;">DAYA</th>
 			<th style="text-align: center;width: 12%;border: solid 1px black;">PERIODE</th>
 			<th style="text-align: center;width: 12%;border: solid 1px black;">TGL BATAL</th>
@@ -64,9 +64,9 @@
 		?>
 		<tr>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $no;  ?></td>
+			<td style="text-align: center;font-size:8pt;border: solid 1px black;">TL<?php echo $tlid; ?></td>
 			<td style="text-align: left;font-size:8pt;border: solid 1px black;"><?php echo $name; ?></td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $lapak; ?></td>
-			<td style="text-align: center;font-size:8pt;border: solid 1px black;">TL<?php echo $tlid; ?></td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $r['e_cost_ampere']; ?> Ampere</td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo $r['periode_name']; ?></td>
 			<td style="text-align: center;font-size:8pt;border: solid 1px black;"><?php echo date("d M Y", strtotime($r['cancel_date'])); ?></td>

@@ -10,7 +10,24 @@
 
     // Update 1 pada menu merchant edit
     if($task=='update'){
-        $update = mysql_query("update e_pay set pay_total = '".$_POST['price']."' where pay_id = '".$id."'");
+        $keterangan = trim($_POST['keterangan']);
+
+        if($keterangan === '') {
+            $update = mysql_query("
+                UPDATE e_pay 
+                SET pay_total = '".$_POST['price']."', 
+                    keterangan = NULL 
+                WHERE pay_id = '".$id."'
+            ");
+        } else {
+            $update = mysql_query("
+                UPDATE e_pay 
+                SET pay_total = '".$_POST['price']."', 
+                    keterangan = '".$keterangan."' 
+                WHERE pay_id = '".$id."'
+            ");
+        }
+
         if($update){
             // Alert Information
             $_SESSION['success'] = true;
@@ -31,7 +48,23 @@
 
     // Update 2 pada menu invoice
     if($task=='update2'){
-        $update = mysql_query("update e_pay set pay_total = '".$_POST['price']."' where pay_id = '".$id."'");
+        $keterangan = trim($_POST['keterangan']);
+
+        if($keterangan === '') {
+            $update = mysql_query("
+                UPDATE e_pay 
+                SET pay_total = '".$_POST['price']."', 
+                    keterangan = NULL 
+                WHERE pay_id = '".$id."'
+            ");
+        } else {
+            $update = mysql_query("
+                UPDATE e_pay 
+                SET pay_total = '".$_POST['price']."', 
+                    keterangan = '".$keterangan."' 
+                WHERE pay_id = '".$id."'
+            ");
+        }
         if($update){
             // Alert Information
             $_SESSION['success'] = true;

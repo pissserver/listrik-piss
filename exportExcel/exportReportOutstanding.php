@@ -6,15 +6,21 @@
 	$total		= 0;
 
     // Query untuk mengambil data
-    $query 	= mysql_query("	select 	pay_id, 
-											merchant_id, 
-											pay_total, 
-											pay_sts,
-											id_lapak_dipasang, 
-											periode_id
-									from 	e_pay
-									where 	pay_sts = 'Belum Lunas'
-									order 	by periode_id, merchant_id");
+    $query = mysql_query("
+        SELECT DISTINCT 
+            p.pay_id, 
+            p.merchant_id, 
+            p.pay_total, 
+            p.pay_sts,
+            p.id_lapak_dipasang, 
+            p.periode_id,
+            e.electricity_sts
+        FROM e_pay p
+        JOIN electricity e ON p.merchant_id = e.merchant_id
+        WHERE p.pay_sts = 'Belum Lunas'
+        ORDER BY p.periode_id, p.merchant_id
+    ");
+
 
     // Buat objek PHPExcel
     $excel = new PHPExcel();
@@ -28,36 +34,38 @@
     // $sheet->setCellValue("C3", date('d M Y', strtotime($date1)) . ' s/d ' . date('d M Y', strtotime($date2)));
 
     // Membuat text bold
-    // $sheet->getStyle("A1:B3")->getFont()->setBold(true);
+    $sheet->getStyle("A1")->getFont()->setBold(true);
 
     // Meratakan semua teks ke tengah
-    // $sheet->getStyle("A1:B3")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    $sheet->getStyle("A1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
     // Meratakan semua teks ke tengah
-    // $sheet->getStyle("A3:A3")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+    // $sheet->getStyle("A1:J1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
     // Merge cell
-    $sheet->mergeCells("A1:H1");
+    $sheet->mergeCells("A1:J1");
 
     // Menulis header
     $sheet->setCellValue("A3", "NO")
           ->setCellValue("B3", "KODE TAGIHAN")
           ->setCellValue("C3", "PENGGUNA LISTRIK")
-          ->setCellValue("D3", "LAPAK PASANG")
-          ->setCellValue("E3", "DAYA")
-          ->setCellValue("F3", "PERIODE")
-          ->setCellValue("G3", "TARIF")
-          ->setCellValue("H3", "TAGIHAN");
+          ->setCellValue("D3", "STATUS PEDAGANG")
+          ->setCellValue("E3", "STATUS LISTRIK")
+          ->setCellValue("F3", "LAPAK PASANG")
+          ->setCellValue("G3", "DAYA")
+          ->setCellValue("H3", "PERIODE")
+          ->setCellValue("I3", "TARIF")
+          ->setCellValue("J3", "TAGIHAN");
 
     // Mengatur warna latar belakang hijau untuk header
     // $sheet->getStyle('A3:I3')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
     // $sheet->getStyle('A3:I3')->getFill()->getStartColor()->setRGB('7FBF7F'); // Warna Hijau
 
     // Membuat Text Bold
-    $sheet->getStyle("A3:H3")->getFont()->setBold(true);
+    $sheet->getStyle("A3:J3")->getFont()->setBold(true);
 
     // Meratakan semua teks ke tengah, kecuali kolom E (Pedagang)
-    $sheet->getStyle('A3:H3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    $sheet->getStyle('A3:J3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
     $no			= 1;
     $row        = 4;
@@ -68,13 +76,14 @@
 		$lid		= executeScalar("select lapak_id from rent where merchant_id = '".$r['merchant_id']."' and (rent_sts2 != 'Pindah' && rent_sts2 != 'Batal') limit 1");
 		$lapak		= executeScalar("select lapak_name from lapak where lapak_id = '".$r['id_lapak_dipasang']."'");
 		$name		= executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
-		$tarif		= executeScalar("select e_cost_id from electricity where merchant_id = '".$r['merchant_id']."'");
+		$tarif		= executeScalar("select e_cost_id from electricity where merchant_id = '".$r['merchant_id']."' and id_lapak_dipasang = '".$r['id_lapak_dipasang']."'");
 		$price		= executeScalar("select e_cost_price from e_cost where e_cost_id = '".$tarif."'");
 		$ampere		= executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$tarif."'");
 		$periode	= executeScalar("select periode_name from e_periode where periode_id = '".$r['periode_id']."'");
+        $merchantSts= executeScalar("select merchant_status from merchant where merchant_id = '".$r['merchant_id']."'");
 
         // Meratakan semua teks ke tengah, kecuali kolom G (Pedagang)
-        $sheet->getStyle('A:I')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A:J')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         // Set alignment khusus untuk kolom G (Pedagang) ke kiri
         $sheet->getStyle('C')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
@@ -82,15 +91,17 @@
         $sheet->setCellValue("A" . $row, $no)
               ->setCellValue("B" . $row, $tlid)
               ->setCellValue("C" . $row, $name)
-              ->setCellValue("D" . $row, $lapak)
-              ->setCellValue("E" . $row, $ampere . " Ampere")
-              ->setCellValue("F" . $row, $periode)
-              ->setCellValue("G" . $row, $price)
-              ->setCellValue("H" . $row, $r['pay_total']);
+              ->setCellValue("D" . $row, $merchantSts)
+              ->setCellValue("E" . $row, $r['electricity_sts'])
+              ->setCellValue("F" . $row, $lapak)
+              ->setCellValue("G" . $row, $ampere . " Ampere")
+              ->setCellValue("H" . $row, $periode)
+              ->setCellValue("I" . $row, $price)
+              ->setCellValue("J" . $row, $r['pay_total']);
             
         // Membuat format menjadi number
-        $sheet->getStyle("G" . $row . ":G" . $row)->getNumberFormat()->setFormatCode('#,##0');
-        $sheet->getStyle("H" . $row . ":H" . $row)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("I" . $row . ":I" . $row)->getNumberFormat()->setFormatCode('#,##0');
+        $sheet->getStyle("J" . $row . ":J" . $row)->getNumberFormat()->setFormatCode('#,##0');
 
         // Perhitungan total
         // if ($data['weighing_sts'] != 'Batal' && $data['weighing_sts'] != 'Dipecah' && $data['weighing_sts'] != 'Digabung') {
@@ -107,13 +118,13 @@
 
     // Menulis total pada baris terakhir
     if ($row > 4) {
-        $sheet->mergeCells("A" . $row . ":G" . $row); 
+        $sheet->mergeCells("A" . $row . ":I" . $row); 
         $sheet->setCellValue("A" . $row, "TOTAL")
-              ->setCellValue("H" . $row, "=SUM(H4:H" . ($row - 1) . ")");
+              ->setCellValue("J" . $row, "=SUM(J4:J" . ($row - 1) . ")");
     } else {
-        $sheet->mergeCells("A" . $row . ":G" . $row); 
+        $sheet->mergeCells("A" . $row . ":I" . $row); 
         $sheet->setCellValue("A" . $row, "TOTAL")
-              ->setCellValue("H" . $row,  0);
+              ->setCellValue("J" . $row,  0);
     }
 
     // Mengatur warna latar belakang kuning untuk baris total
@@ -127,10 +138,10 @@
     // $sheet->getStyle("A" . $row . ":J" . $row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
     // Membuat format menjadi number
-    $sheet->getStyle("H" . $row . ":H" . $row)->getNumberFormat()->setFormatCode('#,##0');
+    $sheet->getStyle("J" . $row . ":J" . $row)->getNumberFormat()->setFormatCode('#,##0');
 
     // Menambahkan border pada seluruh tabel
-    $sheet->getStyle("A3:H" . $row)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+    $sheet->getStyle("A3:J" . $row)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
