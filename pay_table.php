@@ -42,6 +42,25 @@
 			$price 	= executeScalar("select e_cost_price from e_cost where e_cost_id = '".$tarif."'");
 			$ampere = executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$tarif."'");
 			$jml 	= executeScalar("select pay_total from e_pay where pay_id = '".$r['pay_id']."'");
+			$cekECost = executeScalar("select e_cost_id from electricity where electricity_id = '".$r['electricity_id']."'");
+											$cekECostPrice = executeScalar("select e_cost_price from e_cost where e_cost_id = '".$cekECost."'");
+											$display = 'none';
+
+											if ($r['pay_total'] === $cekECostPrice) {
+												$keterangan = '';
+											} else {
+												if ($r['merchant_id'] == 'L0039') {
+													$keterangan = 'Pedagang bebas tarif (Khusus)';
+													$display = 'inline-block';
+												} else {
+													if ($r['keterangan'] != NULL) {
+														$keterangan = $r['keterangan'];
+														$display = 'inline-block';
+													} else {
+														$keterangan = '';
+													}
+												}
+											}
 			
 		?>
 		<tr>
@@ -51,7 +70,23 @@
 			<td style="vertical-align: middle; text-align:left;"><?php echo $name.' / '.($nick != NULL ? $nick : '-'); ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $periode; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $ampere; ?> Ampere</td>
-			<td style="vertical-align: middle; text-align:center;"><?php echo format_rupiah($r['pay_total']); ?></td>
+			<td style="vertical-align: middle; text-align:center;">
+				<div style="display: <?php echo $display ?>; 
+															vertical-align: middle; 
+															background-color: #17a2b8; 
+															color: #fff; 
+															padding: 2px 7px; 
+															border-radius: 50%; 
+															font-size: 10px;
+															cursor: pointer;"
+													data-toggle="tooltip" 
+													data-placement="top" 
+													title="<?php echo $keterangan; ?>">
+													<i class="fa fa-info"></i>
+												</div>
+												&nbsp;
+				<?php echo format_rupiah($r['pay_total']); ?>
+			</td>
 			<td style="vertical-align: middle; text-align:center;">
 				<div style="vertical-align: middle; background-color: <?php echo $r['pay_sts'] == 'Belum Lunas' ? 'red' : 'green'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
 					<i class="fa <?php echo $r['pay_sts'] == 'Belum Lunas' ? 'fa-remove' : 'fa-check'; ?>"></i>&nbsp;<?php echo $r['pay_sts']; ?>

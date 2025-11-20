@@ -14,8 +14,9 @@
             <option value="" selected disabled> -- Pilih Lapak --</option>            
         <?php
             while ($data = mysql_fetch_array($hasil)) {
+                $cekLapak = executeScalar("select id_lapak_dipasang from electricity where merchant_id = '".$merchant."'");
         ?>
-                <option value="<?php echo  $data['id_lapak']; ?>"><?php echo $data['nama_lapak']; ?></option>
+                <option value="<?php echo  $data['id_lapak']; ?>"><?php echo $data['nama_lapak']; ?> <?php echo $data['id_lapak'] == $cekLapak ? ' (Lapak sudah berlangganan)' : ''; ?></option>
             <?php
         }
     }

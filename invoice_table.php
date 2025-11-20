@@ -37,6 +37,25 @@
 				$periode = executeScalar("select periode_name from e_periode where periode_id = '".$r['periode_id']."'");
 				$name	 = executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
 				$lapakpasang	= executeScalar("select lapak_name from lapak where lapak_id = '".$r['id_lapak_dipasang']."'");
+				$cekECost = executeScalar("select e_cost_id from electricity where electricity_id = '".$r['electricity_id']."'");
+											$cekECostPrice = executeScalar("select e_cost_price from e_cost where e_cost_id = '".$cekECost."'");
+											$display = 'none';
+
+											if ($r['pay_total'] === $cekECostPrice) {
+												$keterangan = '';
+											} else {
+												if ($r['merchant_id'] == 'L0039') {
+													$keterangan = 'Pedagang bebas tarif (Khusus)';
+													$display = 'inline-block';
+												} else {
+													if ($r['keterangan'] != NULL) {
+														$keterangan = $r['keterangan'];
+														$display = 'inline-block';
+													} else {
+														$keterangan = '';
+													}
+												}
+											}
 			?>
 			<tr>
 				<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
@@ -45,7 +64,23 @@
 				<td style="vertical-align: middle; text-align:left;"><?php echo $name; ?></td>
 				<td style="vertical-align: middle; text-align:center;"><?php echo $lapakpasang; ?></td>
 				<td style="vertical-align: middle; text-align:center;"><?php echo $periode; ?></td>
-				<td style="vertical-align: middle; text-align:center;"><?php echo format_rupiah($r['pay_total']); ?></td>
+				<td style="vertical-align: middle; text-align:center;">
+					<div style="display: <?php echo $display ?>; 
+															vertical-align: middle; 
+															background-color: #17a2b8; 
+															color: #fff; 
+															padding: 2px 7px; 
+															border-radius: 50%; 
+															font-size: 10px;
+															cursor: pointer;"
+													data-toggle="tooltip" 
+													data-placement="top" 
+													title="<?php echo $keterangan; ?>">
+													<i class="fa fa-info"></i>
+												</div>
+												&nbsp;
+					<?php echo format_rupiah($r['pay_total']); ?>
+				</td>
 				<td style="vertical-align: middle; text-align:center;"><?php echo $r['pay_sts']; ?></td>
 				<td style="vertical-align: middle;">
 					<?php if($_SESSION['role'] == 'Cashier') {

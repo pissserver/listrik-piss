@@ -35,6 +35,10 @@
 				<label>Biaya</label>
 				<input class="form-control" id="price" name="price" type="number" value="<?php echo $r['pay_total']; ?>" />
 			</div>
+			<div class="form-group" style="padding:0 35px; margin-top: 0px;">
+				<label>Keterangan</label>
+				<textarea class="form-control" name="keterangan" id="keterangan" rows="3" placeholder="Keterangan edit biaya tagihan"><?php echo trim($r['keterangan']) ?></textarea>
+			</div>
 			<div class="form-group" style="padding: 0 35px; margin-top: 10px; margin-bottom: 0px;">
 				<center><button type="submit" class="btn btn-block btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button></center>
 			</div>

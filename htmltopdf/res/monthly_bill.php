@@ -50,13 +50,15 @@
 											e.id_lapak_dipasang,
 											e.pay_total 
 									from 	e_pay e, 
-											merchant m 
+											merchant m,
+											electricity y
 									where 	e.merchant_id = m.merchant_id and 
+											e.electricity_id = y.electricity_id and
 											periode_id = '".$id."' 
 									order by m.merchant_name");
 			while($r = mysql_fetch_array($sql)){
 				//$merchant 	= executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
-				$tarif 		= executeScalar("select e_cost_id from electricity where merchant_id = '".$r['merchant_id']."'");
+				$tarif		= executeScalar("select e_cost_id from electricity where merchant_id = '".$r['merchant_id']."' and id_lapak_dipasang = '".$r['id_lapak_dipasang']."'");
 				$ampere 	= executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$tarif."'");
 				$price 		= executeScalar("select e_cost_price from e_cost where e_cost_id = '".$tarif."'");
 				$lapak 		= executeScalar("select lapak_name from lapak where lapak_id = '".$r['id_lapak_dipasang']."'");

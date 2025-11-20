@@ -43,9 +43,9 @@
 
     // Menulis header
     $sheet->setCellValue("A5", "NO")
-          ->setCellValue("B5", "PENGGUNA LISTRIK")
-          ->setCellValue("C5", "LAPAK")
-          ->setCellValue("D5", "NO TAGIHAN")
+          ->setCellValue("B5", "NO TAGIHAN")
+          ->setCellValue("C5", "PENGGUNA LISTRIK")
+          ->setCellValue("D5", "LAPAK")
           ->setCellValue("E5", "DAYA")
           ->setCellValue("F5", "PERIODE")
           ->setCellValue("G5", "TGL BATAL")
@@ -78,9 +78,9 @@
 
         // Menulis data per baris
         $sheet->setCellValue("A" . $row, $no)
-              ->setCellValue("B" . $row, $name)
-              ->setCellValue("C" . $row, $lapak)
-              ->setCellValue("D" . $row, $tlid)
+              ->setCellValue("B" . $row, "TL".$tlid)
+              ->setCellValue("C" . $row, $name)
+              ->setCellValue("D" . $row, $lapak)
               ->setCellValue("E" . $row, $r['e_cost_ampere'])
               ->setCellValue("F" . $row, $r['periode_name'])
               ->setCellValue("G" . $row, date("d M Y", strtotime($r['cancel_date'])))

@@ -86,7 +86,8 @@
 								id_lapak_dipasang = '".$lapak."',
 								e_cost_id = '".$daya."',
 								id_petugas = '".$petugas."' 
-								where merchant_id = '".$mid."'");
+								where
+								electricity_id = '".$eid."'");
 
 		if($update){
 			if($sts=='Aktif'){
@@ -94,8 +95,24 @@
 			}else{
 				$sts2	= 'No';
 			}
-			$update2	= mysql_query("update merchant set merchant_electricity = '".$sts2."' where merchant_id = '".$mid."'");
-			if($update2){
+
+
+			// UPDATE MERCHANT
+			$update2 = mysql_query("update merchant 
+									set merchant_electricity = '".$sts2."' 
+									where merchant_id = '".$mid."'");
+
+			// 🔥 Ambil tarif BARU setelah listrik diupdate
+			$eCost = executeScalar("select e_cost_id from electricity where electricity_id = '".$eid."'");
+			$tarif = executeScalar("select e_cost_price from e_cost where e_cost_id = '".$eCost."'");
+
+			// UPDATE E_PAY
+			$update3 = mysql_query("update e_pay 
+									set pay_total = '".$tarif."' 
+									where electricity_id = '".$eid."' 
+									and pay_sts = 'Belum Lunas'");
+									
+			if($update2 && $update3){
 				// Alert Information
 				$_SESSION['success'] = true;
 				$_SESSION['title'] = 'Berhasil';

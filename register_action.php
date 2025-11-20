@@ -188,8 +188,16 @@
 	
 	elseif ($task == 'delete'){
 		$id		= $_GET['id'];
+		$dateNow = date('Y-m-d');
+
 		$delete = mysql_query("delete from electricity where electricity_id = '".$id."'");
 		if($delete){
+			$updatePay = mysql_query("update e_pay set
+										cancel_date = '".$date_now."',
+										pay_sts = 'Batal'
+										where electricity_id = '".$id."'
+										and pay_date is NULL");
+
 			// Alert Information
 			$_SESSION['success'] = true;
 			$_SESSION['title'] = 'Berhasil';

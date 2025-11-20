@@ -26,7 +26,6 @@
 								order by l.block_id, l.lapak_no");
 	while($r=mysql_fetch_array($sql)){
 		$ampere 	= executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$r['e_cost_id']."'");
-		$price 		= executeScalar("SELECT pay_total FROM e_pay WHERE merchant_id = '".$r['merchant_id']."' AND periode_id = '".$_POST['periode']."'");
 		$priceByAmpere = executeScalar("SELECT e_cost_price FROM e_cost where e_cost_id = '".$r['e_cost_id']."'");
 		$payStatus	= executeScalar("select pay_sts from e_pay where merchant_id = '".$r['merchant_id']."' and periode_id = '".$_POST['periode']."'");
 		$payDate	= executeScalar("select pay_date from e_pay where merchant_id = '".$r['merchant_id']."' and periode_id = '".$_POST['periode']."'");
@@ -76,6 +75,8 @@
 												periode_id = '".$_POST['periode']."'");
 		}
 		//$tlid 		= sprintf("%07d", $id);
+
+		$price 		= executeScalar("SELECT pay_total FROM e_pay WHERE merchant_id = '".$r['merchant_id']."' AND periode_id = '".$_POST['periode']."' and id_lapak_dipasang = '".$r['id_lapak_dipasang']."'");
 ?>
 <page backtop="5mm" backbottom="15mm" backleft="5mm" backright="5mm">
 	<page_header>
@@ -89,9 +90,11 @@
 		</tr>
 	</table>
 	<br />
-    <div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:5px; margin-bottom:15px;">
+    <div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:0px;">
 		TAGIHAN LISTRIK PISS
 	</div>
+	<p style="font-size: 10px; font-weight: bold; text-align: center; margin-top:0px;">(PASAR INDUK SURABAYA SIDOTOPO)</p>
+	<br />
 	<table style="margin-bottom: 5px;font-size:11pt; width: 100%;" id="tableCheckout">
 		<tr>
 			<td style="width: 40%; padding-bottom: 10px;">Nama 				</td>
@@ -153,8 +156,8 @@
     <page_footer>
 		<table style="width: 100%; border: 0px black; margin-top:10px; margin-bottom:30px; margin-right:5px; font-size:8pt;">
 			<tr>
-				<td style="text-align: center;width: 50%">(TTD & Nama Petugas)</td>
-				<td style="text-align: center;width: 50%">(TTD Pelanggan)</td>
+				<td style="text-align: center;width: 50%">( Petugas )</td>
+				<td style="text-align: center;width: 50%">( Pelanggan )</td>
 			</tr>
 		</table>
     </page_footer>

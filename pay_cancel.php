@@ -95,6 +95,15 @@
 		});
 		function clearNotif(){$("#notifArea").html("")};
     </script>
+
+	<script>
+		$(document).ready(function () {
+			$('body').tooltip({
+				selector: '[data-toggle="tooltip"]',
+				html: true
+			});
+		});
+	</script>
 	
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
