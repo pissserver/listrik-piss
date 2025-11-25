@@ -3,11 +3,10 @@
 	include "connection.php";
 	include "components/role_session.php";
 
-    function headScript(){
+	function headScript(){
 		$headScript=file_get_contents("headScript.html");
 		return $headScript;
 	}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,28 +70,46 @@
 							<div class="panel-body">
 								<div class="panel-group" id="accordionChangelog">
 									
+									<!-- Versi 1.3.0 -->
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+												<a data-toggle="collapse" data-parent="#accordionChangelog" href="#ver121">
+													<i class="fa fa-plus"></i> Version 1.3.0 - 21 November 2025
+												</a>
+											</h4>
+										</div>
+										<div id="ver130" class="panel-collapse collapse in">
+											<div class="panel-body">
+												<h5># Penambahan Fitur</h5>
+												<ul>
+													<li>🌭 Menambahkan halaman profil untuk update akun</li>
+													<li>⚙️ Menambahkan badge pencapaian untuk melihat kemajuan operasional kasir pada halaman profil</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+
 									<!-- Versi 1.2.0 -->
 									<div class="panel panel-info">
 										<div class="panel-heading">
 											<h4 class="panel-title">
 												<a data-toggle="collapse" data-parent="#accordionChangelog" href="#ver120">
-													<i class="fa fa-plus"></i> Version 1.2.0 - 17 November 2025
+													<i class="fa fa-plus"></i> Version 1.2.0 - 29 Oktober 2025
 												</a>
 											</h4>
 										</div>
-										<div id="ver120" class="panel-collapse collapse in">
+										<div id="ver120" class="panel-collapse collapse ">
 											<div class="panel-body">
-												<h5># Perubahan & Optimalisasi Fitur</h5>
+												<h5># Penambahan Fitur & Optimalisasi Data</h5>
 												<ul>
-													<li>✨ Sistem versioning listrik 1.2.0</li>
-													<li>🐞 Merubah Hak akses fitur untuk spv, pp, dan kasir</li>
-													<li>⚙️ Sedikit merubah tampilan interface sistem listrik pada beberapa menu</li>
-													<li>🦴 Fixing query pada pemanggilan data pengguna listrik</li>
-													<li>🎈 Fixing bug biaya saat pembuatan tagihan</li>
-													<li>🎊 Menambahkan fitur edit biaya pada tagihan</li>
-													<li>🌭 Merubah menu sidebar menjadi lebih minimalis</li>
+													<li>✨ Sistem versioning lapak 1.2.0</li>
+													<li>🐞 Fixing query data block, lapak & pedagang</li>
+													<li>⚙️ Penggantian nama fitur, dari 'Pendaftaran Lapak Baru' menjadi 'Pendaftaran Pedagang'</li>
+													<li>🦴 Sekarang pada permohonan 'Pendaftaran Pedagang' maupun 'Tambah Lapak' bisa dibatalkan jika tidak jadi melakukan permohonan</li>
+													<li>🎊 Perubahan cara nonaktifkan lapak, dan pedagang</li>
+													<li>🎈 Penambahan fitur log update (changelog)</li>
 													<li>⏰ Penambahan fitur jam disamping nama akun</li>
-													<li>🙌 Fixing bug notification pada icon "bell" disamping nama akun pada saat ada pembaruan sistem</li>
 												</ul>
 											</div>
 										</div>

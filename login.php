@@ -73,7 +73,7 @@
                             >
                         </span>
                         <p class="text-center" style="margin-top: -10px">
-                            Version 1.2.0
+                            Version 1.3.0
                         </p>
 
                         <div class="illustration text-center mb-4 mt-3">
