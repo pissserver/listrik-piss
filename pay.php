@@ -68,11 +68,26 @@
 									Daftar tagihan listrik hanya menampilkan pedagang yang masih berlangganan.
 								</span>
 							</div><br>
-                            <div id="Area1">
-                                <div class="alert alert-info" onclick="clearNotif()">
-                                    <center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
-                                </div>
-                            </div>
+                            <?php 
+									$query = mysql_query("SELECT *
+											FROM e_pay p
+											JOIN electricity e ON p.electricity_id = e.electricity_id
+											WHERE p.pay_sts = 'Belum Lunas'
+											ORDER BY p.pay_id DESC");
+
+									if (mysql_num_rows($query) == 0) { ?>
+										<div class="box-update">
+											<img src="img/paid-off.png" alt="Update Illustration" width="250px">
+											<h3 class="text-primary text-uppercase"><b>Tagihan saat ini sudah lunas seluruhnya.</b></h3>
+										</div>
+									<?php } else { ?>
+										<div id="Area1">
+											<div class="alert alert-info" onclick="clearNotif()">
+												<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+											</div>
+										</div>
+									<?php } 
+								?>
                         </div>
                     </div>
                 </div>

@@ -29,7 +29,7 @@
 		<tbody>
 			<?php
 			// $sql 	= "select * from e_pay where pay_sts != 'Lunas' order by pay_id desc";
-			$sql 	= "select * from e_pay p join electricity e on p.electricity_id = e.electricity_id where pay_sts = 'Belum Lunas' order by pay_id desc";;
+			$sql 	= "select * from e_pay p join electricity e on p.electricity_id = e.electricity_id where pay_sts = 'Belum Lunas' order by pay_id desc";
 			$query 	= mysql_query($sql);
 			$no		= 1;
 			$angs	= 0;

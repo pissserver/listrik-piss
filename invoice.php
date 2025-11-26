@@ -82,11 +82,22 @@
 										Tagihan yang tidak terbayar wajib dibatalkan, dan tagihan yang sudah dibatalkan tidak akan muncul di daftar tagihan.
 									</span>
 								</div><br>
-                                <div id="Area1">
-                                    <div class="alert alert-info" onclick="clearNotif()">
-                                        <center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
-                                    </div>
-                                </div>
+								<?php 
+									$query = mysql_query("select * from e_pay p join electricity e on p.electricity_id = e.electricity_id where pay_sts = 'Belum Lunas' order by pay_id desc");
+
+									if (mysql_num_rows($query) == 0) { ?>
+										<div class="box-update">
+											<img src="img/paid-off.png" alt="Update Illustration" width="250px">
+											<h3 class="text-primary text-uppercase"><b>Tagihan saat ini sudah lunas seluruhnya.</b></h3>
+										</div>
+									<?php } else { ?>
+										<div id="Area1">
+											<div class="alert alert-info" onclick="clearNotif()">
+												<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
+											</div>
+										</div>
+									<?php } 
+								?>
                             </div>
                         </div>
                     </div>
