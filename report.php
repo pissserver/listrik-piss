@@ -285,23 +285,19 @@
     </script>
 	<script>
 		function setAction(type) {
-			var form1 = document.getElementById("reportOmzet");
-			var form2 = document.getElementById("reportCancel");
-			var form3 = document.getElementById("reportOutstanding");
+			let form1 = document.getElementById("reportOmzet");
+			let form2 = document.getElementById("reportCancel");
+			let form3 = document.getElementById("reportOutstanding");
+
 			if (type === 'pdf') {
-				form1.action = "htmltopdf/report_omzet.php";
-				form2.action = "htmltopdf/report_cancel.php";
-				form3.action = "htmltopdf/report_outstanding.php";
-				form1.target = "_blank";
-				form2.target = "_blank";
-				form3.target = "_blank";
-			} else if (type === 'excel') {
-				form1.action = "exportExcel/exportReportOmzet.php";
-				form2.action = "exportExcel/exportReportCancel.php";
-				form3.action = "exportExcel/exportReportOutstanding.php";
-				form1.target = "_self";
-				form2.target = "_self";
-				form3.target = "_self";
+				if (form1) { form1.action = "htmltopdf/report_omzet.php"; form1.target = "_blank"; }
+				if (form2) { form2.action = "htmltopdf/report_cancel.php"; form2.target = "_blank"; }
+				if (form3) { form3.action = "htmltopdf/report_outstanding.php"; form3.target = "_blank"; }
+			} 
+			else if (type === 'excel') {
+				if (form1) { form1.action = "exportExcel/exportReportOmzet.php"; form1.target = "_self"; }
+				if (form2) { form2.action = "exportExcel/exportReportCancel.php"; form2.target = "_self"; }
+				if (form3) { form3.action = "exportExcel/exportReportOutstanding.php"; form3.target = "_self"; }
 			}
 		}
 	</script>
