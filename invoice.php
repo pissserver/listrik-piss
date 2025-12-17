@@ -79,7 +79,7 @@
 								<div class="alert alert-warning d-flex align-items-center" role="alert" style="margin: 0 0;">
 									<i class="fa fa-warning me-2" style="font-size: 18px;"></i>
 									<span style="font-size: 14px;">
-										Tagihan yang tidak terbayar wajib dibatalkan, dan tagihan yang sudah dibatalkan tidak akan muncul di daftar tagihan.
+										Tagihan yang tidak terbayar wajib dioffkan, dan tagihan yang sudah dioffkan tidak akan muncul di daftar tagihan.
 									</span>
 								</div><br>
 								<?php 
@@ -139,17 +139,17 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header bg-primary" >
-						<h5 class="modal-title" id="confirmationModalLabel"><b>KONFIRMASI HAPUS</b></h5>
+						<h5 class="modal-title" id="confirmationModalLabel"><b>KONFIRMASI TAGIHAN OFF</b></h5>
 						<button type="button" style="margin-top: -20px;" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 					<div class="modal-body">
-						Apakah anda yakin ingin membatalkan tagihan?
+						Apakah anda yakin ingin membuat status tagihan menjadi off?
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
-						<button type="button" class="btn btn-primary" onclick="postAndReload()">Ya, Batalkan</button>
+						<button type="button" class="btn btn-primary" onclick="postAndReload()">Ya</button>
 					</div>
 				</div>
 			</div>

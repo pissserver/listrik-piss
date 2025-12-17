@@ -68,7 +68,7 @@
 			// Alert Information
 			$_SESSION['success'] = true;
 			$_SESSION['title'] = 'Berhasil';
-			$_SESSION['message'] = "Membatalkan tagihan";
+			$_SESSION['message'] = "Membuat Tagihan Menjadi Off";
 			echo "<script>
 			window.location=('invoice.php')</script>";
 			exit();
@@ -77,7 +77,7 @@
 			// Alert Information
 			$_SESSION['success'] = false;
 			$_SESSION['title'] = 'Gagal';
-			$_SESSION['message'] = "Membatalkan tagihan";
+			$_SESSION['message'] = "Membuat Tagihan Menjadi Off";
 			echo "<script>
 			window.location=('invoice.php')</script>";
 			exit();
