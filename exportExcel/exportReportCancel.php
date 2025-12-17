@@ -24,7 +24,7 @@
     $sheet->setTitle("Laporan Pembatalan Tagihan");
 
     // Menulis Informasi di Atas Tabel
-    $sheet->setCellValue("A1", "LAPORAN PEMBATALAN TAGIHAN LISTRIK");
+    $sheet->setCellValue("A1", "LAPORAN TAGIHAN LISTRIK OFF");
     $sheet->setCellValue("A3", "TANGGAL");
     $sheet->setCellValue("B3", " : ");
     $sheet->setCellValue("C3", date('d M Y', strtotime($date1)) . ' s/d ' . date('d M Y', strtotime($date2)));
@@ -48,7 +48,7 @@
           ->setCellValue("D5", "LAPAK")
           ->setCellValue("E5", "DAYA")
           ->setCellValue("F5", "PERIODE")
-          ->setCellValue("G5", "TGL BATAL")
+          ->setCellValue("G5", "TGL OFF")
           ->setCellValue("H5", "TARIF");
 
     // Mengatur warna latar belakang hijau untuk header

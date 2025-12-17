@@ -23,7 +23,7 @@
         </table>
     </page_footer>
     <div style="font-size: 18px; font-weight: bold; text-align: center; margin-top:15px;">
-		LAPORAN PEMBATALAN TAGIHAN LISTRIK <br>
+		LAPORAN TAGIHAN LISTRIK OFF<br>
 		PASAR INDUK SURABAYA SIDOTOPO (PISS)
 	</div>
 	<br/><br>
@@ -42,7 +42,7 @@
 			<th style="text-align: center;width: 12%; border: solid 1px black;">LAPAK</th>
 			<th style="text-align: center;width: 12%; border: solid 1px black;">DAYA</th>
 			<th style="text-align: center;width: 12%;border: solid 1px black;">PERIODE</th>
-			<th style="text-align: center;width: 12%;border: solid 1px black;">TGL BATAL</th>
+			<th style="text-align: center;width: 12%;border: solid 1px black;">TGL OFF</th>
 			<th style="text-align: center;width: 15%; border: solid 1px black;">TARIF (RP)</th>
 		</tr>
 		 <?php

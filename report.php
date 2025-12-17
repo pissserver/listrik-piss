@@ -85,7 +85,7 @@
 
 					<div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-file-text fa-fw"></i> Laporan Pembatalan Tagihan Listrik
+                            <i class="fa fa-file-text fa-fw"></i> Laporan Tagihan Listrik Off
                         </div>
                         <div class="panel-body">
 							<form class="form-horizontal" id="reportCancel" name="reportCancel" method="POST">

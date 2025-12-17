@@ -69,6 +69,30 @@
                             </a>
                         </div>
                     </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-credit-card fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge" id="weighing">0</div>
+                                        <div>Pembayaran Selesai</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a>
+                                <div class="panel-footer">
+                                    <span class="pull-left"><?php echo date('M Y', strtotime($startDate)) . ' - ' . date('M Y', strtotime($endDate))?></span>
+                                    <span class="pull-right"><i class="fa fa-calendar-check-o"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
@@ -92,28 +116,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-credit-card fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge" id="weighing">0</div>
-                                        <div>Pembayaran Selesai</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a>
-                                <div class="panel-footer">
-                                    <span class="pull-left"><?php echo date('M Y', strtotime($startDate)) . ' - ' . date('M Y', strtotime($endDate))?></span>
-                                    <span class="pull-right"><i class="fa fa-calendar-check-o"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-red">
                             <div class="panel-heading">
@@ -123,7 +126,7 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge" id="paymentMitraDone">0</div>
-                                        <div>Tagihan Dibatalkan</div>
+                                        <div>Tagihan Off</div>
                                     </div>
                                 </div>
                             </div>

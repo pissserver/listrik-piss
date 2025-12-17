@@ -68,7 +68,7 @@
 											}
 		?>
 		<tr>
-			<td style="vertical-align: middle; text-align:right;"><?php echo $no; ?></td>
+			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo 'TL' . $r['pay_id']; ?></td>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $r['merchant_id']; ?></td>
 			<td style="vertical-align: middle; text-align:left;"><?php echo $name.' / '.($nick != NULL ? $nick : '-'); ?></td>

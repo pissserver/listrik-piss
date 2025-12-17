@@ -104,7 +104,7 @@
 										data-url="pay_action.php?task=absen&id='.$r['pay_id'].'"
 										data-toggle="modal" 
 										data-target="#confirmationModal">
-										<i class="fa fa-remove"></i>&nbsp;&nbsp;Batalkan 
+										<i class="fa fa-remove"></i>&nbsp;&nbsp;Tagihan Off 
 									</button>';
 							}
 						}
