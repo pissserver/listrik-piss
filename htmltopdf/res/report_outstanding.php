@@ -52,6 +52,7 @@
 				FROM e_pay p
 				JOIN electricity e ON p.merchant_id = e.merchant_id
 				WHERE p.pay_sts = 'Belum Lunas'
+				AND e.electricity_sts = 'Aktif'
 				ORDER BY p.periode_id, p.merchant_id
 			");
 
