@@ -78,7 +78,7 @@
 				</div>
 			</td>
 			<td style="vertical-align: middle; text-align:center;">
-				<?php echo date('d M Y', strtotime($data['register_date'])); ?>
+				<?php echo date('d M Y', strtotime($data['register_date'])); ?><br>
 				<!-- Umur waktu -->
 				<div style="margin-top: 5px; background: #ccc; padding: 3px 10px; border-radius: 5px; display: inline-block; font-size: 12px;">
 					<?php echo timeAgo($data['register_date']); ?>
