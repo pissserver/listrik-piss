@@ -53,12 +53,12 @@
 								<form class="form-horizontal" id="formAdmin" name="formAdmin" method="POST" action="admin_action.php?task=insert">
 									<fieldset>
 										<div class="form-group" style="padding:10px; margin-top:-10px">
-											<label>Username SPV / PP</label>
-											<input type="text" class="form-control" id="username" name="username" placeholder="Username SPV / PP" autofocus="autofocus" required/>                  
+											<label>Username SPV / PP / Keuangan</label>
+											<input type="text" class="form-control" id="username" name="username" placeholder="Username SPV / PP / Keuangan" autofocus="autofocus" required/>                  
 										</div>
 										<div class="form-group" style="padding:10px; margin-top:-10px">
-											<label>Nama SPV / PP</label>
-											<input class="form-control" id="name" name="name" type="text" placeholder="Masukkan nama SPV / PP" required/>
+											<label>Nama SPV / PP / Keuangan</label>
+											<input class="form-control" id="name" name="name" type="text" placeholder="Masukkan nama SPV / PP / Keuangan" required/>
 										</div>
 										<div class="form-group" style="padding:10px; margin-top:-10px">
 											<label>Password</label>
