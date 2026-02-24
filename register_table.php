@@ -2,13 +2,123 @@
 	session_start();
 	include "connection.php";
 ?>
+
+<style>
+	/* HEADER FLEX */
+	.dt-header{
+		display:flex;
+		justify-content:space-between;
+		align-items:center;
+		margin-bottom:10px;
+	}
+
+	/* RIGHT SIDE */
+	.dt-right{
+		display:flex;
+		align-items:center;
+		gap:10px;
+	}
+
+	/* SEARCH BOX */
+	.dataTables_filter input{
+
+		border-radius:10px;
+		border:1px solid #ddd;
+		padding:6px 12px;
+		transition:.2s;
+	}
+
+	.dataTables_filter input:focus{
+
+		border-color:#6366f1;
+		box-shadow:0 0 0 3px rgba(99,102,241,.15);
+		outline:none;
+
+	}
+
+	/* BUTTON EXPORT */
+	.btn-export{
+
+		margin-top: -3px;
+		padding:12px 20px;
+		border-radius:8px;
+		color:#fff;
+		font-size:14px;
+		font-weight:600;
+		text-decoration:none;
+		display:inline-flex;
+		align-items:center;
+		gap:6px;
+		transition:.2s;
+		box-shadow:0 4px 12px rgba(0,0,0,.1);
+		
+	}
+
+	a.btn-export {
+		text-decoration: none;
+	}
+
+	.btn-excel{
+
+		background:linear-gradient(135deg,#16a34a,#22c55e);
+
+	}
+
+	.btn-pdf{
+
+		background:linear-gradient(135deg,#dc2626,#ef4444);
+
+	}
+
+	.btn-export:hover{
+
+		transform:translateY(-2px);
+		box-shadow:0 6px 18px rgba(0,0,0,.2);
+		color: #fff;
+	}
+
+	.dt-right{
+		display:flex;
+		align-items:center;
+		gap:10px;
+	}
+
+	.dataTables_filter{
+		margin:0;
+	}
+</style>
+
 <script src="dataTables/jquery.dataTables.js"></script>
 <script src="dataTables/dataTables.tableTools.js"></script>
 <script src="dataTables/dataTables.bootstrap.js"></script>
 <script>
-	$(document).ready(function() {
-		$('#merchantView').dataTable({"aLengthMenu": [[10, 50, 100, -1], [10, 50, 100, "All"]]});
+$(document).ready(function() {
+
+	var table = $('#merchantView').DataTable({
+
+		"aLengthMenu": [[10, 50, 100, -1], [10, 50, 100, "All"]],
+
+		"dom":
+			"<'dt-header'<'dt-left'l><'dt-right'f<'dt-buttons'>>>"+
+			"tr"+
+			"<'dt-footer'ip>"
+
 	});
+
+	// inject button setelah table jadi
+	$('.dt-buttons').html(`
+
+		<a href="exportExcel/exportReportMerchant.php" class="btn-export btn-excel" target="_blank">
+			<i class="fa fa-file-excel-o"></i> Excel
+		</a>
+
+		<a href="htmltopdf/report_merchant.php" class="btn-export btn-pdf" target="_blank">
+			<i class="fa fa-file-pdf-o"></i> PDF
+		</a>
+
+	`);
+
+});
 </script>
 <!-- <h3><center>Data Pengguna Listrik PISS</center></h3></br> -->
 <table id="merchantView" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
@@ -16,7 +126,7 @@
 		<tr>
 			<th style="width:10%;text-align:center;">NO</th>
 			<th style="text-align:center;">KODE</th>
-			<th style="text-align:center;">PEDAGANG</th>
+			<th style="text-align:center;">PENGGUNA</th>
 			<th style="text-align:center;">LAPAK</th>
 			<th style="text-align:center;">DAYA</th>
 			<th style="text-align:center;">TARIF</th>
