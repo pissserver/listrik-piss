@@ -1,7 +1,7 @@
 <?php 
 
     //Validasi role
-	if ($_SESSION['role']=='spv' || $_SESSION['role']=='pp') {
+	if ($_SESSION['role']=='spv' || $_SESSION['role']=='pp' || $_SESSION['role']=='keuangan') {
 		$role = $_SESSION['role'];
 		$name = executescalar("select name from admin where username = '".$_SESSION['username']."'");
 	} elseif ($_SESSION['role']=='Cashier') {

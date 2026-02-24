@@ -132,7 +132,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Laporan Data Penguuna Listrik' . date('d M Y') . '.xls"');
+    header('Content-Disposition: attachment;filename="Laporan Data Penguuna Listrik_' . date('d M Y') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

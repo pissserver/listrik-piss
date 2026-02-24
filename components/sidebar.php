@@ -23,7 +23,7 @@
 	}
 
 	$greetingMessage = greeting();
-	if ($role == 'spv' || $role == 'pp') {
+	if ($role == 'spv' || $role == 'pp' || $role == 'keuangan') {
 		$photoUrl	= executeScalar("select photo from admin where username = '".$_SESSION['username']."'");
 	} elseif ($role == 'Cashier') {
 		$photoUrl	= executeScalar("select photo from checker where checker_code = '".$_SESSION['username']."'");
@@ -718,7 +718,7 @@
 									<?php 
 										if ($role == 'Cashier') {
 											echo $name;
-										} elseif ($role == 'pp' || $role == 'spv') {
+										} elseif ($role == 'pp' || $role == 'spv' || $role == 'keuangan') {
 											echo $name;
 										} 
 									?>
@@ -729,6 +729,9 @@
 											echo '<span class="role-badge">Kasir</span>';
 										} elseif ($role == 'pp') {
 											echo '<span class="role-badge">PP</span>';
+										}
+										elseif ($role == 'keuangan') {
+											echo '<span class="role-badge">Keuangan</span>';
 										} elseif ($role == 'spv') {
 											if ($privileges == 'manager') { ?>
 												<div class="level-badge-nav color-manager-nav">
@@ -800,11 +803,11 @@
 							
 						}
 						else{ ?>
-						<li class="<?= isParentActive(['tarif.php', 'tarif2.php', 'note.php']); ?>">
+						<li class="<?= isParentActive(['admin.php', 'tarif.php', 'tarif2.php', 'note.php']); ?>">
                             <a href="#"><i class="fa fa-database fa-fw"></i> <span>Master</span><span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<?php if($_SESSION['role'] == 'spv'){ ?>
-									<li><a class="<?= isActive(['admin.php']); ?>" href="admin.php"><i class="fa fa-group fa-fw"></i> SPV / PP </a></li>
+									<li><a class="<?= isActive(['admin.php']); ?>" href="admin.php"><i class="fa fa-group fa-fw"></i> SPV / PP / Keuangan</a></li>
 								<?php } ?>
 								<li><a class="<?= isActive(['tarif.php']); ?>" href="tarif.php"><i class="fa fa-flash fa-fw"></i> Daya Listrik</a></li>
 								<li><a class="<?= isActive(['tarif2.php']); ?>" href="tarif2.php"><i class="fa fa-suitcase fa-fw"></i> Perlengkapan Listrik</a></li>

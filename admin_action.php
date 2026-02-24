@@ -7,10 +7,10 @@
 	
 	// Input 
 	if ($task == 'insert'){
-		$username		= $_POST['username'];
+		$username	= $_POST['username'];
 		$name		= ucwords(strtolower(trim($_POST['name'])));
 		$pass 		= $_POST['pass'];
-		$position 	= ucwords(strtolower(trim($_POST['position'])));
+		$position 	= strtolower(trim($_POST['position']));
 		$exist 		= executeScalar("select count(username) from admin where username = '".$_POST['username']."'");
 		if($exist>0){
 			// Alert Information
@@ -20,21 +20,41 @@
 			echo "<script>window.location=('admin.php')</script>";
 		}
 		else{
-			$insert = mysql_query("INSERT INTO `admin` (`id_admin`, `username`, `name`, `password`, `role`) 
-			VALUES ('', '".$username."', '".$name."', '".$pass."', '".$position."')");
+			$insert = mysql_query("
+			INSERT INTO admin
+			(
+				username,
+				name,
+				password,
+				role,
+				lapak,
+				timbangan,
+				listrik
+			)
+			VALUES
+			(
+				'".$username."',
+				'".$name."',
+				'".$pass."',
+				'".$position."',
+				'Yes',
+				'Yes',
+				'Yes'
+			)
+			");
 			
 			if($insert){
 				// Alert Information
 				$_SESSION['success'] = true;
 				$_SESSION['title'] = 'Berhasil';
-				$_SESSION['message'] = "Menambahkan SPV / PP Berhasil";
+				$_SESSION['message'] = "Menambahkan SPV / PP / Keuangan Berhasil";
 				echo "<script>window.location=('admin.php')</script>";
 			}
 			else{
 				// Alert Information
 				$_SESSION['success'] = false;
 				$_SESSION['title'] = 'Gagal';
-				$_SESSION['message'] = "Menambahkan SPV / PP Gagal";
+				$_SESSION['message'] = "Menambahkan SPV / PP / Keuangan Gagal";
 				echo "<script>window.history.back()</script>";
 			}
 		}

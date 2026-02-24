@@ -70,6 +70,7 @@
 												<option value="" disabled selected>- Pilih Posisi -</option>
 												<option value="spv">SPV</option>
 												<option value="pp">PP</option>
+												<option value="keuangan">Keuangan</option>
 											</select>
 										</div>
 										<div class="form-group" style="padding:10px; margin-bottom:-5px">
