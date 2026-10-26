@@ -3,6 +3,7 @@
 	$year 		= date("y");
 	$date 		= date("d/m/y");
 	$id			= $_GET['id'];
+	$e_cost_id	= $_GET['e_cost_id'];
 	$tlid		= 0;
 	$mid		= executeScalar("select merchant_id from e_pay where pay_id = '".$id."'");
 	$name		= executeScalar("select merchant_name from merchant where merchant_id = '".$mid."'");
@@ -12,7 +13,7 @@
 	$tarif		= executeScalar("select e_cost_id from electricity where merchant_id = '".$mid."'");
 	$payStatus  = executeScalar("select pay_sts from e_pay where pay_id = '".$id."'");
 	$price 		= executeScalar("select pay_total from e_pay where pay_id = '".$id."'");
-	$ampere 	= executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$tarif."'");
+	$ampere 	= executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$e_cost_id."'");
 	$lid		= executeScalar("select lapak_id from rent where merchant_id = '".$mid."'");
 	// $lapak		= executeScalar("select lapak_name from lapak where lapak_id = '".$lid."'");
 	$lapak		= executeScalar("	select lapak_name 

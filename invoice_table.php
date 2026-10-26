@@ -19,7 +19,8 @@
 				<th style="vertical-align: middle; width:8%;text-align:center;">TAGIHAN</th>
 				<th style="vertical-align: middle; width:8%;text-align:center;">KODE</th>
 				<th style="vertical-align: middle; width:25;text-align:center;">PENGGUNA LISTRIK</th>
-				<th style="vertical-align: middle; width:15%;text-align:center;">LAPAK PASANG</th>
+				<th style="vertical-align: middle; width:10%;text-align:center;">LAPAK PASANG</th>
+				<th style="vertical-align: middle; width:5%;text-align:center;">DAYA</th>
 				<th style="vertical-align: middle; width:15%;text-align:center;">PERIODE</th>
 				<th style="vertical-align: middle; width:15%;text-align:center;">BIAYA</th>
 				<th style="vertical-align: middle; width:15%;text-align:center;">STATUS</th>
@@ -38,6 +39,8 @@
 				$name	 = executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
 				$lapakpasang	= executeScalar("select lapak_name from lapak where lapak_id = '".$r['id_lapak_dipasang']."'");
 				$cekECost = executeScalar("select e_cost_id from electricity where electricity_id = '".$r['electricity_id']."'");
+				$e_cost_id = executeScalar("select e_cost_id from electricity where electricity_id = '".$r['electricity_id']."'");
+				$ampere = executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$e_cost_id."'");
 											$cekECostPrice = executeScalar("select e_cost_price from e_cost where e_cost_id = '".$cekECost."'");
 											$display = 'none';
 
@@ -57,12 +60,16 @@
 												}
 											}
 			?>
-			<tr>
+			<tr>	
 				<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
 				<td style="vertical-align: middle; text-align:center;"><?php echo 'TL' . $r['pay_id']; ?></td>
 				<td style="vertical-align: middle; text-align:center;"><?php echo $r['merchant_id']; ?></td>
 				<td style="vertical-align: middle; text-align:left;"><?php echo $name; ?></td>
 				<td style="vertical-align: middle; text-align:center;"><?php echo $lapakpasang; ?></td>
+				<td style="vertical-align: middle; text-align:center;">
+					<?php echo $ampere; ?><br>
+					Ampere
+				</td>
 				<td style="vertical-align: middle; text-align:center;"><?php echo $periode; ?></td>
 				<td style="vertical-align: middle; text-align:center;">
 					<div style="display: <?php echo $display ?>; 
@@ -90,7 +97,7 @@
 						<i class="fa fa-edit"></i>&nbsp;Edit
 					</a>
 					<?php } ?>
-					<a style="text-decoration: none;" href="htmltopdf/merchant_bill2.php?id=<?php echo $r[0]; ?>" target="_blank">
+					<a style="text-decoration: none;" href="htmltopdf/merchant_bill2.php?id=<?php echo $r[0]; ?>&e_cost_id=<?php echo $e_cost_id; ?>" target="_blank">
 						<button class="btn btn-primary btn-outline btn-block btn-xs"><i class="fa fa-print"></i>&nbsp;&nbsp;Cetak</button>
 					</a>
 					<?php 

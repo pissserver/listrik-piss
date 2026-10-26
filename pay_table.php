@@ -37,7 +37,7 @@
 		while($r=mysql_fetch_array($query)){
 			$name 	= executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
 			$nick 	= executeScalar("select merchant_nick from merchant where merchant_id = '".$r['merchant_id']."'");
-			$tarif 	= executeScalar("select e_cost_id from electricity where merchant_id = '".$r['merchant_id']."'");
+			$tarif 	= executeScalar("select e_cost_id from electricity where electricity_id = '".$r['electricity_id']."'");
 			$periode= executeScalar("select periode_name from e_periode where periode_id = '".$r['periode_id']."'");
 			$price 	= executeScalar("select e_cost_price from e_cost where e_cost_id = '".$tarif."'");
 			$ampere = executeScalar("select e_cost_ampere from e_cost where e_cost_id = '".$tarif."'");
