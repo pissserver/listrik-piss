@@ -1,8 +1,8 @@
 <?php
-	$server = "localhost";
-	$username = "root";
-	$password = "";
-	$database = "db_piss";
+	$server 	= getenv('DB_HOST') ?: "localhost";
+	$username 	= getenv('DB_USERNAME') ?: (getenv('DB_USER') ?: "root");
+	$password 	= getenv('DB_PASSWORD') ?: (getenv('DB_PASS') ?: "");
+	$database 	= getenv('DB_DATABASE') ?: (getenv('DB_NAME') ?: "db_piss");
 
 	// Koneksi dan memilih database di server
 	mysql_connect($server,$username,$password) or die("Koneksi gagal");
